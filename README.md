@@ -1,2 +1,1 @@
-# mdtime
-Md checklist with bots
+# mdchecklist
