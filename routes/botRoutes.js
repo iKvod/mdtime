@@ -15,7 +15,7 @@ var bot = new TelegramBot(token, { polling: true});
 var Candidate = require('../models/candidates');
 var idGen = require('../Utils/idGenerator');
 var dbHelper = require('../Utils/dbCandidateQuery');
-
+var botDbHelper = require('../Utils/bot/botDbHelpers');
 bot.onText(/\/info/, function (msg, match) {
   var userId = msg.chat.id;
 
@@ -33,23 +33,24 @@ bot.onText(/\/info/, function (msg, match) {
 
 bot.onText(/\/start/, function (msg, match) {
   var userId = msg.chat.id;
-
   bot.sendMessage(userId, 'Пожалуйста введит свой гостевой ID. \n');
 });
 
 
 bot.onText(/\/guest (.+)/, function (msg, match) {
-
   // var gId =  msg.text.substr(1);
   var botId = msg.chat.id;
-  gId = match[1];
+  var obj = {};
+  obj.botId = botId;
+  obj.username = msg.chat.username;
+  var gId = match[1];
 
-  idGen.candidateFind(gId, botId, function (err, candidate) {
+  idGen.candidateFind(gId, obj, function (err, candidate) {
     if(err){
       bot.sendMessage(botId, err.message);
       return
     }
-    bot.sendMessage(botId, candidate.general_name + ' Ваш ID ' + candidate.employee_id);
+    bot.sendMessage(botId, candidate.firstname + ' Ваш ID ' + candidate.employee_id);
   })
 });
 
@@ -61,7 +62,6 @@ bot.onText(/\/id (.+)/, function (msg, match) { // /employee_id - bot command
   var employee_id = match[1];
 
   var bot_id = msg.chat.id;
-
 
   dbHelper.getEmployeeById(employee_id, function (err, emplData) {
       if(err){
@@ -86,7 +86,6 @@ bot.onText(/\/pass (.+)/, function (msg, match) { // /employee_id pass - bot com
   var employee_id = match[1];
 
   if(pass === 'pass'){
-
      dbHelper.getEmployeePasswords(employee_id, bot_id, function (err, data) {
        if(err){
          if(err.status === 401){
@@ -107,6 +106,14 @@ bot.onText(/\/pass (.+)/, function (msg, match) { // /employee_id pass - bot com
    } else {
      bot.sendMessage(bot_id, "Неизвестная команда. Попробуйте еще раз");
    }
+});
+
+
+bot.onText(/\/myid/, function (msg) {
+  var botId = msg.chat.id;
+  botDbHelper.getMyId(botId, function (err, data) {
+    bot.sendMessage(botId, data.firstname + ", Ваш рабочий ID: " + data.employee_id);
+  });
 
 });
 

@@ -20,12 +20,14 @@ db.once('open', function () {
   console.log("Соединение к базе прошло успешно");
 });
 
-
 var index = require('./routes/index');
 var users = require('./routes/users');
 var gSheet = require('./routes/googlesheet');
-
+var parser = require('./routes/parseCsvRoute');
+var candidates = require('./routes/candidates');
 var botRoutes = require('./routes/botRoutes');
+var employees = require('./routes/emplyees');
+
 var app = express();
 
 // view engine setup
@@ -43,6 +45,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 app.use('/api/sheets', gSheet);
+app.use('/api/parser', parser);
+app.use('/api/candidates', candidates);
+app.use('/api/employees', employees);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

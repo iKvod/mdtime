@@ -6,7 +6,6 @@ var express = require('express');
 var router = express.Router();
 var Candidate = require('../models/candidates');
 
-
 router.get('/candidate', function(req, res, next){
   Candidate.find({}, function (err, candidates) {
     if(err){
@@ -84,7 +83,7 @@ router.post('/candidate', function (req, res, next) {
     'one_c': Math.floor(Math.random() * (90000000 - 1000) + 1000),
     'computer': Math.floor(Math.random() * (90000000 - 1000) + 1000),
     'guest_id': cand.id_user,
-    'department': cand.department
+    'department': cand.department || null
   });
   
   
@@ -98,9 +97,9 @@ router.post('/candidate', function (req, res, next) {
 
 });
 
-//Not complited
+//Not compleated
 router.put('/candidate/:id', function (req, res, next) {
-  console.log(req.body);
+  // console.log(req.body);
   var candidate = req.body;
 
   Candidate.findById(req.params.id)
@@ -115,8 +114,7 @@ router.put('/candidate/:id', function (req, res, next) {
         cand.admin = candidate.admin;
         cand.guest_id = candidate.guest_id || cand.guest_id;
 
-
-      cand.save(function (err, saved) {
+        cand.save(function (err, saved) {
             if(err){
               res.status(500).send(err);
               return;
@@ -142,5 +140,4 @@ router.put('/candidate/:id', function (req, res, next) {
 // router.delete('/:id', function (req, res, next) {
 //
 // });
-
 module.exports = router;

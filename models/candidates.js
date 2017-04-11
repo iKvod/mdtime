@@ -9,7 +9,9 @@ var Schema = mongoose.Schema;
 
 
 var Candidate = new Schema({
-  'general_name' : { type: String, default: null},
+  'id': { type: Number },
+  'today_date': { type: Date, default: null},
+  'general_name' : { type: String, default: null },
   'general_middle_name' : { type: String, default: null},
   'general_surname' : { type: String, default: null},
   'general_sex' : { type: String, default: null},
@@ -31,8 +33,8 @@ var Candidate = new Schema({
   'education_faculty' : { type: String, default: null},
   'education_specialty' : { type: String, default: null},
   'education_ball' : { type: String, default: null},
-  'education_start' : { type: String, default: null},
-  'education_end' : { type: String, default: null},
+  'education_start' : { type: Date, default: null},
+  'education_end' : { type: Date, default: null},
   'education_form' : { type: String, default: null},
   'education_kazakh' : { type: String, default: null},
   'education_russian' : { type: String, default: null},
@@ -65,14 +67,7 @@ var Candidate = new Schema({
   'interview_day' : { type: String, default: null},
   'interview_time' : { type: String, default: null},
   'vacancy_id' : { type: String, default: null},
-  'megaplan': { type: Number, default: null}, // poroli
-  'one_c': { type: Number, default: null},// poroli
-  'computer': { type: Number, default: null},// poroli
-  'guest_id': {type: String},
-  'employee_id': {type: String, unique: true},
-  'admin' : { type: Boolean, default: false }, // admin flag,
-  'bot_id': {type: String, unique: true},
-  'department': {type: String}
+  'guest_id': { type: String }
 });
 
 

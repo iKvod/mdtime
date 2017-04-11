@@ -4,7 +4,7 @@
 'use strict';
 
 var mongoose = require('mongoose');
-mongoose.Promise = global.Promise
+mongoose.Promise = global.Promise;
 
 var Schema = mongoose.Schema;
 //var passportLocalMongoose = require('passport-local-mongoose');
@@ -12,15 +12,19 @@ var Schema = mongoose.Schema;
 var Employee = new Schema({
   employee_id: {type: String, unique: true},
   botId: {type: String, unique: true},
-  // botId: {type: String},
   username: String,
   firstname: {type: String, default:'NoName'},
   lastname: {type: String, default: 'NoLastname'},
   email: String,
-  disabled: {type: Boolean, default: false},
+  fired: {type: Boolean, default: false},
+  firedDate: {type: Date},
+  hiredDate: {type: Date},
   phonenumber: {type:String},
-  department: { type: Schema.Types.ObjectId, ref: 'Departments' },
-  position: { type: Schema.Types.ObjectId, ref: 'Positions' },
+  department: { type: String},
+  position: {type:String},
+  hired: {type: Boolean, default: true},
+  // department: { type: Schema.Types.Number, ref: 'Departments' },
+  // position: { type: Schema.Types.Number, ref: 'Positions' },
   salary_fixed: {
     type: Number,
     default: 0.0
@@ -29,6 +33,7 @@ var Employee = new Schema({
     type: Number,
     default: 0.0
   },
+  worker_type: {type: String, default: null},
   work_time: { //fixed work time
     type: Number,
     default: 0
@@ -44,15 +49,67 @@ var Employee = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Reporting'
   }],
-  book: [{ type: Schema.Types.ObjectId, ref: 'Books' }],
+  // book: [{ type: Schema.Types.ObjectId, ref: 'Books' }],
   admin: {
     type: Boolean,
     default: false
   },
   code: [{type: String}],
+  'megaplan': { type: Number, default: null}, // poroli
+  'one_c': { type: Number, default: null},// poroli
+  'computer': { type: Number, default: null},// poroli
 },{
   timestamp:true
 });
+// var Employee = new Schema({
+//   employee_id: {type: String, unique: true},
+//   botId: {type: String, unique: true},
+//   username: String,
+//   firstname: {type: String, default:'NoName'},
+//   lastname: {type: String, default: 'NoLastname'},
+//   email: String,
+//   disabled: {type: Boolean, default: false},
+//   phonenumber: {type:String},
+//   department: { type: Schema.Types.ObjectId, ref: 'Departments' },
+//   position: { type: Schema.Types.ObjectId, ref: 'Positions' },
+//   salary_fixed: {
+//     type: Number,
+//     default: 0.0
+//   },
+//   bonus: {
+//     type: Number,
+//     default: 0.0
+//   },
+//   work_time: { //fixed work time
+//     type: Number,
+//     default: 0
+//   },
+//   registered_at: { type: Date, default: Date.now },
+//   checked: {
+//     type: Boolean,
+//     default:false
+//   },
+//   updated: Date,
+//   rating: [{type: Number}],
+//   report: [{
+//     type: Schema.Types.ObjectId,
+//     ref: 'Reporting'
+//   }],
+//   book: [{ type: Schema.Types.ObjectId, ref: 'Books' }],
+//   admin: {
+//     type: Boolean,
+//     default: false
+//   },
+//   code: [{type: String}],
+// },{
+//   timestamp:true
+// });
+
+Employee.methods.generatePasswords = function () {
+  this.megaplan = Math.floor(Math.random() * (90000000 - 1000) + 1000);
+  this.one_c = Math.floor(Math.random() * (90000000 - 1000) + 1000);
+  this.computer = Math.floor(Math.random() * (90000000 - 1000) + 1000);
+};
 
 Employee.pre('save', function (next) {
   var currentDate = new Date();
@@ -61,11 +118,11 @@ Employee.pre('save', function (next) {
 });
 
 Employee.methods.disableEmployee = function () {
-  this.disabled = true;
+  this.fired = true;
 };
 
 Employee.methods.enableEmployee = function () {
-  this.disabled = false;
+  this.fired = false;
 };
 
 Employee.methods.getName = function () {
