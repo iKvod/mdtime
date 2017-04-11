@@ -12,7 +12,6 @@ router.get('/candidate', function(req, res, next){
       console.log(err);
       return;
     }
-
     res.send(candidates);
   })
 
@@ -85,7 +84,6 @@ router.post('/candidate', function (req, res, next) {
     'guest_id': cand.id_user,
     'department': cand.department || null
   });
-  
   
   candidate.save(function (err, savedCandidate) {
     if(err){

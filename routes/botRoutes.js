@@ -16,6 +16,8 @@ var Candidate = require('../models/candidates');
 var idGen = require('../Utils/idGenerator');
 var dbHelper = require('../Utils/dbCandidateQuery');
 var botDbHelper = require('../Utils/bot/botDbHelpers');
+
+
 bot.onText(/\/info/, function (msg, match) {
   var userId = msg.chat.id;
 
@@ -29,7 +31,6 @@ bot.onText(/\/info/, function (msg, match) {
 
   bot.sendMessage(userId, message);
 });
-
 
 bot.onText(/\/start/, function (msg, match) {
   var userId = msg.chat.id;
@@ -100,7 +101,6 @@ bot.onText(/\/pass (.+)/, function (msg, match) { // /employee_id pass - bot com
          }
          return;
        }
-
        bot.sendMessage(bot_id, data);
      })
    } else {
@@ -108,14 +108,25 @@ bot.onText(/\/pass (.+)/, function (msg, match) { // /employee_id pass - bot com
    }
 });
 
-// bot.onText(/\/myid/, function (msg) {
-//   var botId = msg.chat.id;
-//   botDbHelper.getMyId(botId, function (err, data) {
-//     if(data){
-//       bot.sendMessage(botId, data.firstname + ", Ваш рабочий ID: " + data.employee_id);
-//
-//     }
-//   });
-// });
+bot.onText(/\/myid/, function (msg) {
+  var botId = msg.chat.id;
+  botDbHelper.getMyId(botId, function (err, data) {
+    if(err){
+      if(err.status === 500){
+        bot.sendMessage(botId, err.message);
+        return
+      } else if(err.status === 404){
+        bot.sendMessage(botId, err.message);
+        return
+      }
+      return;
+    }
+    if(data){
+      bot.sendMessage(botId, data.firstname + ", Ваш рабочий ID: " + data.employee_id);
+    } else {
+      bot.sendMessage(botId, "Неизвестная ошибка. Обратитесь в тех поддержку");
+    }
+  });
+});
 
 module.exports = botrouter;
