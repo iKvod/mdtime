@@ -117,12 +117,12 @@ var fetchEmplForPasGen = function(callback){
     });
 };
 
-var errorHandler = function(status, message){
-  var error = {};
-  error.message = message;
-  error.status = status;
-  return error;
-};
+// var errorHandler = function(status, message){
+//   var error = {};
+//   error.message = message;
+//   error.status = status;
+//   return error;
+// };
 
 
 // router.put('/admin/:id', function (req, res, next) {
