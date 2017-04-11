@@ -30,7 +30,7 @@ var getEmployeeById = function (empId, callback) {
           // "Должность: " + empl.position + '\n' +
           "Статус: " + ((empl.hired) ? 'Работает' : 'Уволен') + '\n' +
           "Телеграм ID: " + empl.botId  +  "\n" +
-          "Usernam в телеграмме: " + empl.username + "\n" +
+          "Username в телеграме: " + empl.username + "\n" +
           "Рабочий ID сотрудника:  " + empl.employee_id  + "\n" +
           "Доступы:  " + ((empl.admin) ? 'Расширены' : 'Ограничены');
         callback(null, emplData);

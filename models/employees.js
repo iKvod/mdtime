@@ -5,6 +5,7 @@
 
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
+var password = require('password-generator');
 
 var Schema = mongoose.Schema;
 //var passportLocalMongoose = require('passport-local-mongoose');
@@ -55,9 +56,9 @@ var Employee = new Schema({
     default: false
   },
   code: [{type: String}],
-  'megaplan': { type: Number, default: null}, // poroli
-  'one_c': { type: Number, default: null},// poroli
-  'computer': { type: Number, default: null},// poroli
+  'megaplan': { type: String, default: null}, // poroli
+  'one_c': { type: String, default: null},// poroli
+  'computer': { type: String, default: null},// poroli
 },{
   timestamp:true
 });
@@ -106,9 +107,12 @@ var Employee = new Schema({
 // });
 
 Employee.methods.generatePasswords = function () {
-  this.megaplan = Math.floor(Math.random() * (90000000 - 1000) + 1000);
-  this.one_c = Math.floor(Math.random() * (90000000 - 1000) + 1000);
-  this.computer = Math.floor(Math.random() * (90000000 - 1000) + 1000);
+  // this.megaplan = Math.floor(Math.random() * (90000000 - 1000) + 1000);
+  // this.one_c = Math.floor(Math.random() * (90000000 - 1000) + 1000);
+  // this.computer = Math.floor(Math.random() * (90000000 - 1000) + 1000);
+  this.megaplan = password(12, false);
+  this.one_c = password(12, false);
+  this.computer = password(12, false);
 };
 
 Employee.pre('save', function (next) {

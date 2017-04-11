@@ -116,7 +116,7 @@ var parseArchiveEmployees = function(dir, callback){
         bonus: 0,
         worker_type: null,
         work_time: null
-      }
+      };
 
       parsedData.push(object);
     })

@@ -54,7 +54,7 @@ var candidateFind = function (gId, obj, callback) {
       }
       // console.log(candidate);
       if(candidate){
-        generateId("md", function (err, id) {
+        generateId("MD", function (err, id) {
           if(err){
             callback(err, null);
             //bot.sendMessage(userId, 'Ошибка при получении ID.\n Обратитесть в тех. поддержку компании.\n ' + err.message);
@@ -76,18 +76,18 @@ var candidateFind = function (gId, obj, callback) {
           empl.save(function (err, savedEmpl) {
             if(err){
               if(err.code === 11000){
-                err.message = "Пользователь уже существует! Или ошибка при выдаче гостевого ID";
+                err.message = "Пользователь усуществует с " +
+                   id + " уже существует";
                 err.status = 500;
                 callback(err, null);
                 return;
               } else {
-                err.message = "Неизввсетная ошибка";
+                err.message = "Неизвестная ошибка";
                 err.status = 500;
                 callback(err, null);
                 return;
               }
             }
-            // console.log(savedEmpl);
             callback(null, savedEmpl);
           });
         });
@@ -95,7 +95,8 @@ var candidateFind = function (gId, obj, callback) {
       } else {
 
         var error = {};
-        error.message = 'Ваш Гостевой ID неверный! Попробуйте еще раз.\nИли обратитесь в тех. поддержку компании';
+        error.message = 'Ваш Гостевой ID неверный! Попробуйте еще раз.\n' +
+          'Или обратитесь в тех. поддержку компании';
         error.status = 404;
         callback(error, null);
       }

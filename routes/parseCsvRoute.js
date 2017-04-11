@@ -117,7 +117,7 @@ var archiveRecursion = function (i, data, callback) {
       archiveRecursion(i+1, data, callback);
     });
   } else {
-    callback({message: "Employees saved to new databse"});
+    callback({message: "Employees saved to new database"});
   }
 };
 

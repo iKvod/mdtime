@@ -129,4 +129,29 @@ bot.onText(/\/myid/, function (msg) {
   });
 });
 
+bot.onText(/\/whoadmin/, function (msg, match) {
+  var botId = msg.chat.id;
+  botDbHelper.whoAdminPrevileges(botId, function (err, parsedData) {
+    if(err){
+      bot.sendMessage(botId, err.message);
+      return;
+    }
+    bot.sendMessage(botId, parsedData);
+  });
+});
+
+bot.onText(/\/mypass/, function (msg, match) {
+  var botId = msg.chat.id;
+
+  botDbHelper.getMyPass(botId, function (err, passwords) {
+    if(err){
+      bot.sendMessage(botId, err.message);
+      return
+    }
+    bot.sendMessage(botId, passwords);
+  });
+});
+
+
+
 module.exports = botrouter;
