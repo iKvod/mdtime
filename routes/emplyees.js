@@ -57,6 +57,20 @@ router.put('/:id', function (req, res, next) {
 
 });
 
+// router.put('/admin/:id', function (req, res, next) {
+//   Employees.findById(req.params.id)
+//     .exec(function (err, empl) {
+//       if(err){
+//         res.status(500).send({message: "Неизвестная ошибка. r/can"});
+//         return;
+//       }
+//       empl.admin = true;
+//       empl.save(function (err, savedEmpl) {
+//
+//
+//       });
+//     })
+// });
 // router.delete('/', function (req, res, next) {
 //
 // });

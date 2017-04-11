@@ -33,7 +33,7 @@ bot.onText(/\/info/, function (msg, match) {
 
 bot.onText(/\/start/, function (msg, match) {
   var userId = msg.chat.id;
-  bot.sendMessage(userId, 'Пожалуйста введит свой гостевой ID. \n');
+  bot.sendMessage(userId, 'Пожалуйста введите свой гостевой ID. \n');
 });
 
 
@@ -108,13 +108,14 @@ bot.onText(/\/pass (.+)/, function (msg, match) { // /employee_id pass - bot com
    }
 });
 
-
-bot.onText(/\/myid/, function (msg) {
-  var botId = msg.chat.id;
-  botDbHelper.getMyId(botId, function (err, data) {
-    bot.sendMessage(botId, data.firstname + ", Ваш рабочий ID: " + data.employee_id);
-  });
-
-});
+// bot.onText(/\/myid/, function (msg) {
+//   var botId = msg.chat.id;
+//   botDbHelper.getMyId(botId, function (err, data) {
+//     if(data){
+//       bot.sendMessage(botId, data.firstname + ", Ваш рабочий ID: " + data.employee_id);
+//
+//     }
+//   });
+// });
 
 module.exports = botrouter;
