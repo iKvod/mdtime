@@ -171,8 +171,6 @@ bot.on('message', function (msg) {
       bot.sendMessage(chatId, 'Бот не может распознать вашу команду', replyOption);
     }
 
-
-
   } else if(breket === '/') {
     var sub = messText.slice(1, 3);
     var employee_id = messText.slice(1);
