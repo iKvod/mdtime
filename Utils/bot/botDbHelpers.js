@@ -33,7 +33,6 @@ var whoAdminPrevileges = function (botId, callback) {
       callback(err, null);
       return;
     }
-    console.log(admins);
     buildAdminDataRecursivley(0, admins, '', function (parsedData) {
       callback(null, parsedData);
     });
@@ -45,11 +44,11 @@ var buildAdminDataRecursivley = function (i, data, parsedData, callback) {
   var len = data.length;
 
   if(i < len){
-    parsedData += "--***---****---*** " +"( "+ (i + 1) + " ) " + " ***---****---***--\n\n" +
+    parsedData += " " +"( "+ (i + 1) + " ) " + " \n\n" +
         "Имя: " + data[i].firstname + "\n" +
         "Фамилия: " + data[i].lastname + "\n" +
         "Превилегия Админа: " +  (data[i].admin? "Расширены" : "Ограничены") + "\n\n" +
-        "         ---------**********---------       \n\n";
+        "              \n\n";
     buildAdminDataRecursivley(i + 1, data, parsedData, callback);
   } else {
     callback(parsedData);
@@ -103,11 +102,11 @@ var fetchMyPass = function (botId, callback) {
       }
 
       if(empl){
-        str += "--***---****---*** " + "Ваши пароли" + " ***---****---***--\n\n" +
+        str += " " + "Ваши пароли" + " \n\n" +
           "Мегаплан: " + empl.megaplan + "\n" +
           "1С: " + empl.one_c + "\n" +
           "Компьютер: " + empl.computer + "\n\n" +
-          "                     ---------**********---------       \n\n";
+          "                     \n\n";
         callback(null, str);
       } else {
         var error = {};
@@ -117,6 +116,29 @@ var fetchMyPass = function (botId, callback) {
       }
     });
 };
+
+
+//generate id according his position
+var generateId = function () {
+
+};
+
+var getCantidatePosition = function () {
+
+};
+
+var getActualPosition = function () {
+
+};
+
+var getCandidateData = function (guestId) {
+
+};
+
+var candAcutalInternDuration = function (userInput) {
+
+};
+
 
 module.exports = {
   getMyId: getMyId,

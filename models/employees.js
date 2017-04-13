@@ -110,9 +110,9 @@ Employee.methods.generatePasswords = function () {
   // this.megaplan = Math.floor(Math.random() * (90000000 - 1000) + 1000);
   // this.one_c = Math.floor(Math.random() * (90000000 - 1000) + 1000);
   // this.computer = Math.floor(Math.random() * (90000000 - 1000) + 1000);
-  this.megaplan = password(12, false);
-  this.one_c = password(12, false);
-  this.computer = password(12, false);
+  this.megaplan = password(10, false);
+  this.one_c = password(8, false);
+  this.computer = password(8, false);
 };
 
 Employee.pre('save', function (next) {

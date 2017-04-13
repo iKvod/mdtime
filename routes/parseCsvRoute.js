@@ -97,7 +97,6 @@ router.get('/archive', function (req, res, next) {
     //   res.send(message)
     // });
   })
-
 });
 
 var saveArchivedEmployees = function (dir, callback) {

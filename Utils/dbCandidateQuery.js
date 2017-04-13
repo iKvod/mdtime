@@ -62,7 +62,7 @@ var getEmployeePasswords = function (employee_id, bot_id, callback) {
     }
 
     Employees.findOne({ employee_id: employee_id })
-      .select({'firstname':1, 'lastname':1, 'megaplan':1, '1C':1, 'computer':1})
+      .select({'firstname':1, 'lastname':1, 'megaplan':1, 'one_c':1, 'computer':1, 'employee_id': 1})
       .lean()
       .exec(function (err, data) {
         if(err){
@@ -73,11 +73,10 @@ var getEmployeePasswords = function (employee_id, bot_id, callback) {
         }
 
         if(data){
-          passWords = "\t\t" + fetchedData.general_name + " ,запрошенные вами данные на сотрудника:\n\n" +
-            "******** Пороли для " + data.general_name + " " + data.general_surname + " в системах ********\n\t\t"
-            + 'Megaplan: ' + data.megaplan + "\n"
-            + '\t\t1C: ' + data.one_c + "\n"
-            +  "\t\tКомпьютер: " + data.computer + "\n";
+          passWords = "\t\t Пороли по сотруднику: " + data.firstname + " " + data.lastname + " | " + data.employee_id + " \n\n"
+            + 'MD Mail | MD Plan: ' + data.megaplan + "\n"
+            + "Компьютер | Сервер " + data.computer + "\n"
+            + '1C Base: ' + data.one_c + "\n";
           callback(null, passWords);
         }else {
           var error = {};

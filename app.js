@@ -8,7 +8,6 @@ var cors = require('cors');
 
 var mongoose = require('mongoose');
 
-
 var config = require('./config');
 var app = express();
 app.use(cors);
@@ -29,6 +28,8 @@ var parser = require('./routes/parseCsvRoute');
 var candidates = require('./routes/candidates');
 var botRoutes = require('./routes/botRoutes');
 var employees = require('./routes/emplyees');
+var botInteractive = require('./Utils/bot/interactiveChat');
+
 
 var app = express();
 
@@ -43,13 +44,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
 app.use('/', index);
 app.use('/users', users);
 app.use('/api/sheets', gSheet);
 app.use('/api/parser', parser);
 app.use('/api/candidates', candidates);
 app.use('/api/employees', employees);
+// app.use(botInteractive);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

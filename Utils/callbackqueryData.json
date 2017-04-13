@@ -1,0 +1,32 @@
+{ id: '893034640688035060',
+  from:
+    { id: 207925830,
+      first_name: 'Rafa',
+      last_name: 'B.',
+      username: 'Rbazarbaev777' },
+    message:
+    { message_id: 357,
+      from:
+      { id: 342706056,
+        first_name: 'mdChecklist2_bot
+        ',
+        username: 'mdChecklist2_bot'
+      },
+      chat:
+      { id: 207925830,
+        first_name: 'Rafa',
+        last_name: 'B.',
+        username: 'Rbazarbaev777',
+        type: 'private' },
+      date: 1492070803,
+      reply_to_message:
+      { message_id: 356,
+        from: 'Object',
+        chat: 'Object',
+        date: 1492070803,
+        text: '17ек888' },
+      text: 'Нащжмите на кнопку' },
+  chat_instance: '-541596303925187863
+  8',
+  data: 'Hello World from keyboard'
+}
