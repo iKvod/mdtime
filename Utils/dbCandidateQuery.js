@@ -73,7 +73,7 @@ var getEmployeePasswords = function (employee_id, bot_id, callback) {
         }
 
         if(data){
-          passWords = "\t\t Пороли по сотруднику: " + data.firstname + " " + data.lastname + " | " + data.employee_id + " \n\n"
+          passWords = "\t\t Пароли по сотруднику: " + data.firstname + " " + data.lastname + " | " + data.employee_id + " \n\n"
             + 'MD Mail | MD Plan: ' + data.megaplan + "\n"
             + "Компьютер | Сервер " + data.computer + "\n"
             + '1C Base: ' + data.one_c + "\n";
