@@ -75,14 +75,14 @@ var getEmployeePasswords = function (employee_id, bot_id, callback) {
         if(data){
           passWords = "\t\t Пароли по сотруднику: " + data.firstname + " " + data.lastname + " | " + data.employee_id + " \n\n"
             + 'MD Mail | MD Plan: ' + data.megaplan + "\n"
-            + "Компьютер | Сервер " + data.computer + "\n"
+            + "Компьютер | MD Сервер: " + data.computer + "\n"
             + '1C Base: ' + data.one_c + "\n";
           callback(null, passWords);
         }else {
           var error = {};
           error.message  = "Ошибка при получений с базы данных сотрдуника.\n" +
-            "Обратитесь тех. сотруднику. Возможно сотрудника с такими данными не существует!"
-            + "Код ошибки: Utils-getEmployeePasswords(line - 82)";
+            "Cотрудника с такими данными не существует!\n";
+            // + "Код ошибки: Utils-getEmployeePasswords(line - 82)";
           error.status = 404;
           callback(error, null);
         }
@@ -120,6 +120,8 @@ var verifyAdmin = function (bot_id, callback) {
       }
     })
 };
+
+
 
 module.exports = {
   getEmployeeById:getEmployeeById,

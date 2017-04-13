@@ -2,6 +2,10 @@
  * Created by rafa on 11/04/2017.
  */
 var Employees = require('../../models/employees');
+var Positions = require('../../models/positions');
+var Departments = require('../../models/departments');
+var Candidates = require('../../models/candidates');
+
 
 var getMyId = function (botId, callback) {
   Employees.findOne({botId : botId})
@@ -78,7 +82,6 @@ var getAdmins= function (callback) {
     });
 };
 
-
 //mypass - return emplouyess passwords
 var getMyPass = function (botId, callback) {
   fetchMyPass(botId, function (err, passwords) {
@@ -123,7 +126,38 @@ var generateId = function () {
 
 };
 
-var getCantidatePosition = function () {
+var getCantidatePosition = function (candId, callback) {
+  Candidates.findOne({ guest_id: candId })
+    .select({'vacancy_id':1})
+    .exec(function (err, cand) {
+      if(err){
+        err.status = 500;
+        err.message = 'Неизвестная ошибка';
+        callback(err, null);
+        return;
+      }
+      if(cand){
+        Positions.findOne({department: cand.vacancy_id})
+          .select({ '':1 })
+          .populate({
+            path: 'department',
+            match:{}
+          })
+          .exec(function (err, data) {
+            
+          });
+        callback(null, cand);
+      } else {
+        var error = {};
+        error.status = 404;
+        error.message = 'В базе не найдено пользователя c Вашим гостевым ID.';
+        сallback(error, null);
+        return;
+      }
+    });
+};
+
+var getCandidate = function () {
 
 };
 

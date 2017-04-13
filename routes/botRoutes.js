@@ -18,7 +18,6 @@ var dbHelper = require('../Utils/dbCandidateQuery');
 var botDbHelper = require('../Utils/bot/botDbHelpers');
 var botInteractive = require('../Utils/bot/interactiveChat');
 
-
 //buttons is object with arrays
 
 var buttons = {
@@ -42,7 +41,7 @@ var inlineKeybordOption = function (buttons) {
 
       // console.log('key- '+ key2 + " -values " + buttons.button[key1][key2]);
     }
-    inlineButtons.push(inlineButton)
+    inlineButtons.push(inlineButton);
     inlineButton = [];
   }
   return {
@@ -62,7 +61,7 @@ bot.on('callback_query', function (msg, match) {
 
   switch (msg.data){
     case 'да1':
-      //TODO
+      //TODO должен
       // TODO из базы выдается список Департаментов
       var yesOpt = {
         button: [
@@ -106,6 +105,8 @@ bot.on('callback_query', function (msg, match) {
       });
       break;
     case '1mon':
+
+
   //TODO надо определить он действительно по этой должности должег проходить стажировку по выбранной по кнопке
 
       break;
