@@ -5,6 +5,14 @@ var Employees = require('../../models/employees');
 var Positions = require('../../models/positions');
 var Departments = require('../../models/departments');
 var Candidates = require('../../models/candidates');
+var Subsidaries  = require('../../models/subsidary');
+var Workertypes = require('../../models/workertype');
+var Worktimes = require('../../models/worktimes');
+var Workermodes = require('../../models/workermode');
+var Workhours = require('../../models/workhours');
+var Internperiod = require('../../models/intperiod');
+//Db helpers
+var dbOps = require('../../routes/Helpers/dbRouteCommon');
 
 
 var getMyId = function (botId, callback) {
@@ -126,7 +134,9 @@ var generateId = function () {
 
 };
 
-var getCantidatePosition = function (candId, callback) {
+
+//find candidate position by guest id
+var getCandidatePosition = function (candId, callback) {
   Candidates.findOne({ guest_id: candId })
     .select({'vacancy_id':1})
     .exec(function (err, cand) {
@@ -157,25 +167,188 @@ var getCantidatePosition = function (candId, callback) {
     });
 };
 
-var getCandidate = function () {
+//finds positions and deps that applied by abbrevations
+var getCandidatePos = function (abSub, abPos, callback) {
+  // console.log(abSub.slice(0,1))
+  // console.log(abSub.slice(1,2));
+  //[abSub.slice(0,1), abSub.slice(1,2)]
+  var reg = new RegExp('^'+abSub.slice(0,1), 'i');
+  // var reg = /+abSub +/;
+  Subsidaries.findOne({ subsidary: { $regex: reg } })
+    .select({'subsidary': 1})
+    .exec(function (err, data) {
+      if(err){
+        err.message = 'Внутреняя ошибка';
+        err.status = 500;
+        callback(err, null);
+        return;
+      }
+
+      if(data){
+        // console.log(data);
+        callback(null, data);
+      } else {
+        var error = {};
+        error.message = 'Данные не найдены';
+        error.status = 404;
+        callback(error, null);
+      }
+    });
+};
+
+
+var getSubsDepartments = function (id, callback) {
+  Subsidaries
+    .findOne({_id: id})
+    .lean()
+    .select({
+      'subsidary': 1
+      ,'departments':1
+    })
+    .populate({
+      path:'departments',
+      select: 'department'
+    })
+    .exec(function (err, data) {
+       if(err){
+         err.message = 'Неизвестная ошибка';
+         err.status  = 500;
+         callback(err, null);
+         return
+       }
+
+       if(data){
+         callback(null, data);
+       }else {
+         var error = {};
+         error.message = 'Данные не найдены.';
+         error.status = 404;
+         callback(error, null);
+       }
+    });
+};
+
+
+// Dummy
+var getDepPositions = function (depId, callback) {
+
+  dbOps.getAllRoute(Positions, {//query
+    department: depId
+  },{//select
+
+  }, { // populate
+    path: 'department',
+    select: 'worktimes worktypes workmodes',
+
+  }, function (err, data) { //callback
+    if(err){
+      // console.log(err);
+      callback(err, null);
+      return;
+    }
+
+    callback(null, data);
+    // console.log(data);
+    // if(data.length > 0){
+    //   console.log(data);
+    //
+    //
+    // } else {
+    //   console.log('Нет данных');
+    // }
+  })
+};
+
+
+//Getting available positions for particular department
+var getPosDept = function(depId, callback){ //geting position for particular department
+  dbOps.getAllRoute(Positions, { department: depId }, {
+    '_id': 1, 'department' : 1, 'position': 1
+  }, null, function (err,  data) {
+
+    if(err){
+      callback(err, null);
+      return
+    }
+    callback(null, data);
+  });
+};
+
+
+//Getting workers type. E.g. Intern or Probation period types
+var getWorkerTypes = function (callback) {
+  dbOps.getAllRoute(Workertypes, {}, {}, null, function (err, data) {
+    if(err){
+      callback(err, null);
+      return;
+    }
+    callback(null, data);
+  });
+};
+
+
+
+//Getting work times
+var getWorkTimes = function (callback) {
+  dbOps.getAllRoute(Worktimes, {}, {}, null, function (err, data) {
+    if(err){
+      callback(err, null);
+      return;
+    }
+    callback(null, data);
+  });
 
 };
 
-var getActualPosition = function () {
 
+
+var getInternPeriods = function (callback) {
+  dbOps.getAllRoute(Internperiod, {}, {}, null, function (err, data) {
+    if(err){
+      callback(err, null);
+      return;
+    }
+
+    callback(null, data);
+  });
 };
 
-var getCandidateData = function (guestId) {
-
+var getWorkerMode = function (callback) {
+  dbOps.getAllRoute(Workermodes, {}, {}, null, function (err, data) {
+    if(err){
+      callback(err, null);
+      return;
+    }
+    callback(null, data);
+  });
 };
 
-var candAcutalInternDuration = function (userInput) {
+var getWorkHours = function (callback) {
+  dbOps.getAllRoute(Workhours, {}, {}, null,
+    function (err, data) {
+      if(err){
+        callback(err, null);
+        return;
+      }
 
+      callback(null, data);
+
+    });
 };
 
 
 module.exports = {
   getMyId: getMyId,
   whoAdminPrevileges: whoAdminPrevileges,
-  getMyPass: getMyPass
+  getMyPass: getMyPass,
+  getCandidatePosition : getCandidatePosition,
+  getCandidatePos: getCandidatePos,
+  getSubsDepartments: getSubsDepartments,
+  getDepPositions: getDepPositions,
+  getPosDept: getPosDept,
+  getWorkerTypes: getWorkerTypes,
+  getWorkTimes: getWorkTimes,
+  getWorkHours: getWorkHours,
+  getInternPeriods: getInternPeriods,
+  getWorkerMode: getWorkerMode
 };

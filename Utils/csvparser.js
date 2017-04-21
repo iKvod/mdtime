@@ -122,7 +122,7 @@ var parseArchiveEmployees = function(dir, callback){
     })
     .on('end', function () {
       callback(parsedData);
-    })
+    });
 };
 
 

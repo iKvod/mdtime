@@ -1,6 +1,9 @@
 /**
  * Created by rafa on 09/04/2017.
  */
+
+'use strict';
+
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise
 
@@ -72,66 +75,3 @@ var Candidate = new Schema({
 
 
 module.exports = mongoose.model('Candidate', Candidate);
-
-
-/*
-*
-*
-* 'general_name' : general_name,
- 'general_middle_name' : general_middle_name,
- 'general_surname' : general_surname,
- 'general_sex' : general_sex,
- 'general_birthday' : general_birthday,
- 'general_birth_place' : general_birth_place,
- 'general_nationality' : general_nationality,
- 'personal_work_conditions' : personal_work_conditions,
- 'personal_experience' : personal_experience,
- 'personal_house_phone' : personal_house_phone,
- 'personal_phone' : personal_phone,
- 'personal_email' : personal_email,
- 'personal_education_level' : personal_education_level,
- 'personal_life_place' : personal_life_place,
- 'personal_can_move' : personal_can_move,
- 'personal_photo' : personal_photo,
- 'personal_cv' : personal_cv,
- 'personal_can_trips' : personal_can_trips,
- 'education_name' : education_name,
- 'education_faculty' : education_faculty,
- 'education_specialty' : education_specialty,
- 'education_ball' : education_ball,
- 'education_start' : education_start,
- 'education_end' : education_end,
- 'education_form' : education_form,
- 'education_kazakh' : education_kazakh,
- 'education_russian' : education_russian,
- 'education_english' : education_english,
- 'education_other' : education_other,
- 'lastwork_name' : lastwork_name,
- 'lastwork_position' : lastwork_position,
- 'lastwork_salary' : lastwork_salary,
- 'lastwork_start' : lastwork_start,
- 'lastwork_end' : lastwork_end,
- 'lastwork_rating' : lastwork_rating,
- 'lastwork_duties' : lastwork_duties,
- 'lastwork__end_reason' : lastwork__end_reason,
- 'lastwork_reference_person' : lastwork_reference_person,
- 'lastwork_reference_person_position' : lastwork_reference_person_position,
- 'lastwork_reference_person_phone' : lastwork_reference_person_phone,
- 'summery_desired_salary' : summery_desired_salary,
- 'summery_where_find_us' : summery_where_find_us,
- 'summery_when_can_start_work' : summery_when_can_start_work,
- 'summery_fb' : summery_fb,
- 'summery_insta' : summery_insta,
- 'summery_vk' : summery_vk,
- 'summery_interview_type' : summery_interview_type,
- 'summery_take_important' : summery_take_important,
- 'summery_family' : summery_family,
- 'summery_car' : summery_car,
- 'summery_question' : summery_question,
- 'summery_additional' : summery_additional,
- 'summery_certificates' : summery_certificates,
- 'interview_day' : interview_day,
- 'interview_time' : interview_time,
- 'vacancy_id' : '<?php echo $_GET['vacancy_id'] ?>'
-*
-* */

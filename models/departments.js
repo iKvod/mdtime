@@ -5,11 +5,19 @@ mongoose.Promise = global.Promise;
 
 var Schema = mongoose.Schema;
 
-var DepartmensSchema = new Schema({
-  dep_id: {type: Number},
-  department: { type: String},
-  slug: {type: String},
-  slogan: {type: String}
+var DepartmentsSchema = new Schema({
+  department: {type: String},
+  subsidary: {type: Schema.Types.ObjectId, ref: 'Subsidary'},
+  positions: [{type: Schema.Types.ObjectId, ref: 'Positions'}]
 });
 
-module.exports = mongoose.model('Departments', DepartmensSchema);
+// var DepartmentsSchema = new Schema({
+//   title: {type: String},
+//   content: {type: String},
+//   photoUtl: {type: String},
+//   // author: {type: mongoose.Schema.ObjectId, ref: 'Users'}
+//   // comments: [{type: mongoose.Schema.ObjectId, ref: 'Comments'}]
+//   // positions: [{type: mongoose.Schema.ObjectId, ref: 'Positions'}]
+// });
+
+module.exports = mongoose.model('Departments', DepartmentsSchema );

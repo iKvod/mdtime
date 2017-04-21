@@ -21,12 +21,14 @@ var Employee = new Schema({
   firedDate: {type: Date},
   hiredDate: {type: Date},
   phonenumber: {type:String},
-  department: { type: String},
-  position: {type:String},
+  // department: { type: String}, //must be object id
+  // position: {type:String},//must be object id
+  intern: {type: Boolean, default: false},
+  probation: {type: Boolean, default: false},
   hired: {type: Boolean, default: true},
-  // department: { type: Schema.Types.Number, ref: 'Departments' },
-  // position: { type: Schema.Types.Number, ref: 'Positions' },
-  salary_fixed: {
+  department: { type: Schema.Types.Number, ref: 'Departments' },
+  position: { type: Schema.Types.Number, ref: 'Positions' },
+  salaryfixed: {
     type: Number,
     default: 0.0
   },
@@ -34,11 +36,10 @@ var Employee = new Schema({
     type: Number,
     default: 0.0
   },
-  worker_type: {type: String, default: null},
-  work_time: { //fixed work time
-    type: Number,
-    default: 0
-  },
+  workertype: {type: Schema.Types.ObjectId, ref: 'Workertypes'}, //
+  worktime: { type: Schema.Types.ObjectId, ref: 'Worktimes'},
+  workermode: {type: Schema.Types.ObjectId, ref: 'Workermodes'},
+  worhour: { type: Schema.Types.ObjectId, ref: 'Workhours'},
   registered_at: { type: Date, default: Date.now },
   checked: {
     type: Boolean,

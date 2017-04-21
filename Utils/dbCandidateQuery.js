@@ -4,10 +4,11 @@
 'use strict';
 var Empl = require('../models/candidates');
 var Employees = require('../models/employees');
+var dbHelper = require('../routes/Helpers/dbRouteCommon');
 
 //fetching data by id and sending to TB with apropriate message
 var getEmployeeById = function (empId, callback) {
-
+  //
   var emplData = null;
 
   Employees.findOne({employee_id:empId})
@@ -22,7 +23,7 @@ var getEmployeeById = function (empId, callback) {
         return;
       }
       if(empl){
-        emplData = "*******Данные сотрудника " + empl.firstname + " *******" + "\n" +
+        emplData = "Данные по сотруднику " + empl.firstname + " " + "\n" +
           "Имя: " + empl.firstname + "\n" +
           "Фамилия: " + empl.lastname +  "\n" +
           "Email: " + empl.email + '\n' +
@@ -90,6 +91,55 @@ var getEmployeePasswords = function (employee_id, bot_id, callback) {
   })
 };
 
+var getEmployeeId = function (botId, employeName, callback) {
+  var emplIdInfo = '';
+  verifyAdmin(botId, function (err, data) {
+    if(err){
+      callback(err, null);
+      return;
+    }
+
+    var query =
+    {
+      firstname: employeName
+    };
+
+
+    if(data.admin){
+      fetchEmplId(employeName, query, function (err, data) {
+        if(err){
+          callback(err, null);
+          return;
+        }
+
+        data.forEach(function (empl) {
+          emplIdInfo += 'Рабочий ID сотрудника - ' + empl.firstname + ' ' + empl.lastname + ' \n'
+            + ' Id - ' + empl.employee_id + '\n\n';
+        });
+        callback(null, emplIdInfo);
+      });
+    }
+  })
+
+};
+
+//Helper callback function for getting ID by any qwery
+var fetchEmplId = function(employeName, query, callback){
+
+  dbHelper.getAllRoute(Employees, query, {
+    'firstname': 1,
+    'lastname': 1,
+    'employee_id' : 1
+  }, null, function (err, data) {
+    if(err){
+      callback(err, null);
+      return
+    }
+
+    callback(null, data);
+  });
+};
+
 
 // used to authorize some request only for admins when some authorized
 // commands come from tb
@@ -122,11 +172,11 @@ var verifyAdmin = function (bot_id, callback) {
 };
 
 
-
 module.exports = {
   getEmployeeById:getEmployeeById,
   verifyAdmin: verifyAdmin,
-  getEmployeePasswords: getEmployeePasswords
+  getEmployeePasswords: getEmployeePasswords,
+  getEmployeeId: getEmployeeId
 };
 
 

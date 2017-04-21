@@ -28,7 +28,10 @@ var parser = require('./routes/parseCsvRoute');
 var candidates = require('./routes/candidates');
 var botRoutes = require('./routes/botRoutes');
 var employees = require('./routes/emplyees');
-var botInteractive = require('./Utils/bot/interactiveChat');
+var subsidary = require('./routes/subsidaryRoutes');
+// var botInteractive = require('./Utils/bot/interactiveChat');
+var departmentRoutes = require('./routes/departments');
+var workerRoutes = require('./routes/job');
 
 
 var app = express();
@@ -50,6 +53,11 @@ app.use('/api/sheets', gSheet);
 app.use('/api/parser', parser);
 app.use('/api/candidates', candidates);
 app.use('/api/employees', employees);
+app.use('/api/subsidary', subsidary);
+app.use('/api/departments', departmentRoutes);
+app.use('/api/workers', workerRoutes);
+
+
 // app.use(botInteractive);
 
 // catch 404 and forward to error handler
