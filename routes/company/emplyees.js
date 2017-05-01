@@ -72,7 +72,7 @@ router.get('/password/:id', function (req, res, next) {
             res.send(err);
             return;
           }
-          res.send({message: 'Пароли для ' + savedData.firstname + " созранены"})
+          res.send({message: 'Пароли для ' + savedData.firstname + " сохранены"})
         })
 
       }else {

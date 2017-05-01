@@ -1202,6 +1202,7 @@ bot.onText(/\/whoadmin/, function (msg, match) {
 
 bot.onText(/\/mypass/, function (msg, match) {
   var botId = msg.chat.id;
+  console.log(msg);
 
   botDbHelper.getMyPass(botId, function (err, passwords) {
     if(err){
