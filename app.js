@@ -10,7 +10,7 @@ var cors = require('cors');
 //   host: 'localhost',
 //   port: 6379
 // });
-var redisClient = require('./Utils/redis/redis');
+// var redisClient = require('./Utils/redis/redis');
 var mongoose = require('mongoose');
 
 var config = require('./config');
