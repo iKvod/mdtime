@@ -29,12 +29,12 @@ db.once('open', function () {
 
 
 //redis connection
-redisClient.on('ready', function () {
-  console.log('Successfully connected to Redis');
-});
-redisClient.on('error', function () {
-  console.log('Error on connecting to Redis');
-});
+// redisClient.on('ready', function () {
+//   console.log('Successfully connected to Redis');
+// });
+// redisClient.on('error', function () {
+//   console.log('Error on connecting to Redis');
+// });
 
 
 var index = require('./routes/index');
