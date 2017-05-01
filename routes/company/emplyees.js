@@ -58,7 +58,7 @@ router.put('/:id', function (req, res, next) {
 });
 
 router.get('/password/:id', function (req, res, next) {
-  Employees.findOnd({employee_id: req.params.id})
+  Employees.findOne({employee_id: req.params.id})
     .exec(function (err, data) {
       if(err){
         res.send(err);
