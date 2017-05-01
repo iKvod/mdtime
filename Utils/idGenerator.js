@@ -1,6 +1,6 @@
 'use strict';
 
-var Candidate = require('../models/candidates');
+var Candidate = require('../models/users/candidates');
 var Employees = require('../models/employees');
 
 

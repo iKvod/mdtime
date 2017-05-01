@@ -11,21 +11,22 @@ var Schema = mongoose.Schema;
 //var passportLocalMongoose = require('passport-local-mongoose');
 
 var Employee = new Schema({
-  employee_id: {type: String, unique: true},
-  botId: {type: String, unique: true},
+  employee_id: { type: String, unique: true },
+  avatarurl: { type: String },
+  botId: { type: String, unique: true },
   username: String,
-  firstname: {type: String, default:'NoName'},
-  lastname: {type: String, default: 'NoLastname'},
+  firstname: { type: String, default:'NoName' },
+  lastname: { type: String, default: 'NoLastname' },
   email: String,
-  fired: {type: Boolean, default: false},
-  firedDate: {type: Date},
-  hiredDate: {type: Date},
-  phonenumber: {type:String},
+  fired: { type: Boolean, default: false },
+  firedDate: { type: Date },
+  hiredDate: { type: Date },
+  phonenumber: { type:String },
   // department: { type: String}, //must be object id
   // position: {type:String},//must be object id
-  intern: {type: Boolean, default: false},
-  probation: {type: Boolean, default: false},
-  hired: {type: Boolean, default: true},
+  intern: { type: Boolean, default: false },
+  probation: { type: Boolean, default: false },
+  hired: { type: Boolean, default: true },
   department: { type: Schema.Types.Number, ref: 'Departments' },
   position: { type: Schema.Types.Number, ref: 'Positions' },
   salaryfixed: {
@@ -36,17 +37,19 @@ var Employee = new Schema({
     type: Number,
     default: 0.0
   },
-  workertype: {type: Schema.Types.ObjectId, ref: 'Workertypes'}, //
-  worktime: { type: Schema.Types.ObjectId, ref: 'Worktimes'},
-  workermode: {type: Schema.Types.ObjectId, ref: 'Workermodes'},
-  worhour: { type: Schema.Types.ObjectId, ref: 'Workhours'},
+  internperiod:{type: Schema.Types.ObjectId, ref: 'Internperiods', default: null},
+  workertype: { type: Schema.Types.ObjectId, ref: 'Workertypes', default: null}, //
+  worktime: { type: Schema.Types.ObjectId, ref: 'Worktimes', default: null},
+  workermode: { type: Schema.Types.ObjectId, ref: 'Workermodes', default: null},
+  worhour: { type: Schema.Types.ObjectId, ref: 'Workhours', default: null},
+  wdmode: { type: Schema.Types.ObjectId, ref: 'Daylymodes', default: null},
   registered_at: { type: Date, default: Date.now },
   checked: {
     type: Boolean,
     default:false
   },
   updated: Date,
-  rating: [{type: Number}],
+  rating: [{ type: Number}],
   report: [{
     type: Schema.Types.ObjectId,
     ref: 'Reporting'
@@ -56,10 +59,10 @@ var Employee = new Schema({
     type: Boolean,
     default: false
   },
-  code: [{type: String}],
-  'megaplan': { type: String, default: null}, // poroli
-  'one_c': { type: String, default: null},// poroli
-  'computer': { type: String, default: null},// poroli
+  code: [{ type: String}],
+  megaplan: { type: String, default: null}, // poroli
+  one_c: { type: String, default: null},// poroli
+  computer: { type: String, default: null},// poroli
 },{
   timestamp:true
 });
@@ -108,9 +111,6 @@ var Employee = new Schema({
 // });
 
 Employee.methods.generatePasswords = function () {
-  // this.megaplan = Math.floor(Math.random() * (90000000 - 1000) + 1000);
-  // this.one_c = Math.floor(Math.random() * (90000000 - 1000) + 1000);
-  // this.computer = Math.floor(Math.random() * (90000000 - 1000) + 1000);
   this.megaplan = password(10, false);
   this.one_c = password(8, false);
   this.computer = password(8, false);

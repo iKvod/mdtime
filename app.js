@@ -5,13 +5,19 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var cors = require('cors');
-
+// var redis = require('redis');
+// var redisClient = redis.createClient({
+//   host: 'localhost',
+//   port: 6379
+// });
+var redisClient = require('./Utils/redis/redis');
 var mongoose = require('mongoose');
 
 var config = require('./config');
 var app = express();
 app.use(cors);
 // mongoose.connect(config.mongoUrl, config.opt);
+//mongoose connection
 mongoose.connect(config.mongoUrl);
 var db = mongoose.connection;
 
@@ -21,17 +27,27 @@ db.once('open', function () {
   console.log("Соединение к базе прошло успешно");
 });
 
+
+//redis connection
+redisClient.on('ready', function () {
+  console.log('Successfully connected to Redis');
+});
+redisClient.on('error', function () {
+  console.log('Error on connecting to Redis');
+});
+
+
 var index = require('./routes/index');
 var users = require('./routes/users');
-var gSheet = require('./routes/googlesheet');
+var gSheet = require('./routes/openAPI/googlesheet');
 var parser = require('./routes/parseCsvRoute');
-var candidates = require('./routes/candidates');
-var botRoutes = require('./routes/botRoutes');
-var employees = require('./routes/emplyees');
-var subsidary = require('./routes/subsidaryRoutes');
-// var botInteractive = require('./Utils/bot/interactiveChat');
-var departmentRoutes = require('./routes/departments');
-var workerRoutes = require('./routes/job');
+var candidates = require('./routes/company/candidates');
+var botRoutes = require('./Utils/telegramBot/botRoutes');
+var employees = require('./routes/company/emplyees');
+var subsidary = require('./routes/company/subsidaryRoutes');
+var departmentRoutes = require('./routes/company/departments');
+var workerRoutes = require('./routes/company/job');
+var checklistRoutes = require('./routes/checklist/check');
 
 
 var app = express();
@@ -43,11 +59,13 @@ app.set('view engine', 'jade');
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json({limit: '5mb'}));
+app.use(bodyParser.urlencoded({ limit: '5mb', extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/', index);
+
+
+// app.use('/', index);
 app.use('/users', users);
 app.use('/api/sheets', gSheet);
 app.use('/api/parser', parser);
@@ -57,8 +75,25 @@ app.use('/api/subsidary', subsidary);
 app.use('/api/departments', departmentRoutes);
 app.use('/api/workers', workerRoutes);
 
+//checklist
+app.use('/api/checklist', checklistRoutes);
 
-// app.use(botInteractive);
+
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'node_modules')));
+
+// app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(__dirname + "./public/bower_components"));
+// app.use(express.static(__dirname + "./public/views/pages"));
+// app.use(express.static(__dirname + "./public/images"));
+// app.use(express.static(__dirname + "./public/stylesheets"));
+// app.use(express.static(__dirname + "./public/photos"));
+// app.use(express.static(__dirname + "./public/components"));
+
+app.use('/*', function(req, res){
+  // console.log(__dirname);
+  res.sendFile(path.join(__dirname + '/public/index.html'));
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

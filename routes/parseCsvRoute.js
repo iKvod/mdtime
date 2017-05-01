@@ -3,7 +3,7 @@
  */
 var express = require('express');
 var router = express.Router();
-var Candidate = require('../models/candidates');
+var Candidate = require('../models/users/candidates');
 var Employees = require('../models/employees');
 var csvParser = require('../Utils/csvparser');
 // var csvDir = require('../dbcsv/candidates-goo.csv');
