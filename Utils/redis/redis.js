@@ -16,4 +16,4 @@ var redis = require('redis');
 // });
 
 
-module.exports = redisClient;
+// module.exports = redisClient;
