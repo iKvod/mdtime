@@ -11,10 +11,10 @@ var config = {
         pass: 'Automatodev',
         auth: { authdb: "checklist"}
     },
-    ceoBotID : 78923920,
-    managerBotID : 228106138
-    // ceoBotID: 207925830,     //for testing
-    // managerBotID: 207925830 // for testing
+    // ceoBotID : 78923920,
+    // managerBotID : 228106138
+    ceoBotID: 207925830,     //for testing
+    managerBotID: 207925830 // for testing
 };
 
 module.exports =  config;

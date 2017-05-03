@@ -14,7 +14,7 @@ var Employee = new Schema({
   employee_id: { type: String, unique: true },
   avatarurl: { type: String },
   profileback: { type: String },
-  botId: { type: String, unique: true },
+  botId: { type: String},
   username: { type: String },
   firstname: { type: String, default:'NoName' },
   lastname: { type: String, default: 'NoLastname' },
