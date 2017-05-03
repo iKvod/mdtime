@@ -6,3 +6,62 @@ body {
 a {
   color: #00B7FF;
 }
+
+.form {
+  margin: auto;
+  max-width: 100%;
+  min-width: 100%;
+  background: #fff;
+  min-height: 400px;
+  /* height: 50%; */
+  /* padding: 0px; */
+  border-radius: 3px;
+  display: flex;
+  flex-flow: column wrap;
+}
+
+
+.form_content {
+  display: flex;
+  flex-flow: column nowrap;
+  margin: auto;
+}
+
+.form_header {
+  border-radius: 2px;
+  background-color: antiquewhite;
+  width: 100%;
+  height: 50px;
+  /*padding-left: 30px;*/
+  /*padding-top: 10px;*/
+}
+
+.form_body {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  width: 500px;
+  background: aliceblue;
+  display: flex;
+}
+
+#webcam {
+  margin: auto;
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+#webcam .webcam{
+  margin: auto;
+}
+
+.custom_btn {
+  width: 100%;
+  margin-left: 0 !important;
+}
+
+.foto-cont {
+  display: flex;
+  flex-flow: column wrap;
+  padding: 1% 20%;
+}

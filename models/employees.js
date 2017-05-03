@@ -13,8 +13,9 @@ var Schema = mongoose.Schema;
 var Employee = new Schema({
   employee_id: { type: String, unique: true },
   avatarurl: { type: String },
+  profileback: { type: String },
   botId: { type: String, unique: true },
-  username: String,
+  username: { type: String },
   firstname: { type: String, default:'NoName' },
   lastname: { type: String, default: 'NoLastname' },
   email: String,
@@ -52,7 +53,7 @@ var Employee = new Schema({
   rating: [{ type: Number}],
   report: [{
     type: Schema.Types.ObjectId,
-    ref: 'Reporting'
+    ref: 'Timereportings'
   }],
   // book: [{ type: Schema.Types.ObjectId, ref: 'Books' }],
   admin: {

@@ -1,8 +1,3 @@
-/**
- * Created by rafa on 01/05/2017.
- */
-'use strict';
-
 
 (function (){
 
@@ -10,13 +5,15 @@
   angular
     .module('checklist')
     //.constant("baseURL", "https:checklist.automato.me")
-    .constant("baseURL", "") ;// testing
+    .constant("baseURL", "")// testing
+    .factory('ChecklistService', ChecklistService);
+
+
 
   ChecklistService.$inject = ['$resource', 'baseURL'];
 
 
   function ChecklistService($resource, baseURL){
-    //return $resource("/api/checklist/:id", { id: "@id" });
     return $resource(baseURL + '/api/checklist/:id', { id: '@id'}, {
       query: {
         method: "GET",
@@ -34,7 +31,6 @@
       }
     })
   }
-
 
 })();
 

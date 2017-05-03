@@ -50,6 +50,32 @@ router.post('/manual', function (req, res, next) {
     res.send(savedEmpl);
   });
 });
+router.put('/manual', function (req, res, next) {
+  var data = req.body;
+
+  var empl = new Employees({
+    employee_id: data.employee_id,
+    botId: data.bot_id,
+    username: data.username,
+    firstname: data.firstname,
+    lastname:data.lastname,
+    email:data.email,
+    fired: data.fired,
+    phonenumber: data.phonenumber,
+    // department: data.department,
+    position: data.position
+  });
+
+  empl.save(function (err, savedEmpl) {
+    if(err){
+      err.message = 'Неизвестная ошибка';
+      res.status(500).send(err);
+      return;
+    }
+    res.send(savedEmpl);
+  });
+});
+
 
 //Not compleated
 router.put('/:id', function (req, res, next) {

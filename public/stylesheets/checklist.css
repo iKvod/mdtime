@@ -1,0 +1,97 @@
+.checklist-wrapper {
+    flex: 1;
+    margin:auto;
+    min-width: 600px;
+    max-width: 600px;
+    min-height: 600px;
+    max-height: 600px;
+    /*background-color: aliceblue;*/
+    /*border: solid 1px #fff;*/
+    border-radius: 4px;
+    padding: 30px;
+    display: flex;
+}
+
+.checklist-main {
+    flex: 1;
+    display: flex;
+    flex-flow: column nowrap;
+    margin: auto;
+    /*background: #00B7FF;*/
+    min-width: 300px;
+    min-height: 300px;
+}
+    .checklist-main .pers-info{
+        min-width: 100%;
+        max-width: 100%;
+        min-height: 30px;
+        /*background-color: #eeeeee;*/
+        display: flex;
+        flex-flow: row wrap;
+    }
+        .pers-info span {
+            margin: auto;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+.checklist-avatar {
+    flex: 1;
+    display: flex;
+    max-height: 120px;
+}
+
+.checklist-avatar .checklist-ava {
+    flex: auto;
+    margin: auto;
+    /*background: #ffffff;*/
+    background-color: transparent;
+    border-radius: 100%;
+    min-width: 100px;
+    min-height: 100px;
+    max-height: 100px;
+    max-width: 100px;
+    border: solid 1px #ffffff;
+    display: flex;
+}
+    .checklist-ava img {
+        min-width: 90px;
+        min-height: 90px;
+        max-width: 90px;
+        border-radius: 100%;
+        /*margin: 5px;*/
+        flex: 1;
+        margin: auto;
+        background-color: #ffffff;
+    }
+
+.checklist-form {
+    flex: 5;
+    display: flex;
+    flex-flow: row wrap;
+    max-height: 100px;
+    /*background-color: red;*/
+}
+    .checklist-form .form-content {
+        margin: auto;
+        display: flex;
+        flex-flow: row wrap;
+    }
+
+    .checklist-form .input {
+        margin: auto;
+        flex: 5;
+        border: solid 1px;
+        border-radius: 3px;
+        min-width: 250px;
+        max-width: 250px;
+        min-height: 40px;
+        padding: 0 20px;
+        font-size: 20px;
+    }
+    .checklist-form .icon {
+        flex: 1;
+        min-height: 40px;
+        padding: 0 20px;
+        margin: auto;
+    }

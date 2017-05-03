@@ -8,7 +8,7 @@ angular.module('checklist', [
   'ngResource',
   // 'ngFileUpload',
   'ngAria',
-  // 'webcam'
+  'webcam'
 ])
   .config(['$stateProvider', '$urlRouterProvider','$locationProvider',
     function($stateProvider, $urlRouterProvider, $locationProvider) {
@@ -16,8 +16,8 @@ angular.module('checklist', [
       $stateProvider
         .state('main', {
           url: '/',
-          templateUrl: 'Components/checklist/checklist-tmpl.html',
-          controller: 'ChecklistCtrl',
+          templateUrl: 'Components/main/main-tmpl.html',
+          controller: 'MainCtrl',
           controllerAs: 'vm'/*,
            resolve: {
            user : function(ChecklistService){
@@ -28,7 +28,7 @@ angular.module('checklist', [
         })
         // .state('checklist', {
         //   url: '/checklist',
-        //   templateUrl: 'components/checklist/checklist_id_form.html',
+        //   templateUrl: 'Components/checklist/checklist-tmpl.html',
         //   controller: 'ChecklistCtrl',
         //   controllerAs: 'vm'/*,
         //    resolve: {
@@ -38,56 +38,51 @@ angular.module('checklist', [
         //    }
         //    }*/
         // })
-        // .state("checkin", { //state for creating new FAQﬁ
-        //   url:'/in/code/{employee_id}',
-        //   templateUrl:"components/checklist/checkin_code_form.html",
-        //   controller:"CheckinCtrl",
-        //   controllerAs:"vm"
-        //   // resolve: {
-        //   //     data: function(CheckinService){
-        //   //         return CheckinService.getUserData();
-        //   //     }
-        //   // }
-        //   ,params: {
-        //     employee_id: null
-        //   }
-        // })
-        // .state("checkin.image",{//state for uploadin image and description
-        //   url:'/camera',
-        //   templateUrl:"components/checklist/checkin_image_form.html",
-        //   controller:"CheckinCtrl",
-        //   controllerAs:"vm"
-        //   ,params: {
-        //     employee_id: null
-        //   }
-        // })
-        // .state('checkin.success', {
-        //   url:'/success',
-        //   templateUrl:'components/checklist/success_checkin_page.html',
-        //   controller:"CheckinCtrl",
-        //   controllerAs:'vm'
-        // })
-        // .state("checkout", {
-        //   url:'/out/code/{employee_id}',
-        //   templateUrl:'components/checklist/checkout_code_form.html',
-        //   controller:'CheckoutCtrl',
-        //   controllerAs:'vm'
-        //   ,params: {
-        //     employee_id: null
-        //   }
-        // })
-        // .state('checkout.image',{
-        //   url:'/camera',
-        //   templateUrl:'components/checklist/checkout_image_form.html',
-        //   controller:'CheckoutCtrl',
-        //   controllerAs:'vm'
-        // })
-        // .state('checkout.success', {
-        //   url:'/success',
-        //   templateUrl:'components/checklist/success_checkin_page.html',
-        //   controller:"CheckoutCtrl",
-        //   controllerAs:'vm'
-        // })
+        .state("checkin", { //state for creating new FAQﬁ
+          url:'/checkin/code/:employeeId/:id',
+          templateUrl:"Components/checkin/checkin-tmpl.html",
+          controller:"CheckinCtrl",
+          controllerAs:"vm"
+          ,resolve: {
+              data: function(CheckinService, $stateParams){
+                  // return CheckinService.getUserData();
+                return CheckinService.getUserData().get({ id: $stateParams.employeeId}).$promise
+              }
+          }
+          ,params: {
+            employee_id: null
+          }
+        })
+        .state("checkin.image",{//state for uploadin image and description
+          url:'/camera',
+          templateUrl:"Components/webcam/webcam.html",
+          controller:"WebcamController",
+          controllerAs:"vm",
+        })
+        .state('checkin.success', {
+          url:'/success',
+          templateUrl:'components/checklist/success_checkin_page.html',
+          controller:"CheckinCtrl",
+          controllerAs:'vm'
+        })
+        .state("checkout", {
+          url:'/checkout/code/:employeeId/:id',
+          templateUrl:'components/checklist/checkout_code_form.html',
+          controller:'CheckoutCtrl',
+          controllerAs:'vm'
+        })
+        .state('checkout.image',{
+          url:'/camera',
+          templateUrl:'components/checklist/checkout_image_form.html',
+          controller:'CheckoutCtrl',
+          controllerAs:'vm'
+        })
+        .state('checkout.success', {
+          url:'/success',
+          templateUrl:'components/checklist/success_checkin_page.html',
+          controller:"CheckoutCtrl",
+          controllerAs:'vm'
+        })
         // .state('error',{
         //   url:'/error',
         //   template:"<h1>Upps, Error</h1>>",

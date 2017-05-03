@@ -10,10 +10,10 @@
 
   WebcamController.$inject = ['WebcamService'];
 
-  function PacienteDialogController (WebcamService) {
+  function WebcamController (WebcamService) {
     var vm = this;
 
-    vm.showweb = false;
+    vm.showweb = true;
     vm.webcam = WebcamService.webcam;
     //override function for be call when capture is finalized
     vm.webcam.success = function(image, type) {

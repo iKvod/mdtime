@@ -2,10 +2,10 @@
  * Created by rafa on 28/04/2017.
  */
 var redis = require('redis');
-// var redisClient = redis.createClient({
-//   host: 'localhost',
-//   port: 6379
-// });
+var redisClient = redis.createClient({
+  host: 'localhost',
+  port: 6379
+});
 
 
 // redisClient.on('ready', function () {
@@ -16,4 +16,4 @@ var redis = require('redis');
 // });
 
 
-// module.exports = redisClient;
+module.exports = redisClient;

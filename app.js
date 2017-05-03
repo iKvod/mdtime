@@ -10,12 +10,14 @@ var cors = require('cors');
 //   host: 'localhost',
 //   port: 6379
 // });
-// var redisClient = require('./Utils/redis/redis');
+var redisClient = require('./Utils/redis/redis');
 var mongoose = require('mongoose');
 
 var config = require('./config');
 var app = express();
 app.use(cors);
+
+//if mongo with auth
 // mongoose.connect(config.mongoUrl, config.opt);
 //mongoose connection
 mongoose.connect(config.mongoUrl);
@@ -29,12 +31,12 @@ db.once('open', function () {
 
 
 //redis connection
-// redisClient.on('ready', function () {
-//   console.log('Successfully connected to Redis');
-// });
-// redisClient.on('error', function () {
-//   console.log('Error on connecting to Redis');
-// });
+redisClient.on('ready', function () {
+  console.log('Successfully connected to Redis');
+});
+redisClient.on('error', function () {
+  console.log('Error on connecting to Redis');
+});
 
 
 var index = require('./routes/index');
@@ -78,9 +80,8 @@ app.use('/api/workers', workerRoutes);
 //checklist
 app.use('/api/checklist', checklistRoutes);
 
-
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'node_modules')));
+app.use('/node_modules', express.static(path.join(__dirname, 'node_modules')));
+app.use('/public', express.static(path.join(__dirname, 'public')));
 
 // app.use(express.static(path.join(__dirname, 'public')));
 // app.use(express.static(__dirname + "./public/bower_components"));
