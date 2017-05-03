@@ -972,10 +972,10 @@ bot.on('message', function (msg) {
 bot.onText(/\/start/, function (msg, match) {
   console.log(msg);
   var userId = msg.chat.id;
-  // startHandler.isStart = true;
-  // bot.sendMessage(userId, 'Пожалуйста, введите свой рабочий ID, ' +
-  //   'чтобы зарегистрироваться в системе.\n' +
-  //   'Рабочий ID выдается HR менеджером');
+  startHandler.isStart = true;
+  bot.sendMessage(userId, 'Пожалуйста, введите свой рабочий ID, ' +
+    'чтобы зарегистрироваться в системе.\n' +
+    'Рабочий ID выдается HR менеджером');
 });
 
 bot.onText(/\/salary/, function (msg, mathch) {
