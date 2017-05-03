@@ -162,7 +162,9 @@ var updateOneRoute = function (Model, id, someData, key, callback) {
           callback(err, null);
           return;
         }
-        callback(null, data[key]);
+        if(data){
+          callback(null, data[key]);
+        }
       });
     });
 };

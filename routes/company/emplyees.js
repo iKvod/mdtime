@@ -9,6 +9,7 @@ var express = require('express');
 var router = express.Router();
 var Candidate = require('../../models/users/candidates');
 var Employees = require('../../models/employees');
+var dbHelper = require('../Helpers/dbRouteCommon');
 
 router.get('/', function(req, res, next){
   Employees.find({})
@@ -50,30 +51,25 @@ router.post('/manual', function (req, res, next) {
     res.send(savedEmpl);
   });
 });
-router.put('/manual', function (req, res, next) {
+router.put('/manual/:id', function (req, res, next) {
   var data = req.body;
+  var dataToSave = data.dataToSave;
+  var key = data.key;
 
-  var empl = new Employees({
-    employee_id: data.employee_id,
-    botId: data.bot_id,
-    username: data.username,
-    firstname: data.firstname,
-    lastname:data.lastname,
-    email:data.email,
-    fired: data.fired,
-    phonenumber: data.phonenumber,
-    // department: data.department,
-    position: data.position
-  });
+  dbHelper.updateOneRoute(Employees,
+      req.params.id,
+      dataToSave,
+      key,
+      function (err, empl) {
+      if(err){
+        res.status(err.status).send(err);
+        return;
+      }
 
-  empl.save(function (err, savedEmpl) {
-    if(err){
-      err.message = 'Неизвестная ошибка';
-      res.status(500).send(err);
-      return;
-    }
-    res.send(savedEmpl);
-  });
+      if(empl){
+        res.send(empl);
+      }
+    })
 });
 
 

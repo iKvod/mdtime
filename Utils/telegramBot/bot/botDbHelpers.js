@@ -384,6 +384,7 @@ var checkAndRegisterEmpl = function (emplId, botId, callback) {
       callback(err, null);
       return;
     }
+    // console.log(data);
 
     if(data){
       data.botId = botId;
@@ -393,7 +394,7 @@ var checkAndRegisterEmpl = function (emplId, botId, callback) {
             , null);
           return
         }
-        callback(null, data);
+        callback(null, savedData);
       })
     }
 

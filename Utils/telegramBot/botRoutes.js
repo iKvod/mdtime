@@ -909,12 +909,14 @@ bot.on('message', function (msg) {
         //for registering new employee after he/she presses start button
         //
       } else if( messText.length < 10  && startHandler.isStart) {
+        // console.log(messText);
 
         // checks if employee id is valid format
         if(messText.length === 6 ){
 
           if(parseInt(last2DigitEmId) && last2DigitEmId.length === 2) {
             var emplId = msg.text.toUpperCase();
+            // console.log(emplId);
             botDbHelper.checkAndRegisterEmpl(emplId, chatId, function (err, data) {
               if(err){
                 if(err.status === 404){
@@ -923,6 +925,10 @@ bot.on('message', function (msg) {
                   return;
                 }
                 return;
+              }
+              if(data){
+                bot.sendMessage(chatId, 'Вы успешно зарегистрировались в системе.\nВаш ID бота - ' + data.botId);
+                // console.log(data);
               }
             });
           }
@@ -970,7 +976,7 @@ bot.on('message', function (msg) {
 
 
 bot.onText(/\/start/, function (msg, match) {
-  console.log(msg);
+  // console.log(msg);
   var userId = msg.chat.id;
   startHandler.isStart = true;
   bot.sendMessage(userId, 'Пожалуйста, введите свой рабочий ID, ' +
@@ -993,6 +999,14 @@ bot.onText(/\/time/, function (msg, mathch) {
 bot.onText(/\/timelate/, function (msg, mathch) {
 
 });
+
+bot.onText(/\/getme/, function (msg, mathch) {
+  var botId = msg.from.id;
+  var username = msg.from.username;
+  bot.sendMessage(botId, 'Ваш ID бота - ' + botId
+  + "\nВаш Username -  @" + username);
+});
+
 
 bot.onText(/\/redis/, function (msg, match) {
   // console.log(msg);
