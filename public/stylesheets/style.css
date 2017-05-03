@@ -11,7 +11,7 @@ a {
   margin: auto;
   max-width: 100%;
   min-width: 100%;
-  background: #fff;
+  /*background: #fff;*/
   min-height: 400px;
   /* height: 50%; */
   /* padding: 0px; */
@@ -30,25 +30,43 @@ a {
 .form_header {
   border-radius: 2px;
   background-color: antiquewhite;
-  width: 100%;
+  width: 355px;
   height: 50px;
   /*padding-left: 30px;*/
   /*padding-top: 10px;*/
 }
 
 .form_body {
-  padding-top: 3px;
-  padding-bottom: 3px;
-  width: 500px;
-  background: aliceblue;
+  width: 355px;
+  background: rgba(255, 0, 0, 0.3);
   display: flex;
+  /* padding: 20px; */
+  height: 230px;
+}
+.form-footer {
+  width: 355px;
+  /*background: aliceblue;*/
+  display: flex;
+  /*padding: 20px;*/
+}
+
+.form-footer .md-button {
+  margin: auto;
+}
+
+.form-web-content {
+  display: flex;
+  flex-flow: column nowrap;
+  margin: auto;
 }
 
 #webcam {
   margin: auto;
-  width: 100%;
+  /*width: 100%;*/
   display: flex;
   flex-flow: column nowrap;
+  /*padding: 0 10%;*/
+  /*background: antiquewhite;*/
 }
 
 #webcam .webcam{
@@ -56,12 +74,17 @@ a {
 }
 
 .custom_btn {
-  width: 100%;
-  margin-left: 0 !important;
+  /*margin-left: 0 !important;*/
+  width: 94%;
+  margin: auto;
 }
 
 .foto-cont {
+  /*display: flex;*/
+  /*flex-flow: column wrap;*/
+  /*margin: auto;*/
+  margin: auto;
+  /*width: 100%;*/
   display: flex;
-  flex-flow: column wrap;
-  padding: 1% 20%;
+  flex-flow: column nowrap;
 }

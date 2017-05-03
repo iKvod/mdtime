@@ -20,22 +20,30 @@
     <div class="form_body">
       <!--<img data-ng-src="{{'data:' + vm.fotoContentType + ';base64,' + vm.photo}}" width="320" height="180" style=""/>-->
 
-      <div id="webcam" ng-if="vm.showweb">
-        <webcam channel="vm.webcam.channel"
-                on-streaming="vm.webcam.onSuccess()"
-                on-error="vm.webcam.onError(err)"
-                on-stream="vm.webcam.onStream(stream)"></webcam>
-        <md-button class="md-raised custom_btn md-primary" type="button" ng-click="vm.webcam.makeSnapshot();vm.sendData(vm.photo)">
-          Сделать фото
-        </md-button>
-        <!--<md-button class="btn btn-default" type="button" ng-click="vm.webcam.makeSnapshot();vm.sendData(vm.photo)">Сделать фото</md-button>-->
-        <canvas ng-hide="true" id="snapshot" width="200" height="200"></canvas>
+      <div class="form-web-content">
+        <div id="webcam" ng-if="vm.showweb">
+          <webcam channel="vm.webcam.channel"
+                  on-streaming="vm.webcam.onSuccess()"
+                  on-error="vm.webcam.onError(err)"
+                  on-stream="vm.webcam.onStream(stream)"></webcam>
 
+          <!--<md-button class="btn btn-default" type="button" ng-click="vm.webcam.makeSnapshot();vm.sendData(vm.photo)">Сделать фото</md-button>-->
+          <canvas ng-hide="true" id="snapshot" width="200" height="200"></canvas>
+
+        </div>
+        <!--<md-button class="md-raised custom_btn md-primary" type="button" ng-click="vm.webcam.makeSnapshot();vm.sendData(vm.photo)">-->
+          <!--Сделать фото-->
+        <!--</md-button>-->
+        <div class="foto-cont" ng-if="vm.photo">
+          <img data-ng-src="{{'data:' + vm.fotoContentType + ';base64,' + vm.photo}}" width="320" height="180" style=""/>
+          <!--<md-button class="md-raised custom_btn md-primary" type="button" ng-click="vm.sendData(vm.photo)">Отправить</md-button>-->
+        </div>
       </div>
-       <div class="foto-cont" ng-if="vm.photo">
-        <img data-ng-src="{{'data:' + vm.fotoContentType + ';base64,' + vm.photo}}" width="320" height="180" style=""/>
-          <md-button class="md-raised custom_btn md-primary" type="button" ng-click="vm.sendData(vm.photo)">Отправить</md-button>
-      </div>
+    </div>
+    <div class="form-footer">
+      <md-button ng-if="vm.showweb" class="md-raised custom_btn md-primary" type="button" ng-click="vm.webcam.makeSnapshot();vm.sendData(vm.photo)">
+        Сделать фото
+      </md-button>
     </div>
   </div>
 

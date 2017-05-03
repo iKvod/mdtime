@@ -56,7 +56,7 @@ angular.module('checklist', [
         .state("checkin.image",{//state for uploadin image and description
           url:'/camera',
           templateUrl:"Components/webcam/webcam.html",
-          controller:"WebcamController",
+          controller:"CheckinCtrl",
           controllerAs:"vm",
         })
         .state('checkin.success', {
@@ -67,13 +67,19 @@ angular.module('checklist', [
         })
         .state("checkout", {
           url:'/checkout/code/:employeeId/:id',
-          templateUrl:'components/checklist/checkout_code_form.html',
+          templateUrl:'Components/checkout/checkout-tmpl.html',
           controller:'CheckoutCtrl',
           controllerAs:'vm'
+          ,resolve: {
+            data: function(CheckinService, $stateParams){
+              // return CheckinService.getUserData();
+              return CheckinService.getUserData().get({ id: $stateParams.employeeId}).$promise
+            }
+          }
         })
-        .state('checkout.image',{
+        .state('checkout.image', {
           url:'/camera',
-          templateUrl:'components/checklist/checkout_image_form.html',
+          templateUrl:'Components/webcam/webcam.html',
           controller:'CheckoutCtrl',
           controllerAs:'vm'
         })
