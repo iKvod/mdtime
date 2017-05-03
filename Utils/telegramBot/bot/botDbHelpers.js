@@ -378,7 +378,7 @@ var getWorkHours = function (callback) {
 var checkAndRegisterEmpl = function (emplId, botId, callback) {
   dbOps.getAllToSaveRoute(Employees, { employee_id: emplId },
     {
-      botId: botId
+      botId: 1
     }, function (err, data) {
     if(err){
       callback(err, null);
