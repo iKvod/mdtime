@@ -61,6 +61,7 @@ var getAllToSaveRoute = function (Model, query , selectObj, callback) {
 };
 
 
+//get one
 var getByQueryRoute = function (Model, query, selectObj, populateObj, callback ) {
 
   if(populateObj){

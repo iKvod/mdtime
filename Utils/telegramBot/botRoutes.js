@@ -94,7 +94,6 @@ var notifyRoutine = {
   isNotify: false
 };
 
-console.log("Global " + notifyRoutine.isNotify);
 
 bot.on('callback_query', function (msg, match) {
 
@@ -773,19 +772,22 @@ bot.on('callback_query', function (msg, match) {
 
 
   if(notifyRoutine.isNotify){
-    console.log(notifyRoutine.isNotify);
+    // console.log(notifyRoutine.isNotify);
     // notifyRoutine.isNotify = false;
     test.push(notifyRoutine.isNotify );
-    console.log(test);
+    // console.log(test);
     var mesId = msg.message.message_id;
     var  parsedData = msg.data.slice(4);
     // console.log(parsedData);
     // console.log(msg);
 
     if(caseText==='not') {
+      //handling first inline buttons
       inlineCbHandlers.notifyHandler(bot, parsedData, chatId, mesId);
     } else if(caseText==='ans') {
-      inlineCbHandlers.answerInlineButtonCbHandler(bot, parsedData, chatId, mesId);
+      inlineCbHandlers.answerInlineButtonCbHandler(bot, parsedData, chatId, mesId, function () {
+        notifyRoutine.isNotify = false;
+      });
     }
   }
 });
