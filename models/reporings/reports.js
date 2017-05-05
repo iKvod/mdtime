@@ -13,6 +13,8 @@ var TimeReportingSchema = new Schema({
   goOutFromWork: { type: Number, default: null },// only for fixed tarifed employees
   lateToWorkTime: { type: Number, default: null },// only for fixed tarifed employees
   willBeAbsent: { type: Boolean, default: false }, //
+  report: { type: String, default: null},
+  insight: { type: String, default: null }
 
 }, {
   timestamps: {createdAt: 'created_at'}

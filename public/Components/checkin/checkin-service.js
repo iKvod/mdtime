@@ -81,6 +81,47 @@
         });
     };
 
+    var image = null;
+    var report = null;
+    var insight = null;
+
+    checklist.saveImage = function (img) {
+      image = img;
+
+    };
+    checklist.getImage = function () {
+      return image;
+    };
+
+    checklist.saveReport = function (data) {
+      report = data;
+
+    };
+    checklist.getReport = function () {
+      return report;
+    };
+
+    checklist.saveInsight = function (data) {
+      insight = data;
+
+    };
+    checklist.getInsight = function () {
+      return insight;
+    };
+
+    checklist.getReportData = function () {
+      return {
+        image: checklist.getImage(),
+        report: checklist.getReport(),
+        insight: checklist.getInsight()
+      }
+    };
+
+    checklist.cleanService = function () {
+      image = null;
+      report = null;
+      insight = null;
+    };
 
     // return $resource(baseURL + '/api/checklist/checkin/:id', { id: "@id" }, {
     //   query: {

@@ -61,7 +61,7 @@ angular.module('checklist', [
         })
         .state('checkin.success', {
           url:'/success',
-          templateUrl:'components/checklist/success_checkin_page.html',
+          templateUrl:'Components/successError/succes-tmpl.html',
           controller:"CheckinCtrl",
           controllerAs:'vm'
         })
@@ -83,12 +83,33 @@ angular.module('checklist', [
           controller:'CheckoutCtrl',
           controllerAs:'vm'
         })
+        .state('checkout.report', {
+          url:'/report',
+          templateUrl:'Components/checkout/report-tmpl.html',
+          controller:'CheckoutCtrl',
+          controllerAs:'vm',
+          params: {
+            image: null
+          }
+        })
+        .state('checkout.insight', {
+          url:'/insight',
+          templateUrl:'Components/checkout/insight-tmpl.html',
+          controller:'CheckoutCtrl',
+          controllerAs:'vm',
+          params: {
+            report: null
+          }
+        })
         .state('checkout.success', {
           url:'/success',
-          templateUrl:'components/checklist/success_checkin_page.html',
+          templateUrl:'Components/successError/succes-tmpl.html',
           controller:"CheckoutCtrl",
-          controllerAs:'vm'
-        })
+          controllerAs:'vm',
+          params: {
+            image: null
+          }
+        });
         // .state('error',{
         //   url:'/error',
         //   template:"<h1>Upps, Error</h1>>",

@@ -18,11 +18,3 @@ var config = {
 };
 
 module.exports =  config;
-
-
-//Client identifier -  1071047485832-m4nbek27ukmfepibg3a39g5343ltrvtn.apps.googleusercontent.com
-//Client secret - d1HBMkb-zjKtKB-RXVoorX4W
-
-
-// Tutorial url
-//https://codelabs.developers.google.com/codelabs/sheets-api/#3

@@ -8,7 +8,8 @@ angular.module('checklist')
         var vm = this;
         vm.id = '';
 
-        vm.sendId = function (id) {
+        vm.sendId = function (emplId) {
+          var id = emplId.toUpperCase();
           if(id) {
             var User = CheckinService.getCode();
 

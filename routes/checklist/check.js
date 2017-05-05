@@ -12,6 +12,8 @@ var config = require('../../config');
 var token = config.token;
 var bot = new TelegramBot(token);
 var ceoBotId = config.ceoBotID;
+var fs = require('fs');
+var moment = require('moment');
 
 
 router.get('/:id', function (req, res, next) {
@@ -71,14 +73,10 @@ router.get('/check/:id', function (req, res, next) {
 
 
 router.put('/code/:id', function (req, res, next) {
-  console.log(req.body);
-  // console.log('code');
   var emplId = req.params.id;
   var checklistCode = req.body.code;
   var id = req.body.emplId;
   var checked = req.body.checked;
-  // console.log(checklistCode);
-  // console.log(checked);
 
   redisClient.hget(emplId, "checklistCode", function (err, data) {
     if(err){
@@ -89,12 +87,10 @@ router.put('/code/:id', function (req, res, next) {
       if(data === checklistCode){
         redisClient.hdel(emplId, "checklistCode", function (err, reply) {
           if(err){
-            console.log(err);
             return;
           }
 
           if(checked){
-            console.log('checkin')
             var report = new TimeReportings({
               employee: id,
               checkin: new Date()
@@ -102,7 +98,6 @@ router.put('/code/:id', function (req, res, next) {
 
             report.save(function (err, savedData) {
               var repId = savedData._id;
-              console.log(savedData);
               if(err){
                 res.status(500).send(err);
                 return;
@@ -141,10 +136,9 @@ router.put('/code/:id', function (req, res, next) {
 
             });
 
-          }else {
-            // console.log('checkout');
+          } else {
             Employees.findOne({_id: id} )
-              .select({ report:1 })
+              .select({ report: 1, botId: 1 })
               .exec(function (err, empl) {
                 var reportLength = empl.report.length;
                 var lastReportId = empl.report[reportLength - 1];
@@ -165,11 +159,9 @@ router.put('/code/:id', function (req, res, next) {
                         if(savedData){
                           empl.checked = checked;
                           empl.save(function (err, savedEmpl) {
-
+                            bot.sendMessage(empl.botId, 'Вы круто сделали чекаут)');
                             res.send({message: 'Вы отметились в системе, данные записаны в базе'})
                           });
-                          // console.log(savedData);
-                          // res.send(savedData);
                         } else {
 
                         }
@@ -194,122 +186,86 @@ router.put('/code/:id', function (req, res, next) {
 });
 
 
-
-// router.post('/image/:id', function (req, res, next) {
-//   var baseImg = req.body.image;
-//   var message = req.body.message;
-//
-//
-//
-// });
 router.post('/image/:id', function (req, res, next) {
+  console.log(req.body.report);
   var date = new Date();
-  var time = date.toLocaleString();
+  var time = moment(date).format()
+    .replace(/T/, ' ').      // replace T with a space
+    replace(/\..+/, '');
   var id = req.body.report.id;
+  var emlId = req.body.report.emplId;
   var b64Data = req.body.image;
-  var report = req.body.report.report;
-  var bookReport = req.body.report.bookreport;
-  var bookReportCeo = '';
+  var checked = req.body.report.checked;
   var name = req.body.report.name;
-  var botId = req.body.report.botId;
-  var caption = '';
-  var messageToUser = '';
-  var messageToManager = null;
-  var checkOut = false;
+  var imageDir = './public/photos/' + emlId + "/";
 
+  if(checked){
+    var buffer = new Buffer(b64Data, 'base64');
+    var opt = {
+      "caption": name + " пришел(а) на работу в: \n " + time
+      // 'reply_markup': { // for rating
+      //             "keyboard":[
+      //                 [{text: '👍'}],
+      //                 [{text: '👎'}]
+      //             ],
+      //             "resize_keyboard" : true,
+      //             "one_time_keyboard" : true,
+      //             "remove_keyboard":true
+      //     }
+    };
 
-  if(message && report && bookReport){
-    caption = time + "\n" + name + " " + message + "\n" + report + "\n" ;
-    bookReportCeo = "Мои заметки по книге:\n "+ bookReport + "\n";
-    messageToUser = "У вас круто получилось сделать Checkout!";
-    checkOut = true;
-    messageToManager = time + "\n"  + "Отчет: \n " + name + " - "+ report;
-  } else if (message && (report !== undefined) && (bookReport === undefined) ) {
-    caption = time + "\n" + name + " " + message + "\n" + report + "\n";
-    bookReportCeo = "Я еще не прочел книгу" + "\n";
-    messageToUser = "У вас круто получилось сделать Checkout!";
-    checkOut = true;
-    messageToManager = time + "\n"  + "Отчет: \n " + name + " - "+ report;
-  } else if(message && (report === undefined) && (bookReport === undefined)){
-    caption = time + "\n" + name + " " + message;
-    messageToUser = "У вас круто получилось сделать Checkin!";
+    checkDirectory(imageDir, function (error) {
+      if(error){
+        next(error);
+        return;
+      }
+      var img = imageDir + date + "_" + id + '.jpeg';
+      fs.writeFile(img, buffer,
+        function(e){
+          if(e) {
+            next(e);
+            return;
+          }
+          bot.sendPhoto(ceoBotId, buffer, opt); // Ceo bot id
+          res.send({message: 'Данные отправлены'});
+        });
+    });
 
-  }
-
-  var buffer = new Buffer(b64Data, 'base64');
-  var opt = {
-    "caption": caption,
-    // 'reply_markup': { // for rating
-    //             "keyboard":[
-    //                 [{text: '👍'}],
-    //                 [{text: '👎'}]
-    //             ],
-    //             "resize_keyboard" : true,
-    //             "one_time_keyboard" : true,
-    //             "remove_keyboard":true
-    //     }
-  };
-
-  var bookOpt = {
-    'parse_mode':"Markdown"
-  };
-  //
-  bot.sendPhoto(ceoBotId, buffer, opt); // Rustam's bot ID
-  //sending comment about read books
-  if(bookReportCeo){
-    bot.sendMessage(ceoBotId, bookReportCeo, bookOpt);
-  }
-  // sends to manager Report for current day
-  if(messageToManager !== null){
-    bot.sendMessage(managerBotId, messageToManager); //  Ayganym's bot ID
-  }
-  //sending message to  employee if he checked out or in
-  //and must read book info
-  if(checkOut){
-    dbBook.fetchCurrentBook(botId,  messageToUser, dbBook.sendBookCheckout);
   } else {
-    bot.sendMessage(botId, messageToUser); // Users ID send if he checked in or out
+
+    var buffer = new Buffer(b64Data, 'base64');
+    var opt = {
+      "caption": name + " уходит с работы в: \n" + time
+    };
+
+    checkDirectory(imageDir, function (error) {
+      if(error){
+        next(error);
+        return;
+      }
+      var img = imageDir + date + "_" + id + '.jpeg';
+      fs.writeFile(img, buffer,
+        function(e){
+          if(e) {
+            next(e);
+            return;
+          }
+          bot.sendPhoto(ceoBotId, buffer, opt); // Ceo bot id
+          res.send({message: 'Данные отправлены'});
+        });
+    });
   }
+});
 
-  //  //testing
-  // bot.sendPhoto(207925830, buffer, opt); // testing
-  // //sends to manager Report for current day
-  //  if(messageToManager !== null){
-  //      bot.sendMessage(207925830, messageToManager); //  Ayganym's bot ID
-  //  }
-  //  if(checkOut){
-  //      fetchBook(botId, sendBookCheckout, messageToUser);
-  //  } else {
-  //      bot.sendMessage(botId, messageToUser); // Users ID send if he checked in or out
-  //  }
-
-
-  fs.writeFile('./public/photos/' + date.getTime() + "_" + id + '.jpeg', buffer, function(e){
-    if(e) {
-      console.log(e)
+function checkDirectory(directory, callback) {
+  fs.stat(directory, function(err, stats) {
+    if (err && err.errno === -2) {
+      fs.mkdir(directory, callback);
+    } else {
+      callback(err)
     }
   });
-
-  res.send("OK");
-});
-
-
-
-router.post('/checkin', function (req, res, next) {
-  dbHelper.createRoute(TimeReportings, {
-
-  }, function (err, data){
-
-  });
-
-});
-router.post('/checkout', function (req, res, next) {
-
-});
-
-// router.put('/:id', function (req, res, next) {
-//
-// });
+}
 
 
 module.exports = router;

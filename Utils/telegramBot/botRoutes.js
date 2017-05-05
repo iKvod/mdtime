@@ -1063,49 +1063,46 @@ bot.onText(/\/notify/, function (msg, match) {
   //   console.log(reply);
   //
   // })
-  redisClient.hgetall(chatId, function (err, reply) {
-    if(err){
-      console.log(err);
-      return;
-    }
-
-    if(reply){
-      console.log(JSON.parse(reply.goOut).bank);
-
-
-
-
-    } else {
-      // set initial data to users cache
-      redisClient.hmset(chatId, {
-        goOut: JSON.stringify({
-          bank: false,
-          nk: false,
-          personal: false
-        }),
-        late: JSON.stringify({
-          time2: "30 минут",
-          time3: "1 час",
-          time4: "2 часа"
-        }),
-        initButton: JSON.stringify({
-          goOutButton: 'Ухожу',
-          lateButton: 'Опаздываю',
-          notComeButton: 'не приду'
-        }),
-        isInitial: true
-      })
-
-
-
-    }
-  });
-
-  // notifyRoutine.isNotify = true;
-
-  // bot.sendMessage(chatId, 'Что вы хотите сделать?', {
-  //   reply_markup: inlButtHelp.inlineKeyboardOption(buttons).reply_markup
+  // redisClient.hgetall(chatId, function (err, reply) {
+  //   if(err){
+  //     console.log(err);
+  //     return;
+  //   }
+  //
+  //   if(reply){
+  //     console.log(JSON.parse(reply.goOut).bank);
+  //
+  //
+  //
+  //
+  //   } else {
+  //     // set initial data to users cache
+  //     redisClient.hmset(chatId, {
+  //       goOut: JSON.stringify({
+  //         bank: false,
+  //         nk: false,
+  //         personal: false
+  //       }),
+  //       late: JSON.stringify({
+  //         time2: "30 минут",
+  //         time3: "1 час",
+  //         time4: "2 часа"
+  //       }),
+  //       initButton: JSON.stringify({
+  //         goOutButton: 'Ухожу',
+  //         lateButton: 'Опаздываю',
+  //         notComeButton: 'не приду'
+  //       }),
+  //       isInitial: true
+  //     })
+  //   }
   // });
+
+  notifyRoutine.isNotify = true;
+
+  bot.sendMessage(chatId, 'Что вы хотите сделать?', {
+    reply_markup: inlButtHelp.inlineKeyboardOption(buttons).reply_markup
+  });
 
 });
 
@@ -1239,9 +1236,6 @@ bot.onText(/\/do/, function (msg, match) {
   //   bot.sendMessage(botId, passwords);
   // });
 });
-
-
-
 
 
 module.exports = botrouter;

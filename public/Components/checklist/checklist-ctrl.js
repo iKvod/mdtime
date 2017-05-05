@@ -36,6 +36,7 @@ angular.module('checklist')
         vm.userData = data;
         // console.log(data);
         vm.code = '';
+        vm.image = null;
 
         //sending code and writing report checkin data
         vm.sendCode = function (code) {
@@ -64,7 +65,7 @@ angular.module('checklist')
           emplId: $stateParams.employeeId,
           name: data.firstname + " " + data.lastname,
           botId: data.botId,
-          checked: data.checked,
+          checked: !data.checked,
           id: $stateParams.id
         };
         // console.log(vm.data);
@@ -88,7 +89,7 @@ angular.module('checklist')
         // image to file system
         // and data to CEO
         vm.sendData = function(image){
-          // console.log(image);
+          vm.image = image;
           $http({
             url:'/api/checklist/image/' + $stateParams.id,
             method: 'POST',
@@ -96,11 +97,9 @@ angular.module('checklist')
           })
             .then(function(response){
               ToastService.successToast(3000, "Данные отправлены");
-              // $state.go('checkin.success');
-              console.log(response);
+              $state.go('checkin.success');
             }, function (error) {
               ToastService.errorToast(3000,"Ошибка при отправке данных");
-              console.log(error);
             });
         };
       }])
@@ -108,30 +107,24 @@ angular.module('checklist')
     function($state, $http, $stateParams, CheckoutService, WebcamService, data, ToastService){
       var vm = this;
       vm.userData = data;
-      console.log(data);
       vm.greeting = "Здравствуйте, сделайте Checkout!";
       vm.successGreating = "Надеемся день у Вас был плодотворным!";
-      // vm.data = {
-      //   id: $stateParams.employeeId,
-      //   report:'',
-      //   bookreport:'',
-      //   name: $rootScope.name,
-      //   botId: $rootScope.botId
-      // };
+
 
       //data to be sent to ceo(notifying)
       vm.data = {
         emplId: $stateParams.employeeId,
         name: data.firstname + " " + data.lastname,
         botId: data.botId,
-        checked: data.checked,
+        checked: !data.checked,
         id: $stateParams.id,
-        report:'',
-        vkreport:''
+        report: null,
+        insight: null,
+        image: null
       };
 
-
-      vm.report = '';
+      var image = null;
+      vm.image = null;
 
       vm.sendCode = function (code) {
         var codeS = CheckoutService.sendCode();
@@ -140,17 +133,74 @@ angular.module('checklist')
           .$promise
           .catch(function (err) {
             if(err){
-              console.log(err);
               ToastService.errorToast(3000, err.data.message)
             }
           })
           .then(function (resp) {
             if(resp){
-              console.log(resp);
+              // console.log(resp);
               ToastService.successToast(3000, resp.message);
               $state.go("checkout.image");
             }
           });
+      };
+
+            //set image
+      vm.sendData = function (img) {
+        if(img){
+          CheckoutService.saveImage(img);
+          $state.go('checkout.report');
+        } else {
+
+        }
+      };
+
+      vm.setReport = function () {
+        if(vm.data.report){
+          CheckoutService.saveReport(vm.data.report);
+          $state.go('checkout.insight');
+        } else {
+          ToastService.errorToast(300, "Заполните поле");
+        }
+      };
+
+      //sending captured image to the server/bot writing
+      // image to file system
+      // and data to CEO
+      vm.sendReport = function(){
+
+        getReports(function () {
+          console.log(vm.data);
+          vm.image = image;
+          console.log(image);
+          $http({
+            url:'/api/checklist/image/' + $stateParams.id,
+            method: 'POST',
+            data: { image: image, report: vm.data }
+          })
+            .then(function(response){
+              console.log(response);
+              ToastService.successToast(3000, "Данные отправлены");
+              $state.go('checkout.success');
+            }, function (error) {
+              ToastService.errorToast(3000,"Ошибка при отправке данных");
+              console.log(error);
+            });
+
+        });
+      };
+
+      function getReports(callback) {
+        if(vm.data.insight){
+          CheckoutService.saveInsight(vm.data.insight);
+          var reports = CheckoutService.getReportData();
+          vm.data.insight = reports.insight;
+          image = reports.image;
+          vm.data.report = reports.report;
+          callback();
+        } else {
+          ToastService.errorToast(3000, "Введите ссылку на инсайт");
+        }
       };
 
       //WEB CAM
@@ -168,67 +218,5 @@ angular.module('checklist')
         if(vm.webcam && vm.webcam.isTurnOn===true)
           vm.webcam.turnOff();
       }
-
-      //sending captured image to the server/bot writing
-      // image to file system
-      // and data to CEO
-      vm.sendData = function(image){
-        // console.log(image);
-        $http({
-          url:'/api/checklist/image/' + $stateParams.id,
-          method: 'POST',
-          data: { image: image, report: vm.data }
-        })
-          .then(function(response){
-            ToastService.successToast(3000, "Данные отправлены");
-            // $state.go('checkin.success');
-            console.log(response);
-          }, function (error) {
-            ToastService.errorToast(3000,"Ошибка при отправке данных");
-            console.log(error);
-          });
-      };
-
-      //sending checkout report to the server
-      // vm.checkOut = function(code){
-      //   //console.log("Checkout code: " + code);
-      //   var id = $stateParams.employee_id;
-      //   var checkOut = CheckoutService.query({id:id});
-      //
-      //   checkOut.$promise
-      //     .then(function(data){
-      //       // console.log($stateParams.employee_id);
-      //       $state.go('checkout.image', {reload:true});
-      //     }, function(err){
-      //       console.log(err);
-      //     });
-      // };
-
-      //sending report to the server and notification to CEO and Pr. Manager
-      vm.sendReport  = function (report){
-        var id = $stateParams.employee_id;
-        vm.report = report;
-        var obj = {};
-        obj.report = vm.report;
-        var reporting = new CheckoutService(obj);
-        reporting.$update({id:id})
-      };
-
-      // //sending checkout report to bot
-      // vm.sendData = function(image, report, reportBook){
-      //   vm.data.report = report;
-      //   vm.data.bookreport = reportBook;
-      //   $http({
-      //     url:'/api/bot/image',
-      //     method: 'POST',
-      //     data: {image: image, report: vm.data}
-      //   })
-      //     .then(function(response){
-      //       $state.go('checkout.success');
-      //       //console.log(response);
-      //     }, function (error) {
-      //       console.log(error);
-      //     });
-      // }
 
     }]);

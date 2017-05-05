@@ -1,0 +1,21 @@
+<div class="checklist-main">
+  <div class="checklist-avatar">
+    <div class="checklist-ava">
+      <img ng-src="{{vm.data.avatarurl ? avatarurl : '../../images/users.png'}}" alt="">
+    </div>
+
+  </div>
+  <div class="pers-info">
+    <span>{{vm.userData.firstname}} {{vm.userData.lastname}} Заполните форму отчета</span>
+  </div>
+  <form class="checklist-form">
+    <div class="form-content">
+      <input type="text" class="md-block input" ng-model="vm.data.report" placeholder="Отчет">
+      <a href="" class="icon" ng-click="vm.setReport()">
+        <i class="fa fa-arrow-right fa-3x" aria-hidden="true"></i>
+      </a>
+    </div>
+  </form>
+
+</div>
+</div>
