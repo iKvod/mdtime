@@ -16,8 +16,9 @@
 // ];
 var notifyButtonsInitial = [
   [{text: 'Опаздываю', callback_data:'not_late'},// late
-    {text: 'Ухожу', callback_data:'not_out'},// go out
-    {text: 'Не приду', callback_data:'not_nc'}]// not come
+    // {text: 'Ухожу', callback_data:'not_out'},// go out
+    // {text: 'Не приду', callback_data:'not_nc'}
+  ]// not come
 ];
 
 // callback for Опаздываю
