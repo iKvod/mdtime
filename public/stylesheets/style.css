@@ -29,25 +29,64 @@ a {
 
 .form_header {
   border-radius: 2px;
-  background-color: antiquewhite;
+  /* opacity: 0.3; */
   width: 355px;
-  height: 50px;
-  /*padding-left: 30px;*/
-  /*padding-top: 10px;*/
+  /*background-color: azure;*/
+  /*height: 50px;*/
+  display: flex;
+  flex-flow: row nowrap;
+  height: 41px;
 }
 
-.form_body {
-  width: 355px;
-  background: rgba(255, 0, 0, 0.3);
+.form-header-content1 {
+  flex: 1;
   display: flex;
-  /* padding: 20px; */
-  height: 230px;
+}
+
+.form-header-content1 span{
+  margin: 0 auto;
+  font-size: 35px;
+  font-weight: 900;
+  line-height: 1.2;
+}
+.form-header-content2 {
+  flex: 0.7;
+  display: flex;
+  /*background-color: antiquewhite;*/
+  padding-top: 6px;
+  font-size: medium;
+  color: #fff;
+  font-weight: bold;
+  border-right: solid 2px black;
+}
+.form-header-content2 span{
+  margin: auto;
+}
+.form-header-content3 {
+  display: flex;
+  font-size: 11px;
+  max-width: 210px;
+  min-width: 210px;
+}
+.form-header-content3 span{
+  margin: auto 8px;
+  max-width: 146px;
+  color: #fff;
+  font-weight: 600;
+  line-height: 1;
+}
+
+
+.form_body {
+  min-width: 355px;
+  background: rgba(255, 255, 255, 0.3);
+  display: flex;
+  min-height: 220px;
+  margin: 5px auto 0;
 }
 .form-footer {
   width: 355px;
-  /*background: aliceblue;*/
   display: flex;
-  /*padding: 20px;*/
 }
 
 .form-footer .md-button {
@@ -58,18 +97,29 @@ a {
   display: flex;
   flex-flow: column nowrap;
   margin: auto;
+  min-width: 320px;
+  min-height: 220px;
 }
 
 #webcam {
   margin: auto;
-  /*width: 100%;*/
   display: flex;
   flex-flow: column nowrap;
-  /*padding: 0 10%;*/
-  /*background: antiquewhite;*/
+}
+#webcam .web-cam-content{
+  min-width: 100%;
+  min-height: 100%;
+  margin: auto;
+  display: flex;
+  flex-flow: column nowrap;
+  z-index: 1;
 }
 
 #webcam .webcam{
+  margin: auto;
+  display: flex;
+}
+.webcam video{
   margin: auto;
 }
 
@@ -80,11 +130,34 @@ a {
 }
 
 .foto-cont {
-  /*display: flex;*/
-  /*flex-flow: column wrap;*/
-  /*margin: auto;*/
   margin: auto;
-  /*width: 100%;*/
   display: flex;
   flex-flow: column nowrap;
+}
+
+.foto-capture {
+  position: absolute;
+  z-index: 200;
+  margin: 19px 86px;
+  border-radius: 100%;
+  min-height: 130px;
+  min-width: 130px;
+  background: rebeccapurple;
+  opacity: 0.4;
+  display: flex;
+  color: #ffffff;
+  font-weight: 600;
+  transition: .4s ease-out 0.2s;
+}
+.foto-capture span{
+  margin: auto;
+}
+.foto-capture:hover {
+  background-color: #eeeeee;
+  opacity: 0.6;
+  transition: .4s ease-out;
+  color: green;
+  font-weight: 600;
+  min-height: 150px;
+  min-width: 150px;
 }

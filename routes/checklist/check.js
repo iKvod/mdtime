@@ -220,6 +220,7 @@ router.post('/image/:id', function (req, res, next) {
         return;
       }
       var img = imageDir + date + "_" + id + '.jpeg';
+      console.log(img);
       fs.writeFile(img, buffer,
         function(e){
           if(e) {
@@ -244,6 +245,7 @@ router.post('/image/:id', function (req, res, next) {
         return;
       }
       var img = imageDir + date + "_" + id + '.jpeg';
+
       fs.writeFile(img, buffer,
         function(e){
           if(e) {

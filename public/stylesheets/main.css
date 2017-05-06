@@ -1,14 +1,8 @@
 .main-wrapper {
     min-width: 100%;
     min-height:100%;
-    /*background-color: #00B7FF;*/
-    /*background-color: #fff;*/
-    /*background: url("../images/main-texture.jpg") repeat;*/
-    /*background: url("../images/main-texture-large.jpg") no-repeat;*/
-    background: url("../images/text-small.jpg") repeat;
+    background: url("../images/text-small.jpg") no-repeat;
+    background-size: 1810px 1000px ;
     display: flex;
     flex-flow: column wrap;
 }
-
-
-

@@ -11,10 +11,9 @@ var config = {
         pass: 'Automatodev',
         auth: { authdb: "checklist"}
     },
-    // ceoBotID : 78923920,
-    // managerBotID : 228106138
+    // ceoBotID : 33103333 // Miruses tb bot id
     ceoBotID: 207925830,     //for testing
-    managerBotID: 207925830 // for testing
+    techSupportBotId: 207925830 // for testing
 };
 
 module.exports =  config;

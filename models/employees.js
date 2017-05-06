@@ -12,7 +12,7 @@ var Schema = mongoose.Schema;
 
 var Employee = new Schema({
   employee_id: { type: String, unique: true },
-  avatarurl: { type: String },
+  avatarurl: { type: String, default: null},
   profileback: { type: String },
   botId: { type: String},
   username: { type: String },

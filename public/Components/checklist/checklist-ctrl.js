@@ -46,13 +46,13 @@ angular.module('checklist')
               .$promise
               .catch(function (err) {
                 if(err){
-                  console.log(err);
+                  // console.log(err);
                   ToastService.errorToast(3000, err.data.message)
                 }
               })
               .then(function (resp) {
                 if(resp){
-                  console.log(resp);
+                  // console.log(resp);
                   ToastService.successToast(3000, resp.message);
                   $state.go("checkin.image");
                 }

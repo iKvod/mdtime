@@ -1,21 +1,22 @@
 <div class="checklist-main">
   <div class="checklist-avatar">
     <div class="checklist-ava">
-      <img ng-src="{{vm.data.avatarurl ? avatarurl : '../../images/users.png'}}" alt="">
+      <div class="checklist-ava-content">
+        <img ng-src="{{vm.data.avatarurl ? vm.data.avatarurl : '../../images/users.png'}}" alt="">
+      </div>
     </div>
-
   </div>
   <div class="pers-info">
-    <span>{{vm.userData.firstname}} {{vm.userData.lastname}} Заполните форму отчета</span>
+    <span>{{vm.userData.firstname}} {{vm.userData.lastname}}, заполните форму отчета</span>
   </div>
-  <form class="checklist-form">
+  <form class="checklist-form" ng-submit="vm.setReport()">
     <div class="form-content">
-      <input type="text" class="md-block input" ng-model="vm.data.report" placeholder="Отчет">
-      <a href="" class="icon" ng-click="vm.setReport()">
-        <i class="fa fa-arrow-right fa-3x" aria-hidden="true"></i>
-      </a>
+      <textarea class="text-area" name="" id="" cols="30" rows="10" ng-model="vm.data.report" ></textarea>
+      <!--<input type="text" class="md-block input" ng-model="vm.data.report" placeholder="Отчет">-->
+      <button class="icon" type="submit">
+        <i class="fa fa-arrow-right fa-2x" aria-hidden="true"></i>
+      </button>
     </div>
   </form>
-
 </div>
 </div>

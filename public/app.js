@@ -26,18 +26,6 @@ angular.module('checklist', [
            }
            }*/
         })
-        // .state('checklist', {
-        //   url: '/checklist',
-        //   templateUrl: 'Components/checklist/checklist-tmpl.html',
-        //   controller: 'ChecklistCtrl',
-        //   controllerAs: 'vm'/*,
-        //    resolve: {
-        //    user : function(ChecklistService){
-        //    var userData = ChecklistService.query();
-        //    return userData.$promise;
-        //    }
-        //    }*/
-        // })
         .state("checkin", { //state for creating new FAQﬁ
           url:'/checkin/code/:employeeId/:id',
           templateUrl:"Components/checkin/checkin-tmpl.html",
@@ -45,7 +33,6 @@ angular.module('checklist', [
           controllerAs:"vm"
           ,resolve: {
               data: function(CheckinService, $stateParams){
-                  // return CheckinService.getUserData();
                 return CheckinService.getUserData().get({ id: $stateParams.employeeId}).$promise
               }
           }

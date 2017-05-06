@@ -2,7 +2,10 @@
   <div class="checklist-main">
     <div class="checklist-avatar">
       <div class="checklist-ava">
-        <img src="../../images/key.png" alt="">
+        <div class="checklist-ava-content">
+          <img class="rot180" src="../../images/key.png" alt="">
+        </div>
+
       </div>
 
     </div>
@@ -12,17 +15,14 @@
         <!--<label for="testInput">ВВЕДИТЕ СВОЙ ID</label>-->
         <!--<input id="testInput" ng-model="vm.employee_id" md-autofocus type="text">-->
       <!--</md-input-container>-->
-      <form class="checklist-form">
+      <form class="checklist-form" ng-submit="vm.sendId(vm.id)">
         <div class="form-content">
           <input type="text" class="md-block input" ng-model="vm.id" placeholder="ВВЕДИТЕ СВОЙ ID">
-          <a href="" class="icon" ng-click="vm.sendId(vm.id)">
+          <button class="icon" type="submit">
             <i class="fa fa-arrow-right fa-2x" aria-hidden="true"></i>
-          </a>
+          </button>
         </div>
       </form>
-
     </div>
-
   </div>
-
 </div>

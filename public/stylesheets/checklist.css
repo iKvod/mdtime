@@ -24,17 +24,20 @@
 
 }
     .checklist-main .pers-info{
-        min-width: 100%;
-        max-width: 100%;
+        min-width: 50%;
+        /*max-width: 61%;*/
         min-height: 30px;
         /*background-color: #eeeeee;*/
         display: flex;
         flex-flow: row wrap;
+        /* padding-right: 60px; */
+        margin: 0px auto 3px;
     }
         .pers-info span {
             margin: auto;
-            font-size: 18px;
-            font-weight: 600;
+            font-size: 14px;
+            font-weight: 300;
+            padding-right: 60px;
         }
 
 .checklist-avatar {
@@ -42,6 +45,7 @@
     display: flex;
     max-height: 70px;
     margin-bottom: 10px;
+    padding-right: 60px;
 }
 
 .checklist-avatar .checklist-ava {
@@ -57,7 +61,7 @@
     border: solid 1px #ffffff;
     display: flex;
 }
-    .checklist-ava img {
+    .checklist-ava .checklist-ava-content {
         min-width: 53px;
         min-height: 53px;
         max-width: 53px;
@@ -66,7 +70,25 @@
         flex: 1;
         margin: auto;
         background-color: #ffffff;
+        max-height: 53px;
+        display: flex;
     }
+
+    .checklist-ava-content img {
+        min-width: 40px;
+        max-width: 40px;
+        min-height: 40px;
+        max-height: 40px;
+        border-radius: 100%;
+        /*margin: 5px;*/
+        flex: 1;
+        margin: auto;
+        background-color: transparent;
+    }
+        .checklist-ava-content .rot180 {
+            transform: rotatex(180deg);
+        }
+
 
 .checklist-form {
     flex: 5;
@@ -74,7 +96,7 @@
     flex-flow: row wrap;
     max-height: 50px;
     /*background-color: red;*/
-    padding-left: 68px;
+    /*padding-left: 68px;*/
 }
     .checklist-form .form-content {
         margin: auto;
@@ -85,13 +107,14 @@
     .checklist-form .input {
         margin: auto;
         flex: 5;
-        border: solid 1px;
-        border-radius: 3px;
-        min-width: 150px;
-        max-width: 150px;
-        min-height: 30px;
+        border: solid 1px #fff;
+        border-radius: 4px;
+        min-width: 250px;
+        max-width: 250px !important;
+        min-height: 37px;
         padding: 0 10px;
-        font-size: 14px;
+        background-color: transparent;
+        font-size: 18px;
     }
     .checklist-form .icon {
         flex: 1;
@@ -99,3 +122,10 @@
         padding: 0 20px;
         margin: auto;
     }
+
+.text-area {
+    height: 100px;
+    background: aliceblue;
+    opacity: 0.8;
+    border-radius: 3px;
+}
