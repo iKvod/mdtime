@@ -261,6 +261,7 @@ router.post('/image/:id', function (req, res, next) {
 
 function checkDirectory(directory, callback) {
   fs.stat(directory, function(err, stats) {
+    console.log(err);
     if (err && err.errno === -2) {
       fs.mkdir(directory, callback);
     } else {

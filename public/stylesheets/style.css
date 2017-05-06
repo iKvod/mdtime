@@ -149,6 +149,22 @@ a {
   font-weight: 600;
   transition: .4s ease-out 0.2s;
 }
+.foto-hdr {
+  position: absolute;
+  z-index: 200;
+  margin: 2px 291px;
+  /* border-radius: 100%; */
+  min-height: 25px;
+  min-width: 25px;
+  background: rebeccapurple;
+  opacity: 0.4;
+  display: flex;
+  color: #ffffff;
+  font-size: 7px;
+  font-weight: 600;
+  transition: .4s ease-out 0.2s;
+}
+
 .foto-capture span{
   margin: auto;
 }

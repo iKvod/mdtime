@@ -20,7 +20,7 @@
   window.hasUserMedia = function hasUserMedia() {
     return navigator.getMedia ? true : false;
   };
-})();
+})();2
 
 angular.module('webcam', [])
   .directive('webcam', function () {

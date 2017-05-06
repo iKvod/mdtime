@@ -34,7 +34,8 @@ db.once('open', function () {
 redisClient.on('ready', function () {
   console.log('Successfully connected to Redis');
 });
-redisClient.on('error', function () {
+redisClient.on('error', function (err) {
+  console.log(err);
   console.log('Error on connecting to Redis');
 });
 

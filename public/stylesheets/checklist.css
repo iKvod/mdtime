@@ -89,7 +89,6 @@
             transform: rotatex(180deg);
         }
 
-
 .checklist-form {
     flex: 5;
     display: flex;
@@ -103,7 +102,6 @@
         display: flex;
         flex-flow: row wrap;
     }
-
     .checklist-form .input {
         margin: auto;
         flex: 5;
@@ -111,7 +109,8 @@
         border-radius: 4px;
         min-width: 250px;
         max-width: 250px !important;
-        min-height: 37px;
+        min-height: 30px;
+        max-height: 30px;
         padding: 0 10px;
         background-color: transparent;
         font-size: 18px;
@@ -121,6 +120,9 @@
         min-height: 30px;
         padding: 0 20px;
         margin: auto;
+    }
+    .icon i {
+        font-size: 22px;
     }
 
 .text-area {
