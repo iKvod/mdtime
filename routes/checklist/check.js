@@ -260,6 +260,7 @@ router.post('/image/:id', function (req, res, next) {
 });
 
 function checkDirectory(directory, callback) {
+  console.log(directory);
   fs.stat(directory, function(err, stats) {
     console.log(err);
     if (err && err.errno === -2) {
