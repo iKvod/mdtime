@@ -41,6 +41,14 @@
         }
       });
     };
+
+    checklist.saveImage = function (img) {
+      image = img;
+
+    };
+    checklist.getImage = function () {
+      return image;
+    };
     
     
     // return $resource(baseURL + '/api/checklist/checkin/:id', { id: "@id" }, {

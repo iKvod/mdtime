@@ -109,6 +109,7 @@ angular.module('checklist')
         // and data to CEO
         vm.sendData = function(image){
           vm.image = image;
+          CheckinService.saveImage(image);
           $http({
             url:'/api/checklist/image/' + $stateParams.id,
             method: 'POST',
