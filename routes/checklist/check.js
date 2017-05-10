@@ -309,7 +309,7 @@ function checkDirectory(directory, callback) {
   fs.stat(directory, function(err, stats) {
     console.log(err);
     if (err && err.errno === -2) {
-      fs.mkdir(__dirname + directory, callback);
+      fs.mkdir(directory, callback);
     } else {
       callback(err)
     }
