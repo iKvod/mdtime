@@ -201,6 +201,7 @@ router.post('/image/:id', function (req, res, next) {
   var insight = req.body.report.insight;
 
   if(checked){ // checkin
+    console.log('checkin')
     var buffer = new Buffer(b64Data, 'base64');
     var opt = {
       "caption": name + " пришел(а) на работу в: \n " + time
@@ -217,14 +218,16 @@ router.post('/image/:id', function (req, res, next) {
 
     checkDirectory(imageDir, function (error) {
       if(error){
+        console.log(error);
         next(error);
         return;
       }
       var img = imageDir + date + "_" + id + '.jpeg';
-      console.log(img);
+      // console.log(img);
       fs.writeFile(img, buffer,
         function(e){
           if(e) {
+            console.log(e);
             next(e);
             return;
           }
@@ -277,13 +280,14 @@ router.post('/image/:id', function (req, res, next) {
             .select({ firstname:1, lastname: 1, avatarurl: 1 })
             .exec(function (err, data) {
               if(err){
+                console.log(err);
                 next(err);
                 return;
               }
               if(data){
                 data.avatarurl = img;
                 data.save(function (err, data) {
-                  console.log(data);
+                  // console.log(data);
                   bot.sendPhoto(ceoBotId, buffer, opt); // Ceo bot id
                   bot.sendMessage(ceoBotId, "[ИНСАЙТ:" + '](' + insight + ')', repOpt);
                   res.send({message: 'Данные отправлены'});
@@ -302,7 +306,7 @@ router.post('/image/:id', function (req, res, next) {
 function checkDirectory(directory, callback) {
   console.log(directory);
   fs.stat(directory, function(err, stats) {
-    console.log(err);
+    // console.log(err);
     if (err && err.errno === -2) {
       fs.mkdir(directory, callback);
     } else {

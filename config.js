@@ -9,7 +9,7 @@ var config = {
     opt: {
         user: 'rafa',
         pass: 'Automatodev',
-        auth: { authdb: "checklist"}
+        auth: { authdb: "checklist" }
     },
     ceoBotID : 33103333 ,// Miruses tb bot id
     // ceoBotID: 207925830,     //for testing
