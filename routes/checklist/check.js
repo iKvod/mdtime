@@ -198,8 +198,9 @@ router.post('/image/:id', function (req, res, next) {
   var checked = req.body.report.checked;
   var name = req.body.report.name;
   var imageDir = './public/photos/' + emlId + "/";
+  var insight = req.body.report.insight;
 
-  if(checked){
+  if(checked){ // checkin
     var buffer = new Buffer(b64Data, 'base64');
     var opt = {
       "caption": name + " пришел(а) на работу в: \n " + time
@@ -255,6 +256,10 @@ router.post('/image/:id', function (req, res, next) {
       "caption": name + " уходит с работы в: \n" + time
     };
 
+    var repOpt = {
+      parse_mode: "Markdown"
+    };
+
     checkDirectory(imageDir, function (error) {
       if(error){
         next(error);
@@ -280,10 +285,11 @@ router.post('/image/:id', function (req, res, next) {
                 data.save(function (err, data) {
                   console.log(data);
                   bot.sendPhoto(ceoBotId, buffer, opt); // Ceo bot id
+                  bot.sendMessage(ceoBotId, "[ИНСАЙТ:" + '](' + insight + ')', repOpt);
                   res.send({message: 'Данные отправлены'});
                 });
               } else {
-                console.log('Не извсетная ошибка при созранений аватара');
+                console.log('Неизвеcтная ошибка при созданий аватара');
               }
             });
           // bot.sendPhoto(ceoBotId, buffer, opt); // Ceo bot id
