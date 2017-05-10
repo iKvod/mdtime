@@ -133,29 +133,100 @@ a {
   margin: auto;
   display: flex;
   flex-flow: column nowrap;
+  transition: .4s ease-out 0.2s;
 }
 
 .foto-capture {
   position: absolute;
   z-index: 200;
-  margin: 19px 86px;
+  margin: 3px 81px;
   border-radius: 100%;
-  min-height: 130px;
-  min-width: 130px;
+  min-height: 170px;
+  max-height: 170px;
+  min-width: 170px;
+  max-width: 170px;
   background: rebeccapurple;
+  opacity: 0.3;
+  display: flex;
+  flex-flow: row wrap;
+  color: #ffffff;
+  font-weight: 600;
+  transition: .4s ease-out 0.2s;
+  overflow: hidden;
+}
+  .foto-capture .cell{
+    margin: auto;
+    min-width: 40px;
+    max-width: 40px;
+    min-height: 40px;
+    max-height: 40px;
+    background-color: black;
+  }
+
+.capt-button-wrapper {
+  margin: 5px auto;
+  min-height: 60px;
+  max-height: 60px;
+  /*background: aliceblue;*/
+  display: flex;
+}
+
+.capt-button {
+  margin: auto;
+  border-radius: 100%;
+  min-height: 60px;
+  max-height: 60px;
+  min-width: 60px;
+  max-width: 60px;
+  background: transparent;
+  border: solid 1px #ffffff;
   opacity: 0.4;
   display: flex;
   color: #ffffff;
   font-weight: 600;
   transition: .4s ease-out 0.2s;
+  flex-flow: row wrap;
+  overflow: hidden;
 }
+
+.capt-button:hover {
+  transition: 0.4s ease-out 0.3s;
+  min-height: 70px;
+  max-height: 70px;
+  min-width: 70px;
+  max-width: 70px;
+  background: rebeccapurple;
+  border: solid 1px rebeccapurple;
+  /*box-shadow: 10px 10px 5px #fff;*/
+}
+
+  .capt-button .img-button-content {
+    margin: auto;
+    border-radius: 100%;
+    min-height: 50px;
+    max-height: 50px;
+    min-width: 50px;
+    max-width: 50px;
+    display: flex;
+    background: #ffffff;
+  }
+    .img-button-content img{
+      margin: auto;
+      border-radius: 100%;
+      min-height: 50px;
+      max-height: 50px;
+      min-width: 50px;
+      max-width: 50px;
+    }
+
+
 .foto-hdr {
   position: absolute;
   z-index: 200;
-  margin: 2px 291px;
+  margin: 5px 279px;
   /* border-radius: 100%; */
   min-height: 25px;
-  min-width: 25px;
+  min-width: 35px;
   background: rebeccapurple;
   opacity: 0.4;
   display: flex;
@@ -165,15 +236,23 @@ a {
   transition: .4s ease-out 0.2s;
 }
 
+  .foto-hdr {
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1;
+  }
+
 .foto-capture span{
   margin: auto;
+
 }
-.foto-capture:hover {
-  background-color: #eeeeee;
-  opacity: 0.6;
-  transition: .4s ease-out;
-  color: green;
-  font-weight: 600;
-  min-height: 150px;
-  min-width: 150px;
-}
+/*.foto-capture:hover {*/
+  /*background-color: #eeeeee;*/
+  /*opacity: 0.6;*/
+  /*transition: .4s ease-out;*/
+  /*color: green;*/
+  /*font-weight: 600;*/
+  /*min-height: 150px;*/
+  /*min-width: 150px;*/
+/*}*/

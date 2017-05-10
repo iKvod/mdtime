@@ -29,14 +29,30 @@ angular.module('checklist')
 
     }])
   .controller('CheckinCtrl',
-    ['$state','$stateParams','$http','CheckinService','WebcamService','ToastService','data',
-      function($state,$stateParams, $http, CheckinService, WebcamService, ToastService, data){
+    ['$state','$stateParams','$http','CheckinService','WebcamService','ToastService','data','$timeout',
+      function($state,$stateParams, $http, CheckinService, WebcamService, ToastService, data, $timeout){
 
         var vm = this;
         vm.userData = data;
-        // console.log(data);
+        console.log(data);
         vm.code = '';
         vm.image = null;
+        vm.hdr = true;
+
+        //if code sent then form hidden
+        // and show the success
+        vm.isCodeSent = false;
+
+        //go parent state
+        //used when the employee is not himself
+        vm.goParent = function () {
+          $state.go('main');
+        };
+
+        //show/hide HDR
+        vm.showHdr = function () {
+          vm.hdr = !vm.hdr;
+        };
 
         //sending code and writing report checkin data
         vm.sendCode = function (code) {
@@ -54,13 +70,15 @@ angular.module('checklist')
                 if(resp){
                   // console.log(resp);
                   ToastService.successToast(3000, resp.message);
-                  $state.go("checkin.image");
+                  vm.isCodeSent = true;
+                  $timeout(function () {
+                    $state.go("checkin.image");
+                  }, 3000)
                 }
               });
         };
 
-
-        //data to be sent to ceo(notifying)
+        //data to be sent to ceo(notifying);
         vm.data = {
           emplId: $stateParams.employeeId,
           name: data.firstname + " " + data.lastname,
@@ -103,13 +121,27 @@ angular.module('checklist')
             });
         };
       }])
-  .controller('CheckoutCtrl', ['$state','$http','$stateParams', 'CheckoutService', 'WebcamService','data','ToastService',
-    function($state, $http, $stateParams, CheckoutService, WebcamService, data, ToastService){
+  .controller('CheckoutCtrl', ['$state','$http','$stateParams', 'CheckoutService', 'WebcamService','data','ToastService','$timeout',
+    function($state, $http, $stateParams, CheckoutService, WebcamService, data, ToastService, $timeout){
       var vm = this;
       vm.userData = data;
-      vm.greeting = "Здравствуйте, сделайте Checkout!";
-      vm.successGreating = "Надеемся день у Вас был плодотворным!";
+      // console.log(data);
 
+      //if code sent then form hidden
+      // and show the success
+      vm.isCodeSent = false;
+
+      //go parent state
+      //used when the employee is not himself
+      vm.goParent = function () {
+        $state.go('main');
+      };
+
+      vm.hdr = true;
+      //show/hide HDR
+      vm.showHdr = function () {
+        vm.hdr = !vm.hdr;
+      };
 
       //data to be sent to ceo(notifying)
       vm.data = {
@@ -140,7 +172,10 @@ angular.module('checklist')
             if(resp){
               // console.log(resp);
               ToastService.successToast(3000, resp.message);
-              $state.go("checkout.image");
+              vm.isCodeSent = true;
+              $timeout(function () {
+                $state.go("checkout.image");
+              }, 2000);
             }
           });
       };

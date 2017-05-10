@@ -227,8 +227,24 @@ router.post('/image/:id', function (req, res, next) {
             next(e);
             return;
           }
-          bot.sendPhoto(ceoBotId, buffer, opt); // Ceo bot id
-          res.send({message: 'Данные отправлены'});
+          Employees.findOne({_id: id})
+            .select({ firstname:1, lastname: 1, avatarurl: 1 })
+            .exec(function (err, data) {
+              if(err){
+                next(err);
+                return;
+              }
+              if(data){
+                data.avatarurl = img;
+                data.save(function (err, data) {
+                  console.log(data);
+                  bot.sendPhoto(ceoBotId, buffer, opt); // Ceo bot id
+                  res.send({message: 'Данные отправлены'});
+                });
+              } else {
+                console.log('Не извсетная ошибка при созранений аватара');
+              }
+            });
         });
     });
 
@@ -252,8 +268,26 @@ router.post('/image/:id', function (req, res, next) {
             next(e);
             return;
           }
-          bot.sendPhoto(ceoBotId, buffer, opt); // Ceo bot id
-          res.send({message: 'Данные отправлены'});
+          Employees.findOne({_id: id})
+            .select({ firstname:1, lastname: 1, avatarurl: 1 })
+            .exec(function (err, data) {
+              if(err){
+                next(err);
+                return;
+              }
+              if(data){
+                data.avatarurl = img;
+                data.save(function (err, data) {
+                  console.log(data);
+                  bot.sendPhoto(ceoBotId, buffer, opt); // Ceo bot id
+                  res.send({message: 'Данные отправлены'});
+                });
+              } else {
+                console.log('Не извсетная ошибка при созранений аватара');
+              }
+            });
+          // bot.sendPhoto(ceoBotId, buffer, opt); // Ceo bot id
+          // res.send({message: 'Данные отправлены'});
         });
     });
   }

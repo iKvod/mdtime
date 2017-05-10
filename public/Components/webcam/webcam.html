@@ -44,14 +44,29 @@
               <img data-ng-src="{{'data:' + vm.fotoContentType + ';base64,' + vm.photo}}" width="320" height="200" style=""/>
               <!--<md-button class="md-raised custom_btn md-primary" type="button" ng-click="vm.sendData(vm.photo)">Отправить</md-button>-->
             </div>
-            <a href="" class="foto-capture" ng-click="vm.webcam.makeSnapshot();vm.sendData(vm.photo)">
-              <span>Нажмите</span>
+            <div class="foto-capture" ng-if="vm.hdr">
+              <!--<div class="cell" ng-repeat="cell in [1, 2, 3, 4, 5, 6, 7, 4, 1, 2, 3, 4, 5, 6, 7, 2] track by $index">-->
+                <!--<span></span>-->
+              <!--</div>-->
+            </div>
+            <a href="" class="foto-hdr" ng-click="vm.showHdr()">
+              <span>HDR</span>
+              <!--<div class="cell" ng-repeat="cell in [1, 2, 3, 4, 5, 6, 7, 4, 1, 2, 3, 4, 5, 6, 7, 2] track by $index">-->
+                <!--<span></span>-->
+              <!--</div>-->
             </a>
           </div>
 
           </div>
       </div>
     </div>
+    <a href="" class="capt-button-wrapper"  ng-click="vm.webcam.makeSnapshot();vm.sendData(vm.photo)">
+      <div class="capt-button">
+        <div class="img-button-content">
+          <img ng-src="{{vm.userData.avatarurl  ? vm.userData.avatarurl  : '../../images/users.png'}}" alt="">
+        </div>
+      </div>
+    </a>
     <!--<div class="form-footer">-->
       <!--<md-button ng-if="vm.showweb" class="md-raised custom_btn md-primary" type="button" ng-click="vm.webcam.makeSnapshot();vm.sendData(vm.photo)">-->
         <!--Сделать фото-->
@@ -60,6 +75,9 @@
   </div>
 
 </div>
+<!--<div class="footer">-->
+  <!--<span>MADE WITH LOVE ❤️ BY MIRUSDESK | RELEASE 3.0 </span>-->
+<!--</div>-->
 
 
 <!--&lt;!&ndash;<div>&ndash;&gt;-->

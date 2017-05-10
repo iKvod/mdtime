@@ -3,23 +3,31 @@
     <div class="checklist-avatar">
       <div class="checklist-ava">
         <div class="checklist-ava-content">
-          <img ng-src="{{vm.data.avatarurl ? vm.data.avatarurl : '../../images/users.png'}}" alt="">
+          <img ng-src="{{vm.userData.avatarurl ? vm.userData.avatarurl : '../../images/users.png'}}" alt="">
         </div>
       </div>
-
     </div>
     <div class="pers-info">
       <span>{{vm.userData.firstname}} {{vm.userData.lastname}}</span>
     </div>
     <form class="checklist-form" ng-submit="vm.sendCode(vm.code)">
-      <div class="form-content">
+      <div class="form-content" ng-if="!vm.isCodeSent">
         <input type="text" class="md-block input" ng-model="vm.code" placeholder="ВВЕДИТЕ КОД">
         <button class="icon" type="submit">
           <i class="fa fa-arrow-right fa-2x" aria-hidden="true"></i>
         </button>
       </div>
+      <div class="form-content" ng-if="vm.isCodeSent">
+        <span> Oh, ja! - Dast ist fantastisch</span>
+      </div>
     </form>
+    <a href="" ng-click="vm.goParent()">
+      <span> Это не я </span>
+    </a>
   </div>
 </div>
 
+</div>
+<div class="footer">
+  <span>MADE WITH LOVE ❤️ BY MIRUSDESK | RELEASE 3.0 </span>
 </div>

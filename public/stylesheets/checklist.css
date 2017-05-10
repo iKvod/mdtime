@@ -70,15 +70,16 @@
         flex: 1;
         margin: auto;
         background-color: #ffffff;
+        opacity: 0.6;
         max-height: 53px;
         display: flex;
     }
 
     .checklist-ava-content img {
-        min-width: 40px;
-        max-width: 40px;
-        min-height: 40px;
-        max-height: 40px;
+        min-width: 50px;
+        max-width: 50px;
+        min-height: 50px;
+        max-height: 50px;
         border-radius: 100%;
         /*margin: 5px;*/
         flex: 1;
@@ -102,10 +103,14 @@
         display: flex;
         flex-flow: row wrap;
     }
+    .form-content span{
+        margin: auto;
+        color: #eeeeee;
+    }
     .checklist-form .input {
         margin: auto;
         flex: 5;
-        border: solid 1px #fff;
+        border: solid 1px black;
         border-radius: 4px;
         min-width: 250px;
         max-width: 250px !important;
@@ -114,20 +119,59 @@
         padding: 0 10px;
         background-color: transparent;
         font-size: 18px;
+        transition: .4s ease-out 0.2s;
+    }
+    .checklist-form .input:hover {
+        border: solid 1px #fff;
+        transition: .4s ease-out;
     }
     .checklist-form .icon {
         flex: 1;
-        min-height: 30px;
-        padding: 0 20px;
-        margin: auto;
+        min-height: 35px;
+        max-height: 35px;
+        min-width: 35px;
+        max-width: 35px;
+        margin: auto 10px ;
+        display: flex;
+        transition: .4s ease-out 0.4s;
+    }
+    .checklist-form .icon:hover {
+        background: rebeccapurple;
+         transition: .4s ease-out 0.2s;
+        border-radius: 100%;
     }
     .icon i {
         font-size: 22px;
+        margin: auto;
     }
+
+.checklist-main a {
+    margin: 3px 120px;
+    color: #ffffff;
+    /*font-style: italic;*/
+    text-decoration: underline;
+    transition: 0.5s ease-out 0.2s;
+}
+
+.checklist-main a:hover {
+    color: blue;
+    font-style: italic;
+    transition: 0.5s ease-out 0.2s;
+    font-weight: 400;
+}
 
 .text-area {
     height: 100px;
     background: aliceblue;
     opacity: 0.8;
     border-radius: 3px;
+}
+
+.footer {
+    display: flex;
+}
+.footer span{
+    margin: auto;
+    font-family: Roboto,Helvetica Neue,sans-serif;
+    color: initial;
 }
