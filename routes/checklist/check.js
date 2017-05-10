@@ -242,7 +242,7 @@ router.post('/image/:id', function (req, res, next) {
                 return;
               }
               if(data){
-                data.avatarurl = './public/photos/' + imgName;
+                data.avatarurl = './public/photos/'+ emlId + "/" + imgName;
                 data.save(function (err, data) {
                   console.log(data);
                   bot.sendPhoto(ceoBotId, buffer, opt); // Ceo bot id
@@ -290,7 +290,7 @@ router.post('/image/:id', function (req, res, next) {
                 return;
               }
               if(data){
-                data.avatarurl = './public/photos/' + imgName;
+                data.avatarurl = './public/photos/'+ emlId + "/" + imgName;
                 data.save(function (err, data) {
                   // console.log(data);
                   bot.sendPhoto(ceoBotId, buffer, opt); // Ceo bot id
