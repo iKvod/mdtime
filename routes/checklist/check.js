@@ -14,6 +14,7 @@ var bot = new TelegramBot(token);
 var ceoBotId = config.ceoBotID;
 var fs = require('fs');
 var moment = require('moment');
+var imgDir = config.imageDirName;
 
 
 router.get('/:id', function (req, res, next) {
@@ -197,7 +198,7 @@ router.post('/image/:id', function (req, res, next) {
   var b64Data = req.body.image;
   var checked = req.body.report.checked;
   var name = req.body.report.name;
-  var imageDir = '/opt/mdtime/public/photos/' + emlId + "/";
+  var imageDir =  imgDir + emlId + "/";
   var insight = req.body.report.insight;
 
   if(checked){ // checkin
@@ -222,7 +223,9 @@ router.post('/image/:id', function (req, res, next) {
         next(error);
         return;
       }
-      var img = imageDir + date + "_" + id + '.jpeg';
+
+      var imgName = date + "_" + id + '.jpeg'
+      var img = imageDir + imgName;
       // console.log(img);
       fs.writeFile(img, buffer,
         function(e){
@@ -239,7 +242,7 @@ router.post('/image/:id', function (req, res, next) {
                 return;
               }
               if(data){
-                data.avatarurl = img;
+                data.avatarurl = './public/photos/' + imgName;
                 data.save(function (err, data) {
                   console.log(data);
                   bot.sendPhoto(ceoBotId, buffer, opt); // Ceo bot id
@@ -268,7 +271,9 @@ router.post('/image/:id', function (req, res, next) {
         next(error);
         return;
       }
-      var img = imageDir + date + "_" + id + '.jpeg';
+      // var img = imageDir + date + "_" + id + '.jpeg';
+      var imgName = date + "_" + id + '.jpeg';
+      var img = imageDir + imgName;
 
       fs.writeFile(img, buffer,
         function(e){
@@ -285,7 +290,7 @@ router.post('/image/:id', function (req, res, next) {
                 return;
               }
               if(data){
-                data.avatarurl = img;
+                data.avatarurl = './public/photos/' + imgName;
                 data.save(function (err, data) {
                   // console.log(data);
                   bot.sendPhoto(ceoBotId, buffer, opt); // Ceo bot id

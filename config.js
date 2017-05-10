@@ -13,7 +13,10 @@ var config = {
     },
     ceoBotID : 33103333 ,// Miruses tb bot id
     // ceoBotID: 207925830,     //for testing
-    techSupportBotId: 207925830 // for testing
+    techSupportBotId: 207925830, // for testing,
+    imageDirName: '/opt/mdtime/public/photos/',
+    // imageDirName: './public/photos/'
+
 };
 
 module.exports =  config;
