@@ -50,7 +50,10 @@ angular.module('checklist', [
           url:'/success',
           templateUrl:'Components/successError/succes-tmpl.html',
           controller:"CheckinCtrl",
-          controllerAs:'vm'
+          controllerAs:'vm',
+          params: {
+            image: null
+          }
         })
         .state("checkout", {
           url:'/checkout/code/:employeeId/:id',

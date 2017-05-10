@@ -38,6 +38,7 @@ angular.module('checklist')
         vm.code = '';
         vm.image = null;
         vm.hdr = true;
+        console.log($state.current.name);
 
         //if code sent then form hidden
         // and show the success
@@ -115,11 +116,18 @@ angular.module('checklist')
           })
             .then(function(response){
               ToastService.successToast(3000, "Данные отправлены");
-              $state.go('checkin.success');
+              $state.go('checkin.success', {
+                image: vm.image
+              });
             }, function (error) {
-              ToastService.errorToast(3000,"Ошибка при отправке данных");
+              ToastService.errorToast(3000, "Ошибка при отправке данных");
             });
         };
+        if($state.current.name === 'checkin.success'){
+          vm.image = CheckinService.getImage();
+          // console.log(vm.image);
+        }
+
       }])
   .controller('CheckoutCtrl', ['$state','$http','$stateParams', 'CheckoutService', 'WebcamService','data','ToastService','$timeout',
     function($state, $http, $stateParams, CheckoutService, WebcamService, data, ToastService, $timeout){
@@ -205,21 +213,21 @@ angular.module('checklist')
       vm.sendReport = function(){
 
         getReports(function () {
-          console.log(vm.data);
+          // console.log(vm.data);
           vm.image = image;
-          console.log(image);
+          // console.log(image);
           $http({
             url:'/api/checklist/image/' + $stateParams.id,
             method: 'POST',
             data: { image: image, report: vm.data }
           })
             .then(function(response){
-              console.log(response);
+              // console.log(response);
               ToastService.successToast(3000, "Данные отправлены");
               $state.go('checkout.success');
             }, function (error) {
               ToastService.errorToast(3000,"Ошибка при отправке данных");
-              console.log(error);
+              // console.log(error);
             });
 
         });
@@ -238,6 +246,10 @@ angular.module('checklist')
         }
       };
 
+      if($state.current === 'checkout.success'){
+        vm.image = CheckoutService.getImage();
+      }
+
       //WEB CAM
       //Webcam taking photo
       vm.showweb = true;
@@ -252,6 +264,10 @@ angular.module('checklist')
       function turnOffWebCam() {
         if(vm.webcam && vm.webcam.isTurnOn===true)
           vm.webcam.turnOff();
+      }
+      if($state.current.name === 'checkout.success'){
+        vm.image = CheckoutService.getImage();
+        // console.log(vm.image);
       }
 
     }]);

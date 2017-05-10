@@ -20,7 +20,7 @@
     /*background: #00B7FF;*/
     min-width: 300px;
     max-height: 300px;
-    padding: 35% 20%;
+    /*padding: 35% 20%;*/
 
 }
     .checklist-main .pers-info{
@@ -146,7 +146,7 @@
     }
 
 .checklist-main a {
-    margin: 3px 120px;
+    margin: 3px 230px;
     color: #ffffff;
     /*font-style: italic;*/
     text-decoration: underline;
