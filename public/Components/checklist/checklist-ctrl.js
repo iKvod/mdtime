@@ -73,7 +73,7 @@ angular.module('checklist')
                   vm.isCodeSent = true;
                   $timeout(function () {
                     $state.go("checkin.image");
-                  }, 3000)
+                  }, 1000);
                 }
               });
         };
@@ -175,7 +175,7 @@ angular.module('checklist')
               vm.isCodeSent = true;
               $timeout(function () {
                 $state.go("checkout.image");
-              }, 2000);
+              }, 1000);
             }
           });
       };

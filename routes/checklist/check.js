@@ -197,7 +197,7 @@ router.post('/image/:id', function (req, res, next) {
   var b64Data = req.body.image;
   var checked = req.body.report.checked;
   var name = req.body.report.name;
-  var imageDir = './public/photos/' + emlId + "/";
+  var imageDir = '/opt/mdtime/public/photos/' + emlId + "/";
   var insight = req.body.report.insight;
 
   if(checked){ // checkin
@@ -307,8 +307,8 @@ function checkDirectory(directory, callback) {
   console.log(directory);
   console.log(__dirname);
   fs.stat(directory, function(err, stats) {
-    console.log(err);
     if (err && err.errno === -2) {
+      console.log(err);
       fs.mkdir(directory, callback);
     } else {
       callback(err)
