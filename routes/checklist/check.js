@@ -305,10 +305,11 @@ router.post('/image/:id', function (req, res, next) {
 
 function checkDirectory(directory, callback) {
   console.log(directory);
+  console.log(__dirname);
   fs.stat(directory, function(err, stats) {
     console.log(err);
     if (err && err.errno === -2) {
-      fs.mkdir(directory, callback);
+      fs.mkdir(__dirname + directory, callback);
     } else {
       callback(err)
     }
