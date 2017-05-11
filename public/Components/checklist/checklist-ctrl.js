@@ -73,7 +73,7 @@ angular.module('checklist')
                   vm.isCodeSent = true;
                   $timeout(function () {
                     $state.go("checkin.image");
-                  }, 1000);
+                  }, 500);
                 }
               });
         };
@@ -137,7 +137,7 @@ angular.module('checklist')
               } else if( dep === 'FO'){
                 $window.location.href = locations[2];
               }
-            }, 1000);
+            }, 500);
           }
 
       }])
@@ -234,11 +234,12 @@ angular.module('checklist')
             data: { image: image, report: vm.data }
           })
             .then(function(response){
-              // console.log(response);
-              ToastService.successToast(3000, "Данные отправлены");
+              console.log(response);
+              ToastService.successToast(3000, response.data.message);
               $state.go('checkout.success');
             }, function (error) {
-              ToastService.errorToast(3000,"Ошибка при отправке данных");
+              console.log(error);
+              ToastService.errorToast(3000, error.data.message);
               // console.log(error);
             });
 
@@ -281,7 +282,7 @@ angular.module('checklist')
         vm.image = CheckoutService.getImage();
         $timeout(function () {
           $window.location.href = 'http://vk.com/md.people';
-        }, 1000)
+        }, 500)
         // console.log(vm.image);
       }
 

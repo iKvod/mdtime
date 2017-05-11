@@ -3,6 +3,7 @@
  */
 var express = require('express');
 var router = express.Router();
+var url = require('url');
 var TimeReportings = require('../../models/reporings/reports');
 var dbHelper = require('../Helpers/dbRouteCommon');
 var Employees = require('../../models/employees');
@@ -16,6 +17,8 @@ var ceoBotId = config.ceoBotID;
 var fs = require('fs');
 var moment = require('moment');
 var imgDir = config.imageDirName;
+var vkGroupId = '120539551';
+
 
 
 router.get('/:id', function (req, res, next) {
@@ -187,6 +190,138 @@ router.put('/code/:id', function (req, res, next) {
   });
 });
 
+//
+// router.post('/image/:id', function (req, res, next) {
+//   console.log(req.body.report);
+//   var date = new Date();
+//   var time = moment(date).format()
+//     .replace(/T/, ' ').      // replace T with a space
+//     replace(/\..+/, '');
+//   var id = req.body.report.id;
+//   var emlId = req.body.report.emplId;
+//   var b64Data = req.body.image;
+//   var checked = req.body.report.checked;
+//   var name = req.body.report.name;
+//   var imageDir =  imgDir + emlId + "/";
+//   var insight = req.body.report.insight;
+//
+//   if(checked){ // checkin
+//     var buffer = new Buffer(b64Data, 'base64');
+//     var opt = {
+//       "caption": name + " пришел(а) на работу в: \n " + time
+//       // 'reply_markup': { // for rating
+//       //             "keyboard":[
+//       //                 [{text: '👍'}],
+//       //                 [{text: '👎'}]
+//       //             ],
+//       //             "resize_keyboard" : true,
+//       //             "one_time_keyboard" : true,
+//       //             "remove_keyboard":true
+//       //     }
+//     };
+//
+//     checkDirectory(imageDir, function (error) {
+//       if(error){
+//         console.log(error);
+//         next(error);
+//         return;
+//       }
+//
+//       var imgName = date + "_" + id + '.jpeg';
+//       var img = imageDir + imgName;
+//       // console.log(img);
+//       fs.writeFile(img, buffer,
+//         function(e){
+//           if(e) {
+//             console.log(e);
+//             next(e);
+//             return;
+//           }
+//           Employees.findOne({_id: id})
+//             .select({ firstname:1, lastname: 1, avatarurl: 1 })
+//             .exec(function (err, data) {
+//               if(err){
+//                 next(err);
+//                 return;
+//               }
+//               if(data){
+//                 data.avatarurl = './public/photos/'+ emlId + "/" + imgName;
+//                 data.save(function (err, data) {
+//                   console.log(data);
+//                   bot.sendPhoto(ceoBotId, buffer, opt); // Ceo bot id
+//                   res.send({message: 'Данные отправлены'});
+//                   // res.redirect(301, 'http://google.com');
+//                 });
+//               } else {
+//                 console.log('Не извсетная ошибка при созранений аватара');
+//               }
+//             });
+//         });
+//     });
+//
+//   } else {
+//
+//     var buffer = new Buffer(b64Data, 'base64');
+//     var opt = {
+//       "caption": name + " уходит с работы в: \n" + time
+//     };
+//
+//     var repOpt = {
+//       parse_mode: "Markdown"
+//     };
+//
+//     checkDirectory(imageDir, function (error) {
+//       if(error){
+//         next(error);
+//         return;
+//       }
+//       // var img = imageDir + date + "_" + id + '.jpeg';
+//       var imgName = date + "_" + id + '.jpeg';
+//       var img = imageDir + imgName;
+//
+//       fs.writeFile(img, buffer,
+//         function(e){
+//           if(e) {
+//             next(e);
+//             return;
+//           }
+//           Employees.findOne({_id: id})
+//             .select({ firstname:1, lastname: 1, avatarurl: 1 })
+//             .exec(function (err, data) {
+//               if(err){
+//                 console.log(err);
+//                 next(err);
+//                 return;
+//               }
+//               if(data){
+//                 data.avatarurl = './public/photos/'+ emlId + "/" + imgName;
+//                 data.save(function (err, savedData) {
+//
+//                   var ins = new Insights({
+//                     owner: savedData._id,
+//                     insight: req.body.report.insight
+//                   });
+//
+//                   ins.save(function (err, savedInsight) {
+//                     bot.sendPhoto(ceoBotId, buffer, opt); // Ceo bot id
+//                     bot.sendMessage(ceoBotId, "[ИНСАЙТ - " + savedData.firstname
+//                       + " " + savedData.lastname + ", запостил: " + '](' + insight + ')', repOpt);
+//                     res.send({message: 'Данные отправлены'});
+//                   });
+//
+//                 });
+//               } else {
+//                 console.log('Неизвеcтная ошибка при созданий аватара');
+//               }
+//             });
+//           // bot.sendPhoto(ceoBotId, buffer, opt); // Ceo bot id
+//           // res.send({message: 'Данные отправлены'});
+//         });
+//     });
+//   }
+// });
+
+
 
 router.post('/image/:id', function (req, res, next) {
   console.log(req.body.report);
@@ -219,7 +354,6 @@ router.post('/image/:id', function (req, res, next) {
 
     checkDirectory(imageDir, function (error) {
       if(error){
-        console.log(error);
         next(error);
         return;
       }
@@ -244,7 +378,9 @@ router.post('/image/:id', function (req, res, next) {
               if(data){
                 data.avatarurl = './public/photos/'+ emlId + "/" + imgName;
                 data.save(function (err, data) {
-                  console.log(data);
+                  if(err){
+                    return;
+                  }
                   bot.sendPhoto(ceoBotId, buffer, opt); // Ceo bot id
                   res.send({message: 'Данные отправлены'});
                   // res.redirect(301, 'http://google.com');
@@ -267,71 +403,109 @@ router.post('/image/:id', function (req, res, next) {
       parse_mode: "Markdown"
     };
 
-    checkDirectory(imageDir, function (error) {
-      if(error){
-        next(error);
-        return;
-      }
-      // var img = imageDir + date + "_" + id + '.jpeg';
-      var imgName = date + "_" + id + '.jpeg';
-      var img = imageDir + imgName;
-
-      fs.writeFile(img, buffer,
-        function(e){
-          if(e) {
-            next(e);
+    checkInsightUniq(insight, function (message, data) {
+      // console.log(insight);
+      // console.log(message);
+      // console.log(data);
+      if(!data){
+        console.log('here')
+        checkDirectory(imageDir, function (error) {
+          if(error){
+            // console.log(error);
+            next(error);
             return;
           }
-          Employees.findOne({_id: id})
-            .select({ firstname:1, lastname: 1, avatarurl: 1 })
-            .exec(function (err, data) {
-              if(err){
-                console.log(err);
-                next(err);
+          // var img = imageDir + date + "_" + id + '.jpeg';
+          var imgName = date + "_" + id + '.jpeg';
+          var img = imageDir + imgName;
+
+          fs.writeFile(img, buffer,
+            function(e){
+              if(e) {
+                next(e);
                 return;
               }
-              if(data){
-                data.avatarurl = './public/photos/'+ emlId + "/" + imgName;
-                data.save(function (err, savedData) {
+              Employees.findOne({_id: id})
+                .select({ firstname:1, lastname: 1, avatarurl: 1, report: 1 })
+                .exec(function (err, data) {
+                  if(err){
+                    console.log(err);
+                    next(err);
+                    return;
+                  }
+                  if(data){
+                    data.avatarurl = './public/photos/'+ emlId + "/" + imgName;
+                    var repId = data.report[data.report.length-1];
+                    // console.log(repId);
+                    data.save(function (err, savedData) {
 
-                  var ins = new Insights({
-                    owner: savedData._id,
-                    insight: req.body.report.insight
-                  });
+                      var ins = new Insights({
+                        owner: savedData._id,
+                        insight: req.body.report.insight
+                      });
 
-                  ins.save(function (err, savedInsight) {
-                    bot.sendPhoto(ceoBotId, buffer, opt); // Ceo bot id
-                    bot.sendMessage(ceoBotId, "[ИНСАЙТ - " + savedData.firstname
-                      + " " + savedData.lastname + ", запостил: " + '](' + insight + ')', repOpt);
-                    res.send({message: 'Данные отправлены'});
-                  });
 
+                      ins.save(function (err, savedInsight) {
+                        TimeReportings.findOne({_id: repId})
+                          .select({report: 1})
+                          .exec(function (err, report) {
+                            if(err){
+                              next(err);
+                              return;
+                            }
+                            report.report = req.body.report.report;
+                            report.save(function (err, savedReport) {
+                              console.log(savedReport);
+                              if(err){
+                                next(err);
+                                return;
+                              }
+                              // console.log(err);
+                              bot.sendPhoto(ceoBotId, buffer, opt); // Ceo bot id
+                              bot.sendMessage(ceoBotId, "[ИНСАЙТ - " + savedData.firstname
+                                + " " + savedData.lastname + ", запостил: " + '](' + insight + ')', repOpt);
+                              res.send({message: 'Данные отправлены! ' + message });
+                            })
+                          })
+                      });
+
+                    });
+                  } else {
+                    console.log('Неизвеcтная ошибка при созданий аватара');
+                  }
                 });
-              } else {
-                console.log('Неизвеcтная ошибка при созданий аватара');
-              }
+              // bot.sendPhoto(ceoBotId, buffer, opt); // Ceo bot id
+              // res.send({message: 'Данные отправлены'});
             });
-          // bot.sendPhoto(ceoBotId, buffer, opt); // Ceo bot id
-          // res.send({message: 'Данные отправлены'});
         });
+      } else {
+        res.status(404).send({message: message});
+      }
     });
+
   }
 });
 
-function checkInsightUniq(insight, cb) {
- dbHelper.getAllRoute(Insights, {
-   insight: insight
- }, {}, null, function (err, data) {
-   if(err){
-     cb(err, null);
-     return;
-   }
-   if(data.length >= 1){
-     cb(null, true);
-   } else  {
+function checkInsightUniq(URL, cb) {
+  var q = url.parse(URL, true);
+  var publicId  = q.query.w.slice(5,14);
 
-   }
- });
+  if( publicId == vkGroupId ){
+    dbHelper.getAllRoute(Insights, {
+      insight: URL
+    }, {}, null, function (err, data) {
+      if(err){
+        if(err.status === 404){
+          cb("Красава! Надеемся ваш инсайт содержательный)", false);// insight uniqueness
+          return;
+        }
+      }
+      cb("Ссылка на Инсайт не уникальна. Хватит заниматься плагиатством", true);
+    });
+  } else {
+    var message = "Не надо воровать с другого сайте :)";
+    cb(message, true);
+  }
 };
 
 function checkDirectory(directory, callback) {

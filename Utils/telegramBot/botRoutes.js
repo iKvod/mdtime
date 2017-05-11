@@ -23,6 +23,9 @@ var inlButtHelp = require('./bot/inlineButtons');
 var inlineButtons = require('./bot/staticInlineButtons/staticInlineButtons');
 var inlineCbHandlers = require('./bot/inlineButtonHandler/notifyRoutines');
 
+var url = require('url');
+
+
 
 //start
 var startHandler = {
@@ -1245,6 +1248,19 @@ bot.onText(/\/do/, function (msg, match) {
   //   }
   //   bot.sendMessage(botId, passwords);
   // });
+});
+
+
+var vkGroupId = '120539551';
+var URL = 'https://vk.com/md.people?w=wall-120539551_6378';
+bot.onText(/\/url/, function (msg, match) {
+  var q = url.parse(URL, true);
+  var publicId  = q.query.w.slice(5,14);
+  // var
+  console.log(publicId);
+
+
+
 });
 
 
