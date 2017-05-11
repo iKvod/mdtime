@@ -410,7 +410,6 @@ bot.on('callback_query', function (msg, match) {
 
   if(!notifyRoutine.isNotify){
     // console.log(notifyRoutine.isNotify);
-
     var mesId = msg.message.message_id;
     switch (caseText){
       case '1_1':
@@ -793,16 +792,7 @@ bot.on('callback_query', function (msg, match) {
 });
 
 
-//constants
-var userMess = [];
-var counter = 0;
-var lastMessageId = null;
-var msgId = '';
-var ssss = [];
-
-
 bot.on('message', function (msg) {
-  ssss.push(msg.chat.id);
   // console.log(msg);
   var messText = msg.text;
   var chatId = msg.chat.id;
@@ -986,19 +976,19 @@ bot.onText(/\/start/, function (msg, match) {
     'Рабочий ID выдается HR менеджером');
 });
 
-bot.onText(/\/salary/, function (msg, mathch) {
+bot.onText(/\/salary/, function (msg, match) {
 
 });
 
-bot.onText(/\/salarycast/, function (msg, mathch) {
+bot.onText(/\/salarycast/, function (msg, match) {
 
 });
 
-bot.onText(/\/time/, function (msg, mathch) {
+bot.onText(/\/time/, function (msg, match) {
 
 });
 
-bot.onText(/\/timelate/, function (msg, mathch) {
+bot.onText(/\/timelate/, function (msg, match) {
 
 });
 
@@ -1155,6 +1145,7 @@ bot.onText(/\/data (.+)/, function (msg, match) { // /employee_id - bot command
 bot.onText(/\/id (.+)/, function (msg, match) { // /employee_id - bot command
 
   var employeeName = match[1].slice(0,1).toUpperCase() + match[1].slice(1);
+  console.log(employeeName);
   var bot_id = msg.chat.id;
 
   dbHelper.getEmployeeId(bot_id, employeeName, function (err, data) {
@@ -1164,7 +1155,9 @@ bot.onText(/\/id (.+)/, function (msg, match) { // /employee_id - bot command
     }
 
     if(data){
-      bot.sendMessage(bot_id, 'Вы зарегистрированы в системе');
+      // console.log(data);
+      bot.sendMessage(bot_id, data);
+      // bot.sendMessage(bot_id, 'Вы зарегистрированы в системе');
     }
   });
 });
@@ -1187,6 +1180,22 @@ bot.onText(/\/pass (.+)/, function (msg, match) { // /employee_id pass - bot com
    } else {
      bot.sendMessage(bot_id, "Неизвестная команда. Попробуйте еще раз");
    }
+
+  // var bot_id = msg.chat.id;
+  // var pass  = msg.text.substr(1,4);
+  // var employee_id = match[1];
+  //
+  // if(pass === 'pass'){
+  //    dbHelper.getEmployeePasswords(employee_id, bot_id, function (err, data) {
+  //      if(err){
+  //        bot.sendMessage(bot_id, err.message);
+  //        return;
+  //      }
+  //      bot.sendMessage(bot_id, data);
+  //    })
+  //  } else {
+  //    bot.sendMessage(bot_id, "Неизвестная команда. Попробуйте еще раз");
+  //  }
 });
 
 //Sends Employee ID for current user
@@ -1198,7 +1207,6 @@ bot.onText(/\/myid/, function (msg) {
       return;
     }
       bot.sendMessage(botId, data.firstname + ", Ваш рабочий ID: " + data.employee_id);
-
   });
 });
 

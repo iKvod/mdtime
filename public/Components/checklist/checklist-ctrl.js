@@ -29,16 +29,15 @@ angular.module('checklist')
 
     }])
   .controller('CheckinCtrl',
-    ['$state','$stateParams','$http','CheckinService','WebcamService','ToastService','data','$timeout',
-      function($state,$stateParams, $http, CheckinService, WebcamService, ToastService, data, $timeout){
+    ['$state','$stateParams','$http','CheckinService','WebcamService','ToastService','data','$timeout','$window',
+      function($state,$stateParams, $http, CheckinService, WebcamService, ToastService, data, $timeout, $window){
 
         var vm = this;
         vm.userData = data;
-        console.log(data);
         vm.code = '';
         vm.image = null;
         vm.hdr = true;
-        console.log($state.current.name);
+        var locations = ['http://blog.mirusdesk.kz', 'http://ticket.mirusdesk.kz', 'http://plan.mirusdesk.kz', ];
 
         //if code sent then form hidden
         // and show the success
@@ -124,14 +123,26 @@ angular.module('checklist')
               ToastService.errorToast(3000, "Ошибка при отправке данных");
             });
         };
-        if($state.current.name === 'checkin.success'){
-          vm.image = CheckinService.getImage();
-          // console.log(vm.image);
-        }
+
+
+          if($state.current.name === 'checkin.success'){
+
+            vm.image = CheckinService.getImage();
+            var dep = $stateParams.employeeId.slice(2,4).toUpperCase();
+            $timeout(function () {
+              if(dep === 'MD'){
+                $window.location.href = locations[0];
+              }else if (dep === 'AD'){
+                $window.location.href = locations[1];
+              } else if( dep === 'FO'){
+                $window.location.href = locations[2];
+              }
+            }, 1000);
+          }
 
       }])
-  .controller('CheckoutCtrl', ['$state','$http','$stateParams', 'CheckoutService', 'WebcamService','data','ToastService','$timeout',
-    function($state, $http, $stateParams, CheckoutService, WebcamService, data, ToastService, $timeout){
+  .controller('CheckoutCtrl', ['$state','$http','$stateParams', 'CheckoutService', 'WebcamService','data','ToastService','$timeout','$window',
+    function($state, $http, $stateParams, CheckoutService, WebcamService, data, ToastService, $timeout, $window){
       var vm = this;
       vm.userData = data;
       // console.log(data);
@@ -268,6 +279,9 @@ angular.module('checklist')
       }
       if($state.current.name === 'checkout.success'){
         vm.image = CheckoutService.getImage();
+        $timeout(function () {
+          $window.location.href = 'http://vk.com/md.people';
+        }, 1000)
         // console.log(vm.image);
       }
 

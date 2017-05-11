@@ -6,6 +6,7 @@ var router = express.Router();
 var TimeReportings = require('../../models/reporings/reports');
 var dbHelper = require('../Helpers/dbRouteCommon');
 var Employees = require('../../models/employees');
+var Insights = require('../../models/insight');
 var redisClient = require('../../Utils/redis/redis');
 var TelegramBot = require('../../node_modules/node-telegram-bot-api');
 var config = require('../../config');
@@ -126,7 +127,7 @@ router.put('/code/:id', function (req, res, next) {
                       }
 
                       if(savedEmpl){
-                        res.send({message: "Вы отметились в системе"});
+                        res.send({message: "Вы ввели верный код"});
                         bot.sendMessage(empl.botId, 'Вы круто сделали чекин)')
                       }
 
@@ -161,7 +162,7 @@ router.put('/code/:id', function (req, res, next) {
                           empl.checked = checked;
                           empl.save(function (err, savedEmpl) {
                             bot.sendMessage(empl.botId, 'Вы круто сделали чекаут)');
-                            res.send({message: 'Вы отметились в системе, данные записаны в базе'})
+                            res.send({message: 'Вы ввели верный код'})
                           });
                         } else {
 
@@ -202,7 +203,6 @@ router.post('/image/:id', function (req, res, next) {
   var insight = req.body.report.insight;
 
   if(checked){ // checkin
-    console.log('checkin')
     var buffer = new Buffer(b64Data, 'base64');
     var opt = {
       "caption": name + " пришел(а) на работу в: \n " + time
@@ -224,7 +224,7 @@ router.post('/image/:id', function (req, res, next) {
         return;
       }
 
-      var imgName = date + "_" + id + '.jpeg'
+      var imgName = date + "_" + id + '.jpeg';
       var img = imageDir + imgName;
       // console.log(img);
       fs.writeFile(img, buffer,
@@ -247,6 +247,7 @@ router.post('/image/:id', function (req, res, next) {
                   console.log(data);
                   bot.sendPhoto(ceoBotId, buffer, opt); // Ceo bot id
                   res.send({message: 'Данные отправлены'});
+                  // res.redirect(301, 'http://google.com');
                 });
               } else {
                 console.log('Не извсетная ошибка при созранений аватара');
@@ -291,11 +292,20 @@ router.post('/image/:id', function (req, res, next) {
               }
               if(data){
                 data.avatarurl = './public/photos/'+ emlId + "/" + imgName;
-                data.save(function (err, data) {
-                  // console.log(data);
-                  bot.sendPhoto(ceoBotId, buffer, opt); // Ceo bot id
-                  bot.sendMessage(ceoBotId, "[ИНСАЙТ:" + '](' + insight + ')', repOpt);
-                  res.send({message: 'Данные отправлены'});
+                data.save(function (err, savedData) {
+
+                  var ins = new Insights({
+                    owner: savedData._id,
+                    insight: req.body.report.insight
+                  });
+
+                  ins.save(function (err, savedInsight) {
+                    bot.sendPhoto(ceoBotId, buffer, opt); // Ceo bot id
+                    bot.sendMessage(ceoBotId, "[ИНСАЙТ - " + savedData.firstname
+                      + " " + savedData.lastname + ", запостил: " + '](' + insight + ')', repOpt);
+                    res.send({message: 'Данные отправлены'});
+                  });
+
                 });
               } else {
                 console.log('Неизвеcтная ошибка при созданий аватара');
@@ -308,18 +318,30 @@ router.post('/image/:id', function (req, res, next) {
   }
 });
 
+function checkInsightUniq(insight, cb) {
+ dbHelper.getAllRoute(Insights, {
+   insight: insight
+ }, {}, null, function (err, data) {
+   if(err){
+     cb(err, null);
+     return;
+   }
+   if(data.length >= 1){
+     cb(null, true);
+   } else  {
+
+   }
+ });
+};
+
 function checkDirectory(directory, callback) {
-  console.log(directory);
-  console.log(__dirname);
   fs.stat(directory, function(err, stats) {
     if (err && err.errno === -2) {
-      console.log(err);
       fs.mkdir(directory, callback);
     } else {
       callback(err)
     }
   });
 }
-
 
 module.exports = router;

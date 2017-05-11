@@ -44,12 +44,12 @@
               <img data-ng-src="{{'data:' + vm.fotoContentType + ';base64,' + vm.photo}}" width="320" height="200" style=""/>
               <!--<md-button class="md-raised custom_btn md-primary" type="button" ng-click="vm.sendData(vm.photo)">Отправить</md-button>-->
             </div>
-            <div class="foto-capture" ng-if="vm.hdr">
+            <div class="foto-capture" ng-if="vm.hdr&&vm.showweb">
               <!--<div class="cell" ng-repeat="cell in [1, 2, 3, 4, 5, 6, 7, 4, 1, 2, 3, 4, 5, 6, 7, 2] track by $index">-->
                 <!--<span></span>-->
               <!--</div>-->
             </div>
-            <a href="" class="foto-hdr" ng-click="vm.showHdr()">
+            <a href="" ng-if="vm.showweb" class="foto-hdr" ng-click="vm.showHdr()">
               <span>HDR</span>
               <!--<div class="cell" ng-repeat="cell in [1, 2, 3, 4, 5, 6, 7, 4, 1, 2, 3, 4, 5, 6, 7, 2] track by $index">-->
                 <!--<span></span>-->

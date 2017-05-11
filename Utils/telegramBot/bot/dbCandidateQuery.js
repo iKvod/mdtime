@@ -79,7 +79,7 @@ var getEmployeePasswords = function (employee_id, bot_id, callback) {
             + "Компьютер | MD Сервер: " + data.computer + "\n"
             + '1C Base: ' + data.one_c + "\n";
           callback(null, passWords);
-        }else {
+        } else {
           var error = {};
           error.message  = "Ошибка при получений с базы данных сотрдуника.\n" +
             "Cотрудника с такими данными не существует!\n";
@@ -90,6 +90,61 @@ var getEmployeePasswords = function (employee_id, bot_id, callback) {
       });
   })
 };
+
+//
+// var getEmployeesPassByName = function (query, bot_id, callback) {
+//   var passWords = null;
+//
+//   verifyAdmin(bot_id, function (err, fetchedData) {
+//     if(err){
+//       if(err.status === 401 && err.message){
+//         callback(err, null);
+//         return;
+//       } else if(err.status === 404){
+//         callback(err, null);
+//         return;
+//       }
+//       callback(err, null);
+//       return;
+//     }
+//
+//     dbHelper.getAllRoute(Employees, {
+//
+//     }, {
+//
+//     }, null, function (err, data) {
+//
+//     });
+//
+//     Employees.findOne({ employee_id: employee_id })
+//       .select({'firstname':1, 'lastname':1, 'megaplan':1, 'one_c':1, 'computer':1, 'employee_id': 1})
+//       .lean()
+//       .exec(function (err, data) {
+//         if(err){
+//           err.status = 500;
+//           err.message = 'Неизвестная ошибка. Обратитесь тех. сотруднику';
+//           callback(err, null);
+//           return;
+//         }
+//
+//         if(data){
+//           passWords = "\t\t Пароли по сотруднику: " + data.firstname + " " + data.lastname + " | " + data.employee_id + " \n\n"
+//             + 'MD Mail | MD Plan: ' + data.megaplan + "\n"
+//             + "Компьютер | MD Сервер: " + data.computer + "\n"
+//             + '1C Base: ' + data.one_c + "\n";
+//           callback(null, passWords);
+//         }else {
+//           var error = {};
+//           error.message  = "Ошибка при получений с базы данных сотрдуника.\n" +
+//             "Cотрудника с такими данными не существует!\n";
+//           // + "Код ошибки: Utils-getEmployeePasswords(line - 82)";
+//           error.status = 404;
+//           callback(error, null);
+//         }
+//       });
+//   })
+// };
+
 
 var getEmployeeId = function (botId, employeName, callback) {
   var emplIdInfo = '';

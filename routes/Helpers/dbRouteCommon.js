@@ -3,7 +3,12 @@
  */
 var errorHandeler = require('./errorHandlers');
 
-var getAllRoute = function (Model, query , selectObj, populateStr, callback) {
+var getAllRoute = function (
+  Model,
+query ,
+selectObj,
+populateStr,
+callback) {
   if(populateStr){
     Model.find(query)
       .lean()
@@ -168,6 +173,26 @@ var updateOneRoute = function (Model, id, someData, key, callback) {
         }
       });
     });
+};
+
+var getAllRouteByQuery = function (
+  Model,
+  query,
+  key,
+  selectObj,
+ populateStr,
+  callback
+)
+{
+  if(populateStr){
+    Model.find({
+      // query
+    })
+
+
+  } else {
+
+  }
 };
 
 
