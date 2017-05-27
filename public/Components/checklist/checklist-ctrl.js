@@ -125,8 +125,7 @@ angular.module('checklist')
         };
 
 
-          if($state.current.name === 'checkin.success'){
-
+        if($state.current.name === 'checkin.success'){
             vm.image = CheckinService.getImage();
             var dep = $stateParams.employeeId.slice(2,4).toUpperCase();
             $timeout(function () {
@@ -246,6 +245,7 @@ angular.module('checklist')
         });
       };
 
+      //getting report from service
       function getReports(callback) {
         if(vm.data.insight){
           CheckoutService.saveInsight(vm.data.insight);

@@ -3,6 +3,51 @@
  */
 var errorHandeler = require('./errorHandlers');
 
+
+// getting route with mongoose additional functions
+var gettAllrouteExtnended = function (
+  Model,
+  query,
+  selectObj,
+  populateObj,
+  callback)
+{
+  if(populateObj){
+    Model.find(query)
+      .select(selectObj)
+      .populate(populateObj)
+      .exec(function (err, data) {
+        if(err){
+          callback(errorHandeler.errorHandlerBasic(err, 'Неизвестная ошибка', 500), null);
+          return;
+        }
+
+        if(data.length > 0 && data.length){
+          callback(null, data)
+        } else {
+          var error = {};
+          callback(errorHandeler.errorHandlerBasic(error, 'Не найден', 404), null);
+        }
+      });
+
+  } else {
+    Model.find(query)
+      .select(selectObj)
+      .exec(function (err, data) {
+        if(err){
+          callback(errorHandeler.errorHandlerBasic(err, 'Неизвестная ошибка', 500), null);
+          return;
+        }
+
+        if(data.length > 0 && data.length){
+          callback(null, data)
+        } else {
+          var error = {};
+          callback(errorHandeler.errorHandlerBasic(error, 'Не найден', 404), null);
+        }
+      })
+  }
+};
 var getAllRoute = function (
   Model,
 query ,
@@ -119,7 +164,6 @@ var createRoute = function (Model, data, callback) {
   });
 };
 
-
 var updateRoute = function (Model, id, data, callback) {
   Model.find({_id: id})
   //TODO
@@ -152,7 +196,6 @@ var deleteAllRoute = function (Model, callback) {
     });
 };
 
-
 var updateOneRoute = function (Model, id, someData, key, callback) {
   Model.findOne({_id: id})
     .exec(function (err, data) {
@@ -175,27 +218,6 @@ var updateOneRoute = function (Model, id, someData, key, callback) {
     });
 };
 
-var getAllRouteByQuery = function (
-  Model,
-  query,
-  key,
-  selectObj,
- populateStr,
-  callback
-)
-{
-  if(populateStr){
-    Model.find({
-      // query
-    })
-
-
-  } else {
-
-  }
-};
-
-
 module.exports = {
   getAllRoute: getAllRoute,
   getByQueryRoute: getByQueryRoute,
@@ -203,5 +225,6 @@ module.exports = {
   deleteOneRoute: deleteOneRoute,
   deleteAllRoute: deleteAllRoute,
   updateOneRoute: updateOneRoute,
-  getAllToSaveRoute: getAllToSaveRoute
+  getAllToSaveRoute: getAllToSaveRoute,
+  gettAllrouteExtnended: gettAllrouteExtnended
 };

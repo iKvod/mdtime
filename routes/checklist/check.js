@@ -503,7 +503,7 @@ function checkInsightUniq(URL, cb) {
       cb("Ссылка на Инсайт не уникальна. Хватит заниматься плагиатством", true);
     });
   } else {
-    var message = "Не надо воровать с другого сайте :)";
+    var message = "Не надо воровать с другого сайта :)";
     cb(message, true);
   }
 };

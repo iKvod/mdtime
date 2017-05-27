@@ -67,49 +67,6 @@ var Employee = new Schema({
 },{
   timestamp:true
 });
-// var Employee = new Schema({
-//   employee_id: {type: String, unique: true},
-//   botId: {type: String, unique: true},
-//   username: String,
-//   firstname: {type: String, default:'NoName'},
-//   lastname: {type: String, default: 'NoLastname'},
-//   email: String,
-//   disabled: {type: Boolean, default: false},
-//   phonenumber: {type:String},
-//   department: { type: Schema.Types.ObjectId, ref: 'Departments' },
-//   position: { type: Schema.Types.ObjectId, ref: 'Positions' },
-//   salary_fixed: {
-//     type: Number,
-//     default: 0.0
-//   },
-//   bonus: {
-//     type: Number,
-//     default: 0.0
-//   },
-//   work_time: { //fixed work time
-//     type: Number,
-//     default: 0
-//   },
-//   registered_at: { type: Date, default: Date.now },
-//   checked: {
-//     type: Boolean,
-//     default:false
-//   },
-//   updated: Date,
-//   rating: [{type: Number}],
-//   report: [{
-//     type: Schema.Types.ObjectId,
-//     ref: 'Reporting'
-//   }],
-//   book: [{ type: Schema.Types.ObjectId, ref: 'Books' }],
-//   admin: {
-//     type: Boolean,
-//     default: false
-//   },
-//   code: [{type: String}],
-// },{
-//   timestamp:true
-// });
 
 Employee.methods.generatePasswords = function () {
   this.megaplan = password(10, false);

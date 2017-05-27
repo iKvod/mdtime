@@ -15,7 +15,7 @@ var mongoose = require('mongoose');
 
 var config = require('./config');
 var app = express();
-app.use(cors);
+app.use(cors());
 
 //if mongo with auth
 // mongoose.connect(config.mongoUrl, config.opt);
