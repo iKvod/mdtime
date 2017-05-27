@@ -18,7 +18,7 @@ router.get('/candidate', function(req, res, next){
 });
 
 router.post('/candidate', function (req, res, next) {
-  // console.log(req.body);
+  console.log(req.body);
   var cand = req.body;
 
   var candidate = new Candidate({
