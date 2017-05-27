@@ -78,7 +78,7 @@ router.post('/candidate', function (req, res, next) {
     'interview_day' : cand.interview_day,
     'interview_time' : cand.interview_time,
     'vacancy_id' : cand.vacancy_id,
-    'guest_id': cand.id_user,
+    'guest_id': cand.guest_id,
     'department': cand.department || null
   });
   
