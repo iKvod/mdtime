@@ -18,7 +18,7 @@ router.get('/candidate', function(req, res, next){
 });
 
 router.post('/candidate', function (req, res, next) {
-  console.log(req.body.general_name);
+  console.log(req.body);
   console.log("here");
   var cand = req.body;
 
