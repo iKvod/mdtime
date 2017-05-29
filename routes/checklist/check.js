@@ -441,7 +441,8 @@ router.post('/image/:id', function (req, res, next) {
 
                       var ins = new Insights({
                         owner: savedData._id,
-                        insight: req.body.report.insight
+                        insight: req.body.report.insight,
+                        report: req.body.report.report
                       });
 
 

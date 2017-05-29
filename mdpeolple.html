@@ -1,0 +1,1444 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MD People | Подбор персонала в компанию MIRUSDESK</title>
+  <link rel="shortcut icon" href="files/img/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="files/img/favicon.ico" type="image/x-icon">
+
+  <!-- Bootstrap -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
+  <link href="http://people.mirusdesk.kz/files/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Style -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700&amp;subset=cyrillic" rel="stylesheet">
+  <link rel="stylesheet/less" type="text/css" href="http://people.mirusdesk.kz/files/style/main_page_style.less">
+  <script src="http://people.mirusdesk.kz/files/js/less.min.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="http://people.mirusdesk.kz/files/js/like/social-likes_classic.css">
+
+  <!-- JS -->
+  <link rel="stylesheet" type="text/css" href="http://people.mirusdesk.kz/files/js/sweetalert/sweetalert.css">
+  <link rel="stylesheet" href="http://people.mirusdesk.kz/files/js/rating/css/star-rating.css" media="all" rel="stylesheet" type="text/css"/>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="http://people.mirusdesk.kz/files/js/rating/js/star-rating.js" type="text/javascript"></script>
+
+  <link rel="stylesheet" href="http://people.mirusdesk.kz/files/js/switchery/switchery.css" />
+  <script src="http://people.mirusdesk.kz/files/js/switchery/switchery.js"></script>
+
+  <script src="http://people.mirusdesk.kz/files/js/date/js/bootstrap-datepicker.js"></script>
+  <script src="http://people.mirusdesk.kz/files/js/date/bootstrap-datepicker.ru.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://people.mirusdesk.kz/files/js/date/css/datepicker.css">
+  <link rel="stylesheet/less" type="text/css" href="http://people.mirusdesk.kz/files/js/date/build/build_standalone.less">
+  <script src="http://people.mirusdesk.kz/files/js/less.min.js" type="text/javascript"></script>
+
+  <script src="http://people.mirusdesk.kz/files/js/validator/validator.js"></script>
+
+  <script src="http://people.mirusdesk.kz/files/js/sweetalert/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://people.mirusdesk.kz/files/js/sweetalert/sweetalert.css">
+
+  <style type="text/css">
+    body{
+      font-family: 'Roboto Condensed', sans-serif;
+      background: none;
+      padding: 10px;
+      width: 97%;
+    }
+    form{
+      width: 100%;
+      margin: 0 auto;
+    }
+    .form-group label{
+      font-weight: 400;
+    }
+    h1,h2,h3,h4,h5,h6{
+      font-family: 'Roboto Condensed', sans-serif;
+    }
+    #block_final,#block_personal, #block_education, #block_summery, #block_interview, #block_lastwork{
+      display: none;
+    }
+    .title2{
+      margin: 10px 0px 40px 0px;
+    }
+    .title .label{
+      text-align: left;
+    }
+    input[type='text'], input[type='email'], input[type='number']{
+      height: 44px;
+      border-radius: 3px;
+      font-size: 22px;
+    }
+    .radio-inline{
+      height: 44px;
+      padding-top: 8px;
+
+    }
+    .control-label{
+      font-size: 17px;
+      font-weight: 300;
+      color: #929292;
+    }
+    .form-group label{
+      font-weight: 300;
+    }
+    .checkbox-inline, .radio-inline{
+      font-size: 17px;
+    }
+    select{
+      font-size: 17px;
+    }
+    .label-warning, .btn-warning{
+      border-radius: 3px;
+      font-weight: 300;
+    }
+    .label-warning{
+      display: block;
+      height: 44px;
+      line-height: 35px;
+    }
+    input[type="file"],input[type="file"]::-webkit-file-upload-button{
+      height:44px;
+    }
+    .form-control:focus {
+      border-color: #52AF50;
+      box-shadow: inset 0 1px 1px rgba(82,175,80, 0.075), 0 0 8px rgba(82,175,80, 0.6);
+    }
+
+    .must{
+      color: red;
+      font-size: 14px;
+    }
+
+  </style>
+</head>
+<body>
+<div class="row">
+  <div class="col-sm-12">
+    <div class="progress progress-striped active">
+      <div class="progress-bar progress-bar-warning" style="width: 16.6%"></div>
+    </div>
+  </div>
+</div>
+
+<form id="main_form" method="post" enctype="multipart/form-data">
+
+  <div data-toggle="validator" role="form" id="form_general">
+    <!-- Общие сведения -->
+    <div id="block_general">
+      <div class="row">
+        <h3 class="col-sm-12 title"><span class="label label-warning label-lg">Общие сведения</span></h3>
+        <!-- <h5 class="col-sm-12 title2">Укажите Вашего рекомендателя. Это увеличит шансы приема на работу.</h5> -->
+      </div>
+
+      <div class="row">
+        <div class="form-group col-sm-3">
+          <label class="control-label" id="label_general_name" for="general_name">Имя: <span class="must">*</span></label>
+          <input type="text" value="" class="form-control" id="general_name" name="general_name" data-error="Напишите Ваше имя" required>
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group col-sm-3">
+          <label class="control-label" id="label_general_middle_name" for="general_middle_name">Отчество:</label>
+          <input type="text" value="" class="form-control" id="general_middle_name" name="general_middle_name">
+        </div>
+
+        <div class="form-group col-sm-3">
+          <label class="control-label" id="label_general_surname" for="general_surname">Фамилия: <span class="must">*</span></label>
+          <input type="text" value="" class="form-control" id="general_surname" name="general_surname" data-error="Напишите Вашу фамилию" required>
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group col-sm-3">
+          <label class="control-label" id="label_general_sex" for="general_sex" class="control-label">Пол: <span class="must">*</span></label><br>
+          <label class="radio-inline">
+
+            Мужской <input type="checkbox" class="js-switch-small4" checked value=""> Женский
+
+          </label>
+
+          <div class="help-block with-errors"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-sm-4">
+          <label class="control-label" id="label_general_birthday" for="general_birthday">Дата рождения: <span class="must">*</span></label>
+          <div class="input-group date" data-provide="datepicker">
+            <input type="text" class="form-control datepicker" data-date-format="mm/dd/yyyy" name="general_birthday" id="general_birthday" data-error="Выберите дату рождения" required>
+            <div class="input-group-addon">
+              <span class="glyphicon glyphicon-th"></span>
+            </div>
+          </div>
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group col-sm-4">
+          <label class="control-label" id="label_general_birth_place" for="general_birth_place">Место рождения: <span class="must">*</span></label>
+          <select style="width: 100%; font-weight: 300; height: 44px; font-size: 17px;" class="form-control" value="" name="general_birth_place" id="general_birth_place" data-error="Выберите место рождения" required>
+            <option value="" selected="selected"></option>
+            <optgroup label="Популярные">
+              <option value="г. Алматы">г. Алматы</option>
+              <option value="г. Астана">г. Астана</option>
+              <option value="г. Атырау">г. Атырау</option>
+            </optgroup>
+            <optgroup label="Другие">
+              <option value="г. Актобе">г. Актобе</option>
+              <option value="г. Актау">г. Актау</option>
+              <option value="г. Жезказган">г. Жезказган</option>
+              <option value="г. Караганда">г. Караганда</option>
+              <option value="г. Кокшетау">г. Кокшетау</option>
+              <option value="г. Костанай">г. Костанай</option>
+              <option value="г. Кызылорда">г. Кызылорда</option>
+              <option value="г. Орал">г. Орал</option>
+              <option value="г. Оскемен">г. Оскемен</option>
+              <option value="г. Павлодар">г. Павлодар</option>
+              <option value="г. Петропавл">г. Петропавл</option>
+              <option value="г. Семей">г. Семей</option>
+              <option value="г. Талдыкорган">г. Талдыкорган</option>
+              <option value="г. Тараз">г. Тараз</option>
+              <option value="г. Шымкент">г. Шымкент</option>
+              <option value="В другом городе">В другом городе</option>
+              <option value="В другой стране">В другой стране</option>
+            </optgroup>
+          </select>
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group col-sm-4">
+          <label class="control-label" id="label_general_nationality" for="general_nationality">Национальность: <span class="must">*</span></label>
+          <select style="height: 44px; font-weight: 300; font-size: 17px;" class="form-control" id="general_nationality" name="general_nationality" data-error="Выберите свою национальность" required>
+            <option value="" selected="selected"></option>
+            <option value="Казах">Казах</option>
+            <option value="Русский">Русский</option>
+            <option value="Уйгур">Уйгур</option>
+            <option value="Узбек">Узбек</option>
+            <option value="Турок">Турок</option>
+            <option value="Украинец">Украинец</option>
+            <option value="Кореец">Кореец</option>
+            <option value="Киргиз">Киргиз</option>
+            <option value="Татар">Татар</option>
+            <option value="Метис">Метис</option>
+            <option value="Другой национальности">Другой национальности</option>
+          </select>
+          <div class="help-block with-errors"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <p class="text-right">
+            <span onclick="check(1)" class="btn btn-warning btn-lg">Вперед <img src="http://people.mirusdesk.kz/files/img/arrow_right.png"></span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div data-toggle="validator" role="form" id="form_personal">
+    <!-- Персональные сведения -->
+    <div id="block_personal">
+      <div class="row">
+        <h3 class="col-sm-12 title"><span class="label label-warning">Персональные сведения</span></h3>
+        <h5 class="col-sm-12 title2">Нам важно, чтобы Вы правильно указали все свои контакты.</h5>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-sm-6">
+          <label class="control-label" id="label_personal_work_conditions" for="personal_work_conditions">Условия работы: <span class="must">*</span></label>
+          <select style="height: 44px; font-weight: 300; font-size: 17px;" class="form-control" id="personal_work_conditions" name="personal_work_conditions" data-error="Выберите условие работы" required>
+            <option value="" selected="selected"></option>
+            <option value="Основная и постоянная">Основная и постоянная</option>
+            <option value="Временная, до определенного срока">Временная, до определенного срока</option>
+            <option value="Частичная, как дополнительная к основной">Частичная, как дополнительная к основной</option>
+          </select>
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group col-sm-6">
+          <label class="control-label" id="label_personal_experience" for="personal_experience">Опыт работы: <span class="must">*</span></label>
+          <select style="height: 44px; font-weight: 300; font-size: 17px;" class="form-control" id="personal_experience" name="personal_experience" data-error="Укажите опыт работы" required>
+            <option value="" selected="selected"></option>
+            <option value="Без опыта">Без опыта</option>
+            <option value="от 1 до 3 лет">от 1 до 3 лет</option>
+            <option value="от 3 до 5 лет">от 3 до 5 лет</option>
+            <option value="от 5 до 7 лет">от 5 до 7 лет</option>
+            <option value="от 7 до 10 лет">от 7 до 10 лет</option>
+          </select>
+          <div class="help-block with-errors"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-sm-4">
+          <label class="control-label" id="label_personal_house_phone" for="personal_house_phone">Городской номер: <span class="must">*</span></label>
+          <input type="text" class="form-control" id="personal_house_phone" name="personal_house_phone" data-error="Напишите городской номер" required>
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group col-sm-4">
+          <label class="control-label" id="label_personal_phone" for="personal_phone">Мобильный номер: <span class="must">*</span></label>
+          <input type="text" class="form-control" id="personal_phone" name="personal_phone"  data-error="Напишите мобильный номер" required>
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group col-sm-4">
+          <label class="control-label" id="label_personal_email" for="personal_email">Электронная почта: <span class="must">*</span></label>
+          <input type="email" class="form-control" id="personal_email" name="personal_email" data-error="Напишите электронную почту" required>
+          <div class="help-block with-errors"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-sm-4">
+          <label class="control-label" id="label_personal_education_level" for="personal_education_level">Уровень образования: <span class="must">*</span></label>
+          <select style="height: 44px; font-weight: 300; font-size: 17px;" class="form-control" id="personal_education_level" name="personal_education_level" data-error="Выберите уровень образования" required>
+            <option value="" selected="selected"></option>
+            <option value="Бакалавр">Бакалавр</option>
+            <option value="Магистр">Магистр</option>
+            <option value="Кандидат наук">Кандидат наук</option>
+            <option value="Доктор наук">Доктор наук</option>
+            <option value="Неоконченное высшее (учусь)">Неоконченное высшее (учусь)</option>
+            <option value="Среднее специальное">Среднее специальное</option>
+            <option value="Среднее">Среднее</option>
+          </select>
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group col-sm-4">
+          <label class="control-label" id="label_personal_life_place" for="personal_life_place">Город проживания: <span class="must">*</span></label>
+          <select style="height: 44px; font-weight: 300; font-size: 17px;" class="form-control" id="personal_life_place" name="personal_life_place" data-error="Выберите город проживания" required>
+            <option value="" selected="selected"></option>
+            <optgroup label="Популярные">
+              <option value="г. Алматы">г. Алматы</option>
+              <option value="г. Астана">г. Астана</option>
+              <option value="г. Атырау">г. Атырау</option>
+            </optgroup>
+            <optgroup label="Другие">
+              <option value="г. Актобе">г. Актобе</option>
+              <option value="г. Актау">г. Актау</option>
+              <option value="г. Жезказган">г. Жезказган</option>
+              <option value="г. Караганда">г. Караганда</option>
+              <option value="г. Кокшетау">г. Кокшетау</option>
+              <option value="г. Костанай">г. Костанай</option>
+              <option value="г. Кызылорда">г. Кызылорда</option>
+              <option value="г. Орал">г. Орал</option>
+              <option value="г. Оскемен">г. Оскемен</option>
+              <option value="г. Павлодар">г. Павлодар</option>
+              <option value="г. Петропавл">г. Петропавл</option>
+              <option value="г. Семей">г. Семей</option>
+              <option value="г. Талдыкорган">г. Талдыкорган</option>
+              <option value="г. Тараз">г. Тараз</option>
+              <option value="г. Шымкент">г. Шымкент</option>
+              <option value="В другом городе">В другом городе</option>
+              <option value="В другой стране">В другой стране</option>
+            </optgroup>
+          </select>
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group col-sm-4">
+          <label class="control-label" id="label_personal_can_move" for="personal_can_move">Возможность переезда в:</label>
+          <select style="height: 44px; font-weight: 300; font-size: 17px;" class="form-control" id="personal_can_move" name="personal_can_move">
+            <option value="" selected="selected"></option>
+            <optgroup label="Популярные">
+              <option value="г. Алматы">г. Алматы</option>
+              <option value="г. Астана">г. Астана</option>
+              <option value="г. Атырау">г. Атырау</option>
+            </optgroup>
+            <optgroup label="Другие">
+              <option value="г. Актобе">г. Актобе</option>
+              <option value="г. Актау">г. Актау</option>
+              <option value="г. Жезказган">г. Жезказган</option>
+              <option value="г. Караганда">г. Караганда</option>
+              <option value="г. Кокшетау">г. Кокшетау</option>
+              <option value="г. Костанай">г. Костанай</option>
+              <option value="г. Кызылорда">г. Кызылорда</option>
+              <option value="г. Орал">г. Орал</option>
+              <option value="г. Оскемен">г. Оскемен</option>
+              <option value="г. Павлодар">г. Павлодар</option>
+              <option value="г. Петропавл">г. Петропавл</option>
+              <option value="г. Семей">г. Семей</option>
+              <option value="г. Талдыкорган">г. Талдыкорган</option>
+              <option value="г. Тараз">г. Тараз</option>
+              <option value="г. Шымкент">г. Шымкент</option>
+              <option value="В другом городе">В другом городе</option>
+              <option value="В другой стране">В другой стране</option>
+            </optgroup>
+          </select>
+          <div class="help-block with-errors"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-sm-4">
+          <label class="control-label" id="label_personal_photo" for="personal_photo">Прикрепите Ваше фото: <span class="must">*</span></label>
+          <input type="file" id="personal_photo" name="personal_photo" data-error="Выберите свое фото" required>
+          <p style="font-size: 11px;">Резюме без фото, удаляются автоматический.</p>
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group col-sm-4">
+          <label class="control-label" id="label_personal_cv" for="personal_cv">Прикрепите резюме:</label>
+          <input type="file" id="personal_cv" name="personal_cv">
+          <p style="font-size: 11px;">Прикрепите Ваш вариант резюме, если имеется.</p>
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group col-sm-4">
+          <label class="control-label" id="label_personal_can_trips" for="personal_can_trips">Выезд в командировки: <span class="must">*</span></label><br>
+          <label class="radio-inline"><input type="radio" value="Да" id="personal_can_trips" name="personal_can_trips" data-error="Возможен ли выезд в командировки" required>Да</label>
+          <label class="radio-inline"><input type="radio" value="Нет" id="personal_can_trips" name="personal_can_trips" data-error="Возможен ли выезд в командировки" required>Нет</label>
+          <label class="radio-inline"><input type="radio" value="Иногда" id="personal_can_trips" name="personal_can_trips" data-error="Возможен ли выезд в командировки" required>Иногда</label>
+          <div class="help-block with-errors"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <p>
+            <span onclick="back(2)" style="float: left;" class="btn btn-default btn-lg"><img src="http://people.mirusdesk.kz/files/img/arrow_left.png"> Назад</span>
+            <span onclick="check(2)" style="float: right;" class="btn btn-warning btn-lg">Вперед <img src="http://people.mirusdesk.kz/files/img/arrow_right.png"></span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div data-toggle="validator" role="form" id="form_education">
+    <!-- Образование -->
+    <div id="block_education">
+      <div class="row">
+        <h3 class="col-sm-12 title"><span class="label label-warning">Образование</span></h3>
+        <h5 class="col-sm-12 title2">Пожалуйста, укажите все свои личные достижение в образовании.</h5>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-sm-3">
+          <label class="control-label" id="label_education_name" for="education_name">Учебное заведение: <span class="must">*</span></label>
+          <input type="text" value="" class="form-control" id="education_name" name="education_name" data-error="Где вы учились?" required>
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group col-sm-3">
+          <label class="control-label" id="label_education_faculty" for="education_faculty">Факультет: <span class="must">*</span></label>
+          <input type="text" value="" class="form-control" id="education_faculty" name="education_faculty" data-error="Ваш факультет" required>
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group col-sm-3">
+          <label class="control-label" id="label_education_specialty" for="education_specialty">Специальность: <span class="must">*</span></label>
+          <input type="text" value="" class="form-control" id="education_specialty" name="education_specialty" data-error="Ваша специальность" required>
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group col-sm-3">
+          <label class="control-label" id="label_education_ball" for="education_ball">Средний балл: <span class="must">*</span></label>
+          <input type="text" class="form-control" id="education_ball" name="education_ball" data-error="Ваш средний бал (цифрами)" required>
+          <div class="help-block with-errors"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-sm-4">
+          <label class="control-label" id="label_education_start" for="education_start">Дата поступления: <span class="must">*</span></label>
+          <div class="input-group date" data-provide="datepicker">
+            <input type="text" class="form-control datepicker" data-date-format="mm/dd/yyyy" name="education_start" id="education_start" data-error="Выберите дату поступления" required>
+            <div class="input-group-addon">
+              <span class="glyphicon glyphicon-th"></span>
+            </div>
+          </div>
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group col-sm-4">
+          <label class="control-label" id="label_education_end" for="education_end">Дата окончания: <span class="must">*</span></label>
+          <div class="input-group date" data-provide="datepicker">
+            <input type="text" class="form-control datepicker" data-date-format="mm/dd/yyyy" name="education_end" id="education_end" data-error="Выберите дату окончания" required>
+            <div class="input-group-addon">
+              <span class="glyphicon glyphicon-th"></span>
+            </div>
+          </div>
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group col-sm-4">
+          <label class="control-label" id="label_education_form" for="education_form">Форма обучения: <span class="must">*</span></label><br>
+          <label class="radio-inline"><input type="radio" value="Очная" id="education_form" name="education_form" data-error="Выберите форму обучения" required>Очная</label>
+          <label class="radio-inline"><input type="radio" value="Заочная" id="education_form" name="education_form" data-error="Выберите форму обучения" required>Заочная</label>
+          <label class="radio-inline"><input type="radio" value="Вечерняя" id="education_form" name="education_form" data-error="Выберите форму обучения" required>Вечерняя</label>
+          <div class="help-block with-errors"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-sm-3">
+          <label class="control-label" id="label_education_kazakh" for="education_kazakh">Казахский: <span class="must">*</span></label>
+          <select style="height: 44px; font-weight: 300; font-size: 17px;" class="form-control" id="education_kazakh" name="education_kazakh" data-error="Ваш уровень казахского?" required>
+            <option value="" selected="selected"></option>
+            <option value="Не знаю">Не знаю</option>
+            <option value="Со словарем">Со словарем</option>
+            <option value="Начинающий">Начинающий</option>
+            <option value="Разговорный">Разговорный</option>
+            <option value="В совершенстве">В совершенстве</option>
+          </select>
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group col-sm-3">
+          <label class="control-label" id="label_education_russian" for="education_russian">Русский: <span class="must">*</span></label>
+          <select style="height: 44px; font-weight: 300; font-size: 17px;" class="form-control" id="education_russian" name="education_russian" data-error="Ваш уровень руского?" required>
+            <option value="" selected="selected"></option>
+            <option value="Не знаю">Не знаю</option>
+            <option value="Со словарем">Со словарем</option>
+            <option value="Начинающий">Начинающий</option>
+            <option value="Разговорный">Разговорный</option>
+            <option value="В совершенстве">В совершенстве</option>
+          </select>
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group col-sm-3">
+          <label class="control-label" id="label_education_english" for="education_english">Английский: <span class="must">*</span></label>
+          <select style="height: 44px; font-weight: 300; font-size: 17px;" class="form-control" id="education_english" name="education_english" data-error="Ваш уровень английского?" required>
+            <option value="" selected="selected"></option>
+            <option value="Не знаю">Не знаю</option>
+            <option value="Со словарем">Со словарем</option>
+            <option value="Начинающий">Начинающий</option>
+            <option value="Разговорный">Разговорный</option>
+            <option value="В совершенстве">В совершенстве</option>
+          </select>
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group col-sm-3">
+          <label class="control-label" id="label_education_other" for="education_other">Другой: <span class="must">*</span></label>
+          <select style="height: 44px; font-weight: 300; font-size: 17px;" class="form-control" id="education_other" name="education_other" data-error="Знаете другие языки?" required>
+            <option value="" selected="selected"></option>
+            <option value="Не знаю">Не знаю</option>
+            <option value="Со словарем">Со словарем</option>
+            <option value="Начинающий">Начинающий</option>
+            <option value="Разговорный">Разговорный</option>
+            <option value="В совершенстве">В совершенстве</option>
+          </select>
+          <div class="help-block with-errors"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <p>
+            <span onclick="back(3)" style="float: left;" class="btn btn-default btn-lg"><img src="http://people.mirusdesk.kz/files/img/arrow_left.png"> Назад</span>
+            <span onclick="check(3)" style="float: right;" class="btn btn-warning btn-lg">Вперед <img src="http://people.mirusdesk.kz/files/img/arrow_right.png"></span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div data-toggle="validator" role="form" id="form_lastwork">
+    <!-- Последнее место работы -->
+    <div id="block_lastwork">
+      <div class="row">
+        <h3 class="col-sm-12 title"><span class="label label-warning">Последнее место работы</span></h3>
+        <h5 class="col-sm-12 title2">Укажите Вашего рекомендателя. Это увеличит шансы приема на работу.</h5>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-sm-4">
+          <label class="control-label" id="label_lastwork_name" for="lastwork_name">Наименование организации: <span class="must">*</span></label>
+          <input type="text" value="" class="form-control" id="lastwork_name" name="lastwork_name" data-error="Напишите наименование последнего место работы" required>
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group col-sm-4">
+          <label class="control-label" id="label_lastwork_position" for="lastwork_position">Должность: <span class="must">*</span></label>
+          <input type="text" value="" class="form-control" id="lastwork_position" name="lastwork_position" data-error="Напишите должность в последней компании" required>
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group col-sm-4">
+          <label class="control-label" id="label_lastwork_salary" for="lastwork_salary">Оклад:</label>
+          <input type="text" class="form-control" id="lastwork_salary" name="lastwork_salary">
+          <div class="help-block with-errors"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-sm-4">
+          <label class="control-label" id="label_lastwork_start" for="lastwork_start">Дата приема на работу: <span class="must">*</span></label>
+          <div class="input-group date" data-provide="datepicker">
+            <input type="text" value="" class="form-control datepicker" data-date-format="mm/dd/yyyy"name='lastwork_start' id="lastwork_start" data-error="Выберите дату" required>
+            <div class="input-group-addon">
+              <span class="glyphicon glyphicon-th"></span>
+            </div>
+          </div>
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group col-sm-4">
+          <label class="control-label" id="label_lastwork_end" for="lastwork_end">Дата увольнения: <span class="must">*</span></label>
+          <div class="input-group date" data-provide="datepicker">
+            <input type="text" value="" class="form-control datepicker" data-date-format="mm/dd/yyyy"name='lastwork_end' id="lastwork_end" data-error="Выберите дату" required>
+            <div class="input-group-addon">
+              <span class="glyphicon glyphicon-th"></span>
+            </div>
+          </div>
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group col-sm-4">
+          <label class="control-label" id="label_lastwork_rating" for="lastwork_rating">Оцените Вашу компанию: <span class="must">*</span></label>
+          <input value="0" type="number" class="rating form-control" min=0 max=5 step=1 data-size="none"  id="lastwork_rating" name="lastwork_rating" data-error="Оцените компанию" required>
+          <p style="font-size: 11px;">5 звезд значит — идеальная компания!</p>
+          <div class="help-block with-errors"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-sm-6">
+          <label class="control-label" id="label_lastwork_duties" for="lastwork_duties">Ваши основные обязанности:</label>
+          <textarea class="form-control" rows="5" id="lastwork_duties" name="lastwork_duties"></textarea>
+          <p style="font-size: 11px;">Желательно по пунктно. Можете скопировать с резюме.</p>
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group col-sm-6">
+          <label class="control-label" id="label_lastwork__end_reason" for="lastwork__end_reason">Причины смены работы:</label>
+          <textarea class="form-control" rows="5" id="lastwork__end_reason" name="lastwork__end_reason"></textarea>
+          <p style="font-size: 11px;">Только честно. Как есть.</p>
+          <div class="help-block with-errors"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-sm-4">
+          <label class="control-label" id="label_lastwork_reference_person" for="lastwork_reference_person">Рекомендательное лицо:</label>
+          <input type="text" class="form-control" id="lastwork_reference_person" name="lastwork_reference_person">
+          <p style="font-size: 11px;">Имя и желательно отчество рекомендателя.</p>
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group col-sm-4">
+          <label class="control-label" id="label_lastwork_reference_person_position" for="lastwork_reference_person_position">Должность:</label>
+          <input type="text" class="form-control" id="lastwork_reference_person_position" name="lastwork_reference_person_position">
+          <p style="font-size: 11px;">Давайте лучше директора )</p>
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group col-sm-4">
+          <label class="control-label" id="label_lastwork_reference_person_phone" for="lastwork_reference_person_phone">Контактный номер:</label>
+          <input type="text" class="form-control" id="lastwork_reference_person_phone" name="lastwork_reference_person_phone">
+          <div class="help-block with-errors"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <p>
+            <span onclick="back(4)" style="float: left;" class="btn btn-default btn-lg"><img src="http://people.mirusdesk.kz/files/img/arrow_left.png"> Назад</span>
+            <span onclick="check(4)" style="float: right;" class="btn btn-warning btn-lg">Вперед <img src="http://people.mirusdesk.kz/files/img/arrow_right.png"></span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div data-toggle="validator" role="form" id="form_summery">
+    <!-- Итоговые сведения -->
+    <div id="block_summery">
+      <div class="row">
+        <h3 class="col-sm-12 title"><span class="label label-warning">Итоговые сведения</span></h3>
+        <h5 class="col-sm-12 title2">Если Вы с другого города, Вам желательно указать собеседование по телефону.</h5>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-sm-4">
+          <label class="control-label" id="label_summery_desired_salary" for="summery_desired_salary">Желаемый оклад: <span class="must">*</span></label>
+          <select style="height: 44px; font-weight: 300; font-size: 17px;" class="form-control" id="summery_desired_salary" name="summery_desired_salary" data-error="Выберите желаемый оклад" required>
+            <option value="" selected="selected"></option>
+            <option value="Безвозмездно">Безвозмездно</option>
+            <option value="От 25000 - 50000 тенге">От 25000 - 50000 тенге</option>
+            <option value="От 50000 - 75000 тенге">От 50000 - 75000 тенге</option>
+            <option value="От 75000 - 100000 тенге">От 75000 - 100000 тенге</option>
+            <option value="От 100000 - 125000 тенге">От 100000 - 125000 тенге</option>
+            <option value="От 125000 - 150000 тенге">От 125000 - 150000 тенге</option>
+            <option value="От 150000 - 175000 тенге">От 150000 - 175000 тенге</option>
+            <option value="От 175000 - 200000 тенге">От 175000 - 200000 тенге</option>
+            <option value="От 200000 - 250000 тенге">От 200000 - 250000 тенге</option>
+            <option value="От 250000 - 300000 тенге">От 250000 - 300000 тенге</option>
+            <option value="От 300000 и выше">От 300000 и выше</option>
+          </select>
+          <p style="font-size: 11px;">Оклад после испытательного срока</p>
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group col-sm-4">
+          <label class="control-label" id="label_summery_where_find_us" for="summery_where_find_us">Откуда Вы узнали про нас? <span class="must">*</span></label>
+          <select style="height: 44px; font-weight: 300; font-size: 17px;" class="form-control" id="summery_where_find_us" name="summery_where_find_us" data-error="Выберите откуда вы узнали" required>
+            <option value="" selected="selected"></option>
+            <option value="С сайта karierist.kz">С сайта karierist.kz</option>
+            <option value="С сайта hh.kz">С сайта hh.kz</option>
+            <option value="С сайта nur.kz">С сайта nur.kz</option>
+            <option value="C cайта mail.ru">C cайта mail.ru</option>
+            <option value="С сайта flagma.kz">С сайта flagma.kz</option>
+            <option value="По знакомству">По знакомству</option>
+            <option value="Другое">Другое</option>
+          </select>
+          <p style="font-size: 11px;">Укажите источник</p>
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group col-sm-4">
+          <label class="control-label" id="label_summery_when_can_start_work" for="summery_when_can_start_work">Когда сможете приступить? <span class="must">*</span></label>
+          <div class="input-group date" data-provide="datepicker">
+            <input type="text" class="form-control datepicker" data-date-format="mm/dd/yyyy"name="summery_when_can_start_work" id="summery_when_can_start_work" data-error="Выберите дату" required>
+            <div class="input-group-addon">
+              <span class="glyphicon glyphicon-th"></span>
+            </div>
+          </div>
+          <p style="font-size: 11px;">Укажите число.</p>
+          <div class="help-block with-errors"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-sm-3">
+          <label class="control-label" id="label_summery_fb" for="summery_fb">Аккаунт в Фейсбуке:</label>
+          <input type="text" class="form-control" id="summery_fb" name="summery_fb">
+          <p style="font-size: 11px;">Укажите страничку в Facebook.</p>
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group col-sm-3">
+          <label class="control-label" id="label_summery_insta" for="summery_insta">Аккаунт в Instagram:</label>
+          <input type="text" class="form-control" id="summery_insta" name="summery_insta">
+          <p style="font-size: 11px;">Укажите страничку в Instagram.</p>
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group col-sm-3">
+          <label class="control-label" id="label_summery_vk" for="summery_vk">Аккаунт в Vkontakte:</label>
+          <input type="text" class="form-control" id="summery_vk" name="summery_vk">
+          <p style="font-size: 11px;">Укажите страничку в Vkontakte.</p>
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group col-sm-3">
+          <label class="control-label" id="label_summery_interview_type" for="summery_interview_type">Тип собеседования: <span class="must">*</span></label>
+          <select style="height: 44px; font-weight: 300; font-size: 17px;" class="form-control" id="summery_interview_type" name="summery_interview_type" data-error="Выберите тип собеседования" required>
+            <option value="" selected="selected"></option>
+            <!-- <option value="По скайпу">По скайпу</option> -->
+            <option value="По телефону">По телефону</option>
+            <option value="При встрече">При встрече</option>
+          </select>
+          <p style="font-size: 11px;">Укажите источник</p>
+          <div class="help-block with-errors"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-sm-4">
+          <label class="control-label" id="label_summery_take_important" for="summery_take_important">Выберите самое важное: <span class="must">*</span></label><br>
+          <label class="radio-inline"><input type="radio" value="Деньги" id="summery_take_important" name="summery_take_important" data-error="Выберите самое важное" required>Деньги</label>
+          <label class="radio-inline"><input type="radio" value="Опыт" id="summery_take_important" name="summery_take_important" data-error="Выберите самое важное" required>Опыт</label>
+          <label class="radio-inline"><input type="radio" value="Карьера" id="summery_take_important" name="summery_take_important" data-error="Выберите самое важное" required>Карьера</label>
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group col-sm-4">
+          <label class="control-label" id="label_summery_family" for="summery_family">Семейное положение: <span class="must">*</span></label><br>
+          <label class="radio-inline"><input type="radio" value="Не замужем" id="summery_family" name="summery_family" data-error="Выберите семейное положение" required>Не замужем</label>
+          <label class="radio-inline"><input type="radio" value="Замужем" id="summery_family" name="summery_family" data-error="Выберите семейное положение" required>Замужем</label>
+          <label class="radio-inline"><input type="radio" value="Разведена" id="summery_family" name="summery_family" data-error="Выберите семейное положение" required>Разведена</label>
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group col-sm-4">
+          <label class="control-label" id="label_summery_car" for="summery_car">Наличие автотранспорта: <span class="must">*</span></label><br>
+          <label class="radio-inline"><input type="radio" value="Имею" id="summery_car" name="summery_car" data-error="Выберите наличие автотранспорта" required>Имею</label>
+          <label class="radio-inline"><input type="radio" value="Не имею" id="summery_car" name="summery_car" data-error="Выберите наличие автотранспорта" required>Не имею</label>
+          <div class="help-block with-errors"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-sm-4">
+          <label class="control-label" id="label_summery_question" for="summery_question">Задайте главный вопрос руководителю:</label>
+          <textarea class="form-control" rows="5" id="summery_question" name="summery_question"></textarea>
+          <p style="font-size: 11px;">Задайте свои вопросы напрямую работодателю.</p>
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group col-sm-4">
+          <label class="control-label" id="label_summery_additional" for="summery_additional">Дополнительные сведения:</label>
+          <textarea class="form-control" rows="5" id="summery_additional" name="summery_additional"></textarea>
+          <p style="font-size: 11px;">Напишите здесь о себе, что могло бы нас зацепить.</p>
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group col-sm-4">
+          <label class="control-label" id="label_summery_certificates" for="summery_certificates">Прикрепить сертификаты:</label>
+          <input type="file" id="summery_certificates" name="summery_certificates">
+          <p style="font-size: 11px;">Дополнительные сертификаты имеют немаловажное значение при отборе кандидата. Но файл должен весить не больше 3 мб.</p>
+          <div class="help-block with-errors"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <p>
+            <span onclick="back(5)" style="float: left;" class="btn btn-default btn-lg"><img src="http://people.mirusdesk.kz/files/img/arrow_left.png"> Назад</span>
+            <span onclick="check(5)" style="float: right;" class="btn btn-warning btn-lg">Вперед <img src="http://people.mirusdesk.kz/files/img/arrow_right.png"></span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div data-toggle="validator" role="form" id="form_interview">
+    <!-- Приглашение на собеседование -->
+    <div id="block_interview">
+      <div class="row">
+        <h3 class="col-sm-12 title"><span class="label label-warning">Приглашение на собеседование</span></h3>
+        <h5 class="col-sm-12 title2">Укажите удобное для Вас время и дату собеседования у нас в офисе</h5>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-sm-6">
+          <label class="control-label" id="label_interview_day" for="interview_day">День собеседования: <span class="must">*</span></label>
+          <select style="height: 44px; font-weight: 300; font-size: 17px;" class="form-control" id="interview_day" name="interview_day" data-error="Выберите день собеседования" required>
+            <option value="" selected="selected"></option>
+
+            <option value='в понедельник'>В понедельник</option>
+            <option value='во вторник'>Во вторник</option>
+            <option value='в среду'>В среду</option>
+            <option value='в четверг'>В четверг</option>
+            <option value='в пятницу'>В пятницу</option>
+          </select>
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group col-sm-6">
+          <label class="control-label" id="label_interview_time" for="interview_time">Время собеседования: <span class="must">*</span></label>
+          <select style="height: 44px; font-weight: 300; font-size: 17px;" class="form-control" id="interview_time" name="interview_time" data-error="Выберите день собеседования" required>
+            <option value="" selected="selected"></option>
+            <option value="в 16:00">в 16:00</option>
+            <option value="в 17:00">в 17:00</option>
+          </select>
+          <div class="help-block with-errors"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <p>
+            <span onclick="back(6)" style="float: left;" class="btn btn-default btn-lg"><img src="http://people.mirusdesk.kz/files/img/arrow_left.png"> Назад</span>
+            <span onclick="check(6)" style="float: right;" class="btn btn-warning btn-lg">Вперед <img src="http://people.mirusdesk.kz/files/img/arrow_right.png"></span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Общие сведения -->
+  <div id="block_final">
+    <div class="row">
+      <h3 class="col-sm-12 title tex-center" style="text-align: center;"><span class="label label-warning">Успешно отправлено!</span></h3>
+      <h4 class="col-sm-12 title2" style="text-align: center;">Наш HR-менеджер скоро с вами свяжется</h4>
+    </div>
+  </div>
+
+</form>
+
+<!-- <script type="text/javascript">
+  $('select').select2();
+</script> -->
+<script src="http://people.mirusdesk.kz/files/js/jquery.maskedinput.js" type="text/javascript"></script>
+<script type="text/javascript">
+  jQuery(function($){
+    $("#personal_house_phone").mask("+7 (999) 999-9999");
+    $("#personal_phone").mask("+7 (999) 999-9999");
+    $("#lastwork_reference_person_phone").mask("+7 (999) 999-9999");
+    $("#education_ball").mask("9.9")
+
+    $('.datepicker').datepicker({
+      format: 'mm/dd/yyyy',
+      startDate: '-80y',
+      language: 'ru',
+      startView: 2,
+      leftArrow:'<<',
+      rightArrow:'>>',
+      autoclose: true,
+    });
+  });
+
+  var target = "";
+  var job_id = 2;
+  $( "#interview_day" ).change(function() {
+    changeTime();
+  });
+
+  function changeTime(){
+    target = $('#interview_day option:selected').val();
+
+    if (job_id == 4) {
+
+      if (target == 'во вторник') {
+        $time = "<option value='' selected='selected'></option> <option value='в 14:00'>в 14:00</option> <option value='в 15:00'>в 15:00</option>";
+      }else if (target == 'в четверг') {
+        $time = "<option value='' selected='selected'></option> <option value='в 14:00'>в 14:00</option> <option value='в 15:00'>в 15:00</option>";
+      }else if (target == 'в cубботу') {
+        $time = "<option value='' selected='selected'></option> <option value='в 12:00'>в 12:00</option> <option value='в 14:00'>в 14:00</option>";
+      }
+
+    }else if (job_id == 5) {
+
+      if (target == 'в понедельник') {
+        $time = "<option value='' selected='selected'></option> <option value='в 16:00'>в 16:00</option> <option value='в 17:00'>в 17:00</option>";
+      }else if (target == 'в среду') {
+        $time = "<option value='' selected='selected'></option> <option value='в 16:00'>в 16:00</option> <option value='в 17:00'>в 17:00</option>";
+      }else if (target == 'в пятницу') {
+        $time = "<option value='' selected='selected'></option> <option value='в 16:00'>в 16:00</option> <option value='в 17:00'>в 17:00</option>";
+      }
+
+    }else if (job_id == 6) {
+
+      if (target == 'в понедельник') {
+        $time = "<option value='' selected='selected'></option> <option value='в 14:00'>в 14:00</option> <option value='в 15:00'>в 15:00</option>";
+      }else if (target == 'в среду') {
+        $time = "<option value='' selected='selected'></option> <option value='в 14:00'>в 14:00</option> <option value='в 15:00'>в 15:00</option>";
+      }else if (target == 'в пятницу') {
+        $time = "<option value='' selected='selected'></option> <option value='в 14:00'>в 14:00</option> <option value='в 15:00'>в 15:00</option>";
+      }
+
+    }else if (job_id == 7 || job_id == 8) {
+
+      if (target == 'в понедельник') {
+        $time = "<option value='' selected='selected'></option> <option value='в 11:00'>в 11:00</option> <option value='в 12:00'>в 12:00</option>";
+      }else if (target == 'в среду') {
+        $time = "<option value='' selected='selected'></option> <option value='в 11:00'>в 11:00</option> <option value='в 12:00'>в 12:00</option>";
+      }else if (target == 'в пятницу') {
+        $time = "<option value='' selected='selected'></option> <option value='в 11:00'>в 11:00</option> <option value='в 12:00'>в 12:00</option>";
+      }
+
+    }else if (job_id == 9) { // mark
+
+      if (target == 'во вторник') {
+        $time = "<option value='' selected='selected'></option> <option value='в 16:00'>в 16:00</option> <option value='в 17:00'>в 17:00</option>";
+      }else if (target == 'в четверг') {
+        $time = "<option value='' selected='selected'></option> <option value='в 16:00'>в 16:00</option> <option value='в 17:00'>в 17:00</option>";
+      }else if (target == 'в cубботу') {
+        $time = "<option value='' selected='selected'></option> <option value='в 14:00'>в 14:00</option> <option value='в 15:00'>в 15:00</option>";
+      }
+
+    }
+
+    $('#interview_time').html($time);
+
+  }
+
+</script>
+
+<script type="text/javascript">
+
+  var switch4 = document.querySelector('.js-switch-small4');
+  var switchery4 = new Switchery(switch4, {
+    size: 'small',
+    color: '#5DC458', secondaryColor: '#faab43'
+  });
+  var switch4value = "Женский";
+  switch4.onchange = function() {
+    switch4value = switch4.checked;
+    if(switch4value == true){
+      switch4value = "Мужской";
+    }else{
+      switch4value = "Женский";
+    }
+  };
+
+
+  var ary = {};
+
+  function pushToAry(name, val) {
+    ary[name] = val;
+  }
+
+  var sendPush = false;
+
+  function sendData() {
+
+    if (sendPush == false) {
+      sendPush = true;
+
+      var label_general_name = $("#label_general_name").text();
+      var general_name = $("#general_name").val();
+
+      var label_general_middle_name = $("#label_general_middle_name").text();
+      var general_middle_name = $("#general_middle_name").val();
+
+      var label_general_surname = $("#label_general_surname").text();
+      var general_surname = $("#general_surname").val();
+
+      var label_general_sex = $("#label_general_sex").text();
+      var general_sex = switch4value;
+
+      var label_general_birthday = $("#label_general_birthday").text();
+      var general_birthday = $("#general_birthday").val();
+
+      var label_general_birth_place = $("#label_general_birth_place").text();
+      var general_birth_place = $("#general_birth_place").val();
+
+      var label_general_nationality = $("#label_general_nationality").text();
+      var general_nationality = $("#general_nationality").val();
+
+      var label_personal_work_conditions = $("#label_personal_work_conditions").text();
+      var personal_work_conditions = $("#personal_work_conditions").val();
+
+      var label_personal_experience = $("#label_personal_experience").text();
+      var personal_experience = $("#personal_experience").val();
+
+      var label_personal_house_phone = $("#label_personal_house_phone").text();
+      var personal_house_phone = $("#personal_house_phone").val();
+
+      var label_personal_phone = $("#label_personal_phone").text();
+      var personal_phone = $("#personal_phone").val();
+      personal_phone = personal_phone.replace("+", "");
+      personal_phone = personal_phone.replace(" ", "");
+      personal_phone = personal_phone.replace("(", "");
+      personal_phone = personal_phone.replace(")", "");
+      personal_phone = personal_phone.replace("-", "");
+      personal_phone = personal_phone.replace(/ /g,'');
+      personal_phone = personal_phone.replace(/\s/g,'');
+
+      var label_personal_email = $("#label_personal_email").text();
+      var personal_email = $("#personal_email").val();
+
+      var label_personal_education_level = $("#label_personal_education_level").text();
+      var personal_education_level = $("#personal_education_level").val();
+
+      var label_personal_life_place = $("#label_personal_life_place").text();
+      var personal_life_place = $("#personal_life_place").val();
+
+      var label_personal_can_move = $("#label_personal_can_move").text();
+      var personal_can_move = $("#personal_can_move").val();
+
+      var label_personal_photo = $("#label_personal_photo").text();
+      var personal_photo = $("#personal_photo").val();
+
+      var label_personal_cv = $("#label_personal_cv").text();
+      var personal_cv = $("#personal_cv").val();
+
+      var label_personal_can_trips = $("#label_personal_can_trips").text();
+      var personal_can_trips = $("#personal_can_trips:checked").val();
+
+      var label_education_name = $("#label_education_name").text();
+      var education_name = $("#education_name").val();
+
+      var label_education_faculty = $("#label_education_faculty").text();
+      var education_faculty = $("#education_faculty").val();
+
+      var label_education_specialty = $("#label_education_specialty").text();
+      var education_specialty = $("#education_specialty").val();
+
+      var label_education_ball = $("#label_education_ball").text();
+      var education_ball = $("#education_ball").val();
+
+      var label_education_start = $("#label_education_start").text();
+      var education_start = $("#education_start").val();
+
+      var label_education_end = $("#label_education_end").text();
+      var education_end = $("#education_end").val();
+
+      var label_education_form = $("#label_education_form").text();
+      var education_form = $("#education_form:checked").val();
+
+      var label_education_kazakh = $("#label_education_kazakh").text();
+      var education_kazakh = $("#education_kazakh").val();
+
+      var label_education_russian = $("#label_education_russian").text();
+      var education_russian = $("#education_russian").val();
+
+      var label_education_english = $("#label_education_english").text();
+      var education_english = $("#education_english").val();
+
+      var label_education_other = $("#label_education_other").text();
+      var education_other = $("#education_other").val();
+
+      var label_lastwork_name = $("#label_lastwork_name").text();
+      var lastwork_name = $("#lastwork_name").val();
+
+      var label_lastwork_position = $("#label_lastwork_position").text();
+      var lastwork_position = $("#lastwork_position").val();
+
+      var label_lastwork_salary = $("#label_lastwork_salary").text();
+      var lastwork_salary = $("#lastwork_salary").val();
+
+      var label_lastwork_start = $("#label_lastwork_start").text();
+      var lastwork_start = $("#lastwork_start").val();
+
+      var label_lastwork_end = $("#label_lastwork_end").text();
+      var lastwork_end = $("#lastwork_end").val();
+
+      var label_lastwork_rating = $("#label_lastwork_rating").text();
+      var lastwork_rating = $("#lastwork_rating").val();
+
+      var label_lastwork_duties = $("#label_lastwork_duties").text();
+      var lastwork_duties = $("#lastwork_duties").val();
+
+      var label_lastwork__end_reason = $("#label_lastwork__end_reason").text();
+      var lastwork__end_reason = $("#lastwork__end_reason").val();
+
+      var label_lastwork_reference_person = $("#label_lastwork_reference_person").text();
+      var lastwork_reference_person = $("#lastwork_reference_person").val();
+
+      var label_lastwork_reference_person_position = $("#label_lastwork_reference_person_position").text();
+      var lastwork_reference_person_position = $("#lastwork_reference_person_position").val();
+
+      var label_lastwork_reference_person_phone = $("#label_lastwork_reference_person_phone").text();
+      var lastwork_reference_person_phone = $("#lastwork_reference_person_phone").val();
+
+      var label_summery_desired_salary = $("#label_summery_desired_salary").text();
+      var summery_desired_salary = $("#summery_desired_salary").val();
+
+      var label_summery_where_find_us = $("#label_summery_where_find_us").text();
+      var summery_where_find_us = $("#summery_where_find_us").val();
+
+      var label_summery_when_can_start_work = $("#label_summery_when_can_start_work").text();
+      var summery_when_can_start_work = $("#summery_when_can_start_work").val();
+
+      var label_summery_fb = $("#label_summery_fb").text();
+      var summery_fb = $("#summery_fb").val();
+
+      var label_summery_insta = $("#label_summery_insta").text();
+      var summery_insta = $("#summery_insta").val();
+
+      var label_summery_vk = $("#label_summery_vk").text();
+      var summery_vk = $("#summery_vk").val();
+
+      var label_summery_interview_type = $("#label_summery_interview_type").text();
+      var summery_interview_type = $("#summery_interview_type").val();
+
+      var label_summery_take_important = $("#label_summery_take_important").text();
+      var summery_take_important = $("#summery_take_important:checked").val();
+
+      var label_summery_family = $("#label_summery_family").text();
+      var summery_family = $("#summery_family:checked").val();
+
+      var label_summery_car = $("#label_summery_car").text();
+      var summery_car = $("#summery_car:checked").val();
+
+      var label_summery_question = $("#label_summery_question").text();
+      var summery_question = $("#summery_question").val();
+
+      var label_summery_additional = $("#label_summery_additional").text();
+      var summery_additional = $("#summery_additional").val();
+
+      var label_summery_certificates = $("#label_summery_certificates").text();
+      var summery_certificates = $("#summery_certificates").val();
+
+      var label_interview_day = $("#label_interview_day").text();
+      var interview_day = $("#interview_day").val();
+
+      var label_interview_time = $("#label_interview_time").text();
+      var interview_time = $("#interview_time").val();
+
+
+      var hh_id = '592967ee2219e'
+      var postForm = {
+        'general_name' : general_name,
+        'general_middle_name' : general_middle_name,
+        'general_surname' : general_surname,
+        'general_sex' : general_sex,
+        'general_birthday' : general_birthday,
+        'general_birth_place' : general_birth_place,
+        'general_nationality' : general_nationality,
+        'personal_work_conditions' : personal_work_conditions,
+        'personal_experience' : personal_experience,
+        'personal_house_phone' : personal_house_phone,
+        'personal_phone' : personal_phone,
+        'personal_email' : personal_email,
+        'personal_education_level' : personal_education_level,
+        'personal_life_place' : personal_life_place,
+        'personal_can_move' : personal_can_move,
+        'personal_photo' : personal_photo,
+        'personal_cv' : personal_cv,
+        'personal_can_trips' : personal_can_trips,
+        'education_name' : education_name,
+        'education_faculty' : education_faculty,
+        'education_specialty' : education_specialty,
+        'education_ball' : education_ball,
+        'education_start' : education_start,
+        'education_end' : education_end,
+        'education_form' : education_form,
+        'education_kazakh' : education_kazakh,
+        'education_russian' : education_russian,
+        'education_english' : education_english,
+        'education_other' : education_other,
+        'lastwork_name' : lastwork_name,
+        'lastwork_position' : lastwork_position,
+        'lastwork_salary' : lastwork_salary,
+        'lastwork_start' : lastwork_start,
+        'lastwork_end' : lastwork_end,
+        'lastwork_rating' : lastwork_rating,
+        'lastwork_duties' : lastwork_duties,
+        'lastwork__end_reason' : lastwork__end_reason,
+        'lastwork_reference_person' : lastwork_reference_person,
+        'lastwork_reference_person_position' : lastwork_reference_person_position,
+        'lastwork_reference_person_phone' : lastwork_reference_person_phone,
+        'summery_desired_salary' : summery_desired_salary,
+        'summery_where_find_us' : summery_where_find_us,
+        'summery_when_can_start_work' : summery_when_can_start_work,
+        'summery_fb' : summery_fb,
+        'summery_insta' : summery_insta,
+        'summery_vk' : summery_vk,
+        'summery_interview_type' : summery_interview_type,
+        'summery_take_important' : summery_take_important,
+        'summery_family' : summery_family,
+        'summery_car' : summery_car,
+        'summery_question' : summery_question,
+        'summery_additional' : summery_additional,
+        'summery_certificates' : summery_certificates,
+        'interview_day' : interview_day,
+        'interview_time' : interview_time,
+        'vacancy_id' : '2'
+      };
+      var id_user = 0;
+      console.log("dskaljdlksj");
+      $.ajax({
+        type      : 'POST',
+        url       : 'http://localhost:8888/api/sheets/candidate',
+        data      : postForm,
+        dataType  : 'json',
+        success: function(msg) {
+          console.log(msg);
+
+          id_user = '17MD0527FO';
+
+//          var formData = new FormData($("form#main_form")[0]);
+//          formData.append('md_id', id_user);
+//                   $.ajax({
+//                       url: "http://people.mirusdesk.kz/admin/candidate_photo_add",
+//                       type: 'POST',
+//                       data: formData,
+//                       async: false,
+//                       success: function (data) {
+// //                           alert(data)
+//                       },
+//                       cache: false,
+//                       contentType: false,
+//                       processData: false
+//                   });
+
+          pushToAry(label_general_name, general_name)
+          pushToAry(label_general_middle_name, general_middle_name)
+          pushToAry(label_general_surname, general_surname)
+          pushToAry(label_general_sex, general_sex)
+          pushToAry(label_general_birthday, general_birthday)
+          pushToAry(label_general_birth_place, general_birth_place)
+          pushToAry(label_general_nationality, general_nationality)
+          pushToAry(label_personal_work_conditions, personal_work_conditions)
+          pushToAry(label_personal_experience, personal_experience)
+          pushToAry(label_personal_house_phone, personal_house_phone)
+          pushToAry(label_personal_phone, personal_phone)
+          pushToAry(label_personal_email, personal_email)
+          pushToAry(label_personal_education_level, personal_education_level)
+          pushToAry(label_personal_life_place, personal_life_place)
+          pushToAry(label_personal_can_move, personal_can_move)
+          pushToAry(label_personal_photo, personal_photo)
+          pushToAry(label_personal_cv, personal_cv)
+          pushToAry(label_personal_can_trips, personal_can_trips)
+          pushToAry(label_education_name, education_name)
+          pushToAry(label_education_faculty, education_faculty)
+          pushToAry(label_education_specialty, education_specialty)
+          pushToAry(label_education_ball, education_ball)
+          pushToAry(label_education_start, education_start)
+          pushToAry(label_education_end, education_end)
+          pushToAry(label_education_form, education_form)
+          pushToAry(label_education_kazakh, education_kazakh)
+          pushToAry(label_education_russian, education_russian)
+          pushToAry(label_education_english, education_english)
+          pushToAry(label_education_other, education_other)
+          pushToAry(label_lastwork_name, lastwork_name)
+          pushToAry(label_lastwork_position, lastwork_position)
+          pushToAry(label_lastwork_salary, lastwork_salary)
+          pushToAry(label_lastwork_start, lastwork_start)
+          pushToAry(label_lastwork_end, lastwork_end)
+          pushToAry(label_lastwork_rating, lastwork_rating)
+          pushToAry(label_lastwork_duties, lastwork_duties)
+          pushToAry(label_lastwork__end_reason, lastwork__end_reason)
+          pushToAry(label_lastwork_reference_person, lastwork_reference_person)
+          pushToAry(label_lastwork_reference_person_position, lastwork_reference_person_position)
+          pushToAry(label_lastwork_reference_person_phone, lastwork_reference_person_phone)
+          pushToAry(label_summery_desired_salary, summery_desired_salary)
+          pushToAry(label_summery_where_find_us, summery_where_find_us)
+          pushToAry(label_summery_when_can_start_work, summery_when_can_start_work)
+          pushToAry(label_summery_fb, summery_fb)
+          pushToAry(label_summery_insta, summery_insta)
+          pushToAry(label_summery_vk, summery_vk)
+          pushToAry(label_summery_interview_type, summery_interview_type)
+          pushToAry(label_summery_take_important, summery_take_important)
+          pushToAry(label_summery_family, summery_family)
+          pushToAry(label_summery_car, summery_car)
+          pushToAry(label_summery_question, summery_question)
+          pushToAry(label_summery_additional, summery_additional)
+          pushToAry(label_summery_certificates, summery_certificates)
+          pushToAry(label_interview_day, interview_day)
+          pushToAry(label_interview_time, interview_time)
+          pushToAry('md_id', id_user)
+          pushToAry('guest_id', id_user)
+          pushToAry('hh_id', hh_id)
+          pushToAry('Желаемая должность: ', 'Менеджер по документообороту')
+
+          console.log(ary);
+
+          // console.log(JSON.stringify(ary))
+
+
+
+          $.ajax({ //Process the form using $.ajax()
+            type      : 'POST', //Method type
+            url       : 'http://188.166.182.2:8888/api/sheets/candidate', //Your form processing file URL
+            data      : ary, //Forms name
+            dataType  : 'json',
+            processData: false,
+            contentType: false,
+            success: function(msg) {
+              console.log('feefe');
+              alert(msg)
+            }
+          });
+
+          // $.ajax({ //Process the form using $.ajax()
+          //     type      : 'POST', //Method type
+          //     url       : 'https://hooks.zapier.com/hooks/catch/11422/tjrc8j/', //Your form processing file URL
+          //     data      : JSON.stringify(ary), //Forms name
+          //     dataType  : 'json',
+          //     processData: false,
+          //     contentType: false,
+          //     success: function(msg) {
+          //       yaCounter38869655.reachGoal('done');
+          //       $( "#block_interview").slideUp( "slow", function() {});
+          //       $( "#block_final" ).slideDown( "slow", function() {});
+          //       $( ".progress-bar" ).css("width","100%");
+          //       sendPush = false;
+          //     }
+          // });
+        }
+      });
+    }
+  }
+
+  var personal_experience = "";
+
+  function check(section){
+    if (section == 1) {
+      if (!$('#form_general').validator('validate').has('.has-error').length) {
+        $( "#block_general" ).slideUp( "slow", function() {});
+        $( "#block_personal" ).slideDown( "slow", function() {});
+        $( ".progress-bar" ).css("width","33.3%");
+      }
+    }else if (section == 2) {
+      if (!$('#form_personal').validator('validate').has('.has-error').length) {
+        personal_experience = $("#personal_experience").val();
+        $( "#block_personal").slideUp( "slow", function() {});
+        $( "#block_education" ).slideDown( "slow", function() {});
+        $( ".progress-bar" ).css("width","49.9%");
+      }
+    }else if (section == 3) {
+      if (!$('#form_education').validator('validate').has('.has-error').length) {
+
+        if (personal_experience == "Без опыта") {
+          $( "#block_education").slideUp( "slow", function() {});
+          $( "#block_summery" ).slideDown( "slow", function() {});
+          $( ".progress-bar" ).css("width","66.5%");
+        }else{
+          $( "#block_education").slideUp( "slow", function() {});
+          $( "#block_lastwork" ).slideDown( "slow", function() {});
+          $( ".progress-bar" ).css("width","66.5%");
+        }
+
+      }
+    }else if (section == 4) {
+      if (!$('#form_lastwork').validator('validate').has('.has-error').length) {
+        $( "#block_lastwork").slideUp( "slow", function() {});
+        $( "#block_summery" ).slideDown( "slow", function() {});
+        $( ".progress-bar" ).css("width","83.1%");
+      }
+    }else if (section == 5) {
+      if (!$('#form_summery').validator('validate').has('.has-error').length) {
+        $( "#block_summery").slideUp( "slow", function() {});
+        $( "#block_interview" ).slideDown( "slow", function() {});
+        $( ".progress-bar" ).css("width","99%");
+      }
+    }else if (section == 6) {
+      if (!$('#form_interview').validator('validate').has('.has-error').length) {
+        // $( "#main_form" ).submit();
+        sendData()
+      }
+    }
+  }
+
+  function back(section){
+    if (section == 2) {
+      $( "#block_personal").slideUp( "slow", function() {});
+      $( "#block_general" ).slideDown( "slow", function() {});
+      $( ".progress-bar" ).css("width","16.6%");
+    }else if (section == 3) {
+      $( "#block_education").slideUp( "slow", function() {});
+      $( "#block_personal" ).slideDown( "slow", function() {});
+      $( ".progress-bar" ).css("width","33.3%");
+    }else if (section == 4) {
+      $( "#block_lastwork").slideUp( "slow", function() {});
+      $( "#block_education" ).slideDown( "slow", function() {});
+      $( ".progress-bar" ).css("width","49.9%");
+    }else if (section == 5) {
+      $( "#block_summery").slideUp( "slow", function() {});
+      $( "#block_lastwork" ).slideDown( "slow", function() {});
+      $( ".progress-bar" ).css("width","66.5%");
+    }else if (section == 6) {
+      $( "#block_interview").slideUp( "slow", function() {});
+      $( "#block_summery" ).slideDown( "slow", function() {});
+      $( ".progress-bar" ).css("width","83.1%");
+    }
+  }
+
+</script>
+<!--
+  <script type="text/javascript">
+      (function (d, w, c) {
+          (w[c] = w[c] || []).push(function() {
+              try {
+                  w.yaCounter38869655 = new Ya.Metrika({
+                      id:38869655,
+                      clickmap:true,
+                      trackLinks:true,
+                      accurateTrackBounce:true,
+                      webvisor:true
+                  });
+              } catch(e) { }
+          });
+
+          var n = d.getElementsByTagName("script")[0],
+              s = d.createElement("script"),
+              f = function () { n.parentNode.insertBefore(s, n); };
+          s.type = "text/javascript";
+          s.async = true;
+          s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+          if (w.opera == "[object Opera]") {
+              d.addEventListener("DOMContentLoaded", f, false);
+          } else { f(); }
+      })(document, window, "yandex_metrika_callbacks");
+  </script>
+  <noscript><div><img src="https://mc.yandex.ru/watch/38869655" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+ -->
+</body>
+</html>

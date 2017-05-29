@@ -18,7 +18,7 @@ router.get('/candidate', function(req, res, next){
 });
 
 router.post('/candidate', function (req, res, next) {
-  console.log(req.body);
+  console.log(req.body.general_name);
   console.log("here");
   var cand = req.body;
 
@@ -85,9 +85,11 @@ router.post('/candidate', function (req, res, next) {
   
   candidate.save(function (err, savedCandidate) {
     if(err){
+      err.message = 'Неизвестная ошибка';
       res.status(500).send(err);
       return;
     }
+    console.log(savedCandidate);
     res.send('Candidate saved');
   })
 
